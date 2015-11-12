@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="package_order_line">
+             <field name="name">package.sale.order</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale.view_order_form" />
+             <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="package" attrs="{'invisible': [('is_package', '=', False)],'required': [('is_package', '!=', False)]}"/>
+                    <field name="service" attrs="{'invisible': [('is_book_service', '=', False)],'required': [('is_book_service', '!=', False)]}"/>
+                    <field name="is_package"/>
+                    <field name="is_book_service"/>
+                </xpath>
+             </field>
+        </record>
+
+    </data>
+</openerp>

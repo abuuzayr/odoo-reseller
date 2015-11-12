@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- scheduler base window view -->
+	<record id="scheduler_form_action" model="ir.actions.act_window">
+	<field name="name">Scheduler Form</field>
+	<field name="res_model">service.scheduler</field>
+	<field name="view_type">form</field>
+	<field name="view_mode">calendar,tree,form</field>
+	<field name="help" type="html">
+		<p class="oe_view_nocontent_create">Click Create to add a new Service Schedule!</p>
+	</field>
+	</record>
+
+        <!-- resource base window view -->
+	<record id="resource_form_action" model="ir.actions.act_window">
+	<field name="name">Resource Form</field>
+	<field name="res_model">service.resource</field>
+	<field name="view_type">form</field>
+	<field name="view_mode">tree,form</field>
+	<field name="help" type="html">
+		<p class="oe_view_nocontent_create">Click Create to add a new Service Resource!</p>
+	</field>
+	</record>
+
+        <!-- scheduler form view -->
+        <record id="scheduler_form_view" model="ir.ui.view">
+            <field name="name">scheduler.form.view</field>
+            <field name="model">service.scheduler</field>
+            <field name="arch" type="xml">
+                <form string="Scheduler Form">
+                			<header>
+				<button name="confirm_schedule" string="Confirm schedule" states="pending" type="object" class="oe_highlight"/>
+				<button name="cancel_schedule" string="Cancel booking" states="pending,confirmed" type="object" class="oe_highlight"/>
+				<button name="pending_schedule" string="Set to draft" states="cancelled,confirmed" type="object" class="oe_highlight"/>
+				<field name="state" widget="statusbar" statusbar_visible="pending,approved"/>
+			</header>
+                    <sheet>
+       			<!-- add header -->
+			<div class="oe_title">
+				<label for="name" class="oe_edit_only" string="Booking title"/>
+				<h1><field name="name" class="oe_inline" /></h1>
+			</div>
+			<separator/>
+                        <group col="4">
+                        <group col="2">
+                            <field name="customer" />
+                            <field name="from_package"/>
+                            <field name="package" attrs="{'invisible':[('from_package', '=', False)]}"/>
+                            <field name="package_service" attrs="{'invisible':[('from_package', '=', False)]}"/>
+                            <field name="package_quantity" attrs="{'invisible':[('from_package', '=', False)]}"/>
+                            <field name="service" attrs="{'invisible':[('from_package', '=', True)]}"/>
+                            <field name="service_from_service" attrs="{'invisible':[('from_package', '=', True)]}"/>
+                            <field name="start" />
+                            <field name="end" />
+                            <field name="duration" />
+                            <field name="state" />
+                        </group>
+                        <group col="2">
+                        </group>
+                        </group>
+			<notebook>
+                            <page string="Assign Resources">
+				<group colspan="2">
+                                	<field name="service_staff"/>
+                                	<field name="service_resource"/>
+				</group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- resource form view -->
+        <record id="resource_form_view" model="ir.ui.view">
+            <field name="name">resource.form.view</field>
+            <field name="model">service.resource</field>
+            <field name="arch" type="xml">
+                <form string="Resource Form">
+                    <sheet>
+       			<!-- add header -->
+			<div class="oe_title">
+				<label for="name" class="oe_edit_only" string="Resource name"/>
+				<h1><field name="name" class="oe_inline" /></h1>
+			</div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- scheduler tree view -->
+
+        <record id="scheduler_tree_view" model="ir.ui.view">
+            <field name="name">scheduler.tree.view</field>
+            <field name="model">service.scheduler</field>
+            <field name="arch" type="xml">
+                <tree string="Service Scheduler">
+			<field name="name" />
+			<field name="package" />
+			<field name="package_quantity" />
+			<field name="service" />
+			<field name="start" />
+			<field name="end" />
+			<field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- resource tree view -->
+
+        <record id="resource_tree_view" model="ir.ui.view">
+            <field name="name">resource.tree.view</field>
+            <field name="model">service.resource</field>
+            <field name="arch" type="xml">
+                <tree string="Service Resources">
+			<field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<!-- calendar view -->
+	<record model="ir.ui.view" id="scheduler_calendar_view">
+		<field name="name">scheduler.calendar</field>
+		<field name="model">service.scheduler</field>
+		<field name="arch" type="xml">
+			<calendar string="Scheduler Calendar" 
+			date_start="start" 
+			date_stop="end" 
+			color="customer">
+				<field name="name"/>
+			</calendar>
+		</field>
+	</record>
+
+
+	<menuitem id="scheduler_menu" 
+			name="Scheduler"
+			parent="menu_package"
+			sequence="6"
+	/>
+
+	<menuitem id="menu_scheduler" 
+		name="Scheduler"
+		parent="scheduler_menu"
+		action="scheduler_form_action" 
+		sequence="1"/>
+
+	<menuitem id="menu_resource" 
+		name="Resources"
+		parent="scheduler_menu"
+		action="resource_form_action" 
+		sequence="2"/>
+
+    </data>
+</openerp>
