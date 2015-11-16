@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- off_day base window view -->
+	<record id="module_form_action" model="ir.actions.act_window">
+		<field name="name">Module Form</field>
+		<field name="res_model">gv.module</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Click Create to add new Modules</p>
+		</field>
+	</record>
+
+        <!-- off_day form view -->
+        <record id="module_form_view" model="ir.ui.view">
+            <field name="name">gv.module.form.view</field>
+            <field name="model">gv.module</field>
+            <field name="arch" type="xml">
+                <form string="Module Form">
+                    <sheet>
+                    	<group col="2">
+							<field name="name" />   
+
+						</group>                    
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- off_day tree view -->
+
+        <record id="module_tree_view" model="ir.ui.view">
+            <field name="name">gv.module.tree.view</field>
+            <field name="model">gv.module</field>
+            <field name="arch" type="xml">
+                <tree string="Modules">
+						<field name="name" />   
+ 
+                </tree>
+            </field>
+        </record>
+        <menuitem id="submenu_modules" name="Modules" parent="menu_products" action="module_form_action" />
+		<menuitem id="menu_products" name="Products" parent="main_menu"  />
+		<menuitem id="main_menu" name="Main Menu" />
+    </data>
+</openerp>
