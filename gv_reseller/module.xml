@@ -21,7 +21,8 @@
                 <form string="Module Form">
                     <sheet>
                     	<group col="2">
-							<field name="name" />   
+							<field name="duration" />   
+							<field name="name" />
 
 						</group>                    
                     </sheet>
@@ -36,8 +37,8 @@
             <field name="model">gv.module</field>
             <field name="arch" type="xml">
                 <tree string="Modules">
-						<field name="name" />   
- 
+						<field name="duration" />   
+ 						<field name="name" />
                 </tree>
             </field>
         </record>

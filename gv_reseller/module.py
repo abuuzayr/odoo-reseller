@@ -6,7 +6,8 @@ class gv_module(models.Model):
 
     """
     _name = 'gv.module'
-    name = fields.Char(string="Title", required=True)
+    _inherits = {'product.template': 'product_tmpl_id'}
+    duration = fields.Integer()
 #     Type - module/miscellaneous/service
 #     Price
 #     Image
