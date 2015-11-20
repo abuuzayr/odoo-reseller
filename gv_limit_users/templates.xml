@@ -1,0 +1,28 @@
+<openerp>
+    <data>
+    <record id="view_custom_config_settings" model="ir.ui.view">
+        <field name="name">User settings</field>
+        <field name="model">gv.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="Configure Accounting" version="7.0" class="oe_form_configuration">
+                <header>
+                    <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                </header>
+                <field name="userLimit"  groups="base.group_no_one"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_user_settings_config" model="ir.actions.act_window">
+        <field name="name">User Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gv.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+        
+        <menuitem id="user_settings" name="User Settings" parent="base.menu_config"  action="action_user_settings_config"  groups="base.group_no_one" />
+    </data>
+</openerp>
