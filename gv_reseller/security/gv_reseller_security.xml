@@ -26,3 +26,4 @@
 		    <field name="implied_ids" eval="[(4, ref('group_reseller_salesperson')), (4, ref('base.group_sale_manager'))]"/>
 		</record>
 	</data>
+</openerp>

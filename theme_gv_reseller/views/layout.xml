@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+  <data>
+	<!-- Customize header  -->
+	<template id="custom_header" inherit_id="website.layout" name="Custom Header">
+
+	  <!-- Assign an id  -->
+	  <xpath expr="//div[@id='wrapwrap']/header" position="attributes">
+	    <attribute name="id">gvrs_header</attribute>
+	  </xpath>
+
+	  <!-- Replace and assign first div css class -->
+	  <xpath expr="//header[@id='gvrs_header']/div[1]" position="attributes">
+	    <attribute name="class">gvrs_nav</attribute>
+	  </xpath>
+
+	  <!-- Replace and assign first #top_menu -->
+	  <xpath expr="//ul[@id='top_menu']" position="attributes">
+	    <attribute name="class">fixed_left</attribute>
+	  </xpath>
+
+	  <!-- Assign #top_menu items -->
+	  <xpath expr="//ul[@id='top_menu']" position="inside">
+	  	<li><a href="/"><i class="fa fa-bars"></i>Menu</a></li>
+	  	<li><a href="/shop"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+	  	<li><i class="fa fa-database"></i>Projects</li>
+	  	<li><i class="fa fa-cloud-download"></i>Cloud</li>
+	  	<li><i class="fa fa-question-circle"></i>Info</li>
+	  </xpath>
+
+	  <!-- Remove menu items -->
+	  <xpath expr="//ul[@id='top_menu']/li[@class='dropdown']" position="replace">
+
+	  </xpath>
+
+	  <!-- Add an element after the top menu  -->
+	  <xpath expr="//div[@id='wrapwrap']/header/div" position="after">
+	    <div class="container">
+	      <div class="alert alert-info mt16" role="alert">
+	        <strong>Welcome</strong> to GV Reseller!
+	      </div>
+	    </div>
+	  </xpath>
+	</template>
+  </data>
+</openerp>

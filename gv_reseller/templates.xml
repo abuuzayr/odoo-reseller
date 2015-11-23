@@ -1,22 +1,44 @@
 <openerp>
-    <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
-    </data>
+<data>
+    <template id="pricing">
+        <title>GV Reseller</title>
+        <t t-call="website.layout">
+        <div class="oe_structure">
+            <div class="container">            
+            <h1>Module Selection</h1>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Number of Users</h3>
+                    <input class="form-control" type="number" id="client_count" min="1"></input>
+                    <hr></hr>
+
+                    <h3>Modules</h3>
+                    <div class="row">
+                        <t t-foreach="consu_product_product" t-as="pt">
+                            <div class="col-md-4" t-att-listprice="pt.list_price">
+                                <t t-esc="pt.name"></t>
+                                <img t-att-src="'data:image/png;base64,%s' % pt.image_medium"/>
+
+                                <t t-foreach="consu_product_product[pt]" t-as="pp">
+                                        <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                            <div class="variant"
+                                                t-att-year="attr.name"
+                                                t-attf-price="${{pp.price_extra}}">
+                                            </div>
+                                        </t>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                    <hr></hr>
+                    
+                </div>
+
+                <div class="col-md-4"></div>
+            </div>
+            </div>
+        </div>
+        </t>
+    </template>
+</data>
 </openerp>
