@@ -3,7 +3,10 @@ from openerp import fields, models, api, exceptions, osv
 
 class gv_user_limit(models.Model):
     """
-
+    For limiting the number of employees that can be created. Limit can only be set by superadmin on settings after having logged in.
+    Overwrites the write and create methods.
+    Employees are determined by the computed field 'share'
+    Adding api.constrains to the computed field 'share' was proven not to work hence the method overriding.
     """
     _inherit="res.users"
 
@@ -35,12 +38,18 @@ class gv_user_limit(models.Model):
         return super(gv_user_limit, self).create(values)
     
 class gv_config_settings(osv.osv.osv_memory):
+    """
+    Adds the maximum number of employees limit to the settings, which will be saved for the configuration.
+    """
     _inherit = 'res.config.settings'
     _name="gv.config.settings"
     
     userLimit = fields.Integer(string="Maximum No of Employees", help="Maximum number of active employees allowable for this installation. ")
     
     def get_default_userLimit(self, cr, uid, ids, context=None):
+        """
+        Retrieves and displays the limit from gv.config.settings. 
+        """
         config_obj = self.pool.get('gv.config.settings')
         config_ids = config_obj.search(cr, uid, [], limit=1, order='id DESC', context=context)
         if config_ids:
@@ -50,6 +59,9 @@ class gv_config_settings(osv.osv.osv_memory):
     
  
     def set_default_userLimit(self, cr, uid, ids, context=None):
+        """
+        saves the userLimit to gv.config.settings. Will be automatically called when the "Apply" button is clicked" 
+        """
         config_obj = self.pool.get('gv.config.settings')
         config_ids = config_obj.search(cr, uid, [], limit=1, order='id DESC', context=context)
         config = self.browse(cr, uid, ids[0], context)

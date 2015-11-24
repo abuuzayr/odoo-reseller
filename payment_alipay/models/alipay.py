@@ -55,7 +55,7 @@ class AcquirerAlipay(osv.Model):
     ALIPAY_INTERFACE_TYPE = [
         ('trade_create_by_buyer', 'Standard Dual Interface'),
         ('create_direct_pay_by_user', 'Instant Payment Transaction'),
-        ('create_partner_trade_by_buyer', 'Securied Transaction'),
+        ('create_partner_trade_by_buyer', 'Secured Transaction'),
     ]
 
     _columns = {
