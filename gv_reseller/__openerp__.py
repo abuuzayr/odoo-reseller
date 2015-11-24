@@ -24,7 +24,7 @@
 
     # always loaded
     'data': [
-#         'security/ir.model.access.csv',
+        'security/gv_reseller_security.xml',
         'templates.xml',
         'module.xml',
     ],
