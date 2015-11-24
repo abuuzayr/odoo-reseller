@@ -5,14 +5,6 @@ from datetime import datetime
 
 import json
 
-def pretty(d, indent=0):
-   for key, value in d.iteritems():
-      print '\t' * indent + str(key)
-      if isinstance(value, dict):
-         pretty(value, indent+1)
-      else:
-         print '\t' * (indent+1) + str(value)
-
 class booking(http.Controller):
 
 	#Handles the GET request for the route '/bookings'
@@ -26,14 +18,36 @@ class booking(http.Controller):
 		consu_product_templates = request.env['product.template'].search([('type','=','consu')])
 		consu_product_product = {}
 
+		misc_product_templates = request.env['product.template'].search([('type','=','misc')])
+		misc_product_product = {}
+
+		other_product_templates = request.env['product.template'].search([('type','=','other')])
+		other_product_product = {}
+
+		optional_product_templates = request.env['product.template'].search([('type','=','optional')])
+		optional_product_product = {}
+
 		for x in consu_product_templates:
 			consu_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
-			for attr in dir(x):
-				print attr
+		for x in misc_product_templates:
+			misc_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
+		for x in other_product_templates:
+			other_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
+		for x in optional_product_templates:
+			optional_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
+	
+		for attr in dir(request.env.user.groups_id[0]):
+			print attr
 
 		return http.request.render('gv_reseller.pricing', {
 			'consu_product_templates': consu_product_templates,
 			'consu_product_product': consu_product_product,
+			'misc_product_templates': misc_product_templates,
+			'misc_product_product': misc_product_product,
+			'other_product_templates': other_product_templates,
+			'other_product_product': other_product_product,
+			'optional_product_templates': optional_product_templates,
+			'optional_product_product': optional_product_product,
 			'user': request.env.user
 		})
 

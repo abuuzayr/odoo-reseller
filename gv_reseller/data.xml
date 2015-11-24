@@ -22,17 +22,19 @@
             <field name="attribute_id" eval="product_att_year"></field>
         </record>
 
+        <!-- CORE MODULES -->
         <record id="product_pos" model="product.template">
             <field name="name">Point of Sale System</field>
             <field name="website_published">true</field>
+            <field name="type">consu</field>
             <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(4, product_att_year_1 ),(1, product_att_year_1, { 'price_extra': 97.00 })] }), ]"></field>            
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
             <field name="image" type="base64" file="gv_reseller/static/img/POS.png"/>
         </record>
         <record id="product_crm" model="product.template">
             <field name="name">CRM</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>            
+            <field name="type">consu</field>
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
             <field name="image" type="base64" file="gv_reseller/static/img/CRM.png"/>
@@ -93,5 +95,34 @@
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
             <field name="image" type="base64" file="gv_reseller/static/img/E-COMM.png"/>
         </record>
+
+        <!-- MISC MODULES -->        
+        <record id="misc_product_pos" model="product.template">
+            <field name="name">Point of Sale System (MISC)</field>
+            <field name="website_published">true</field>
+            <field name="list_price">200.00</field>
+            <field name="type">misc</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/POS.png"/>
+        </record>
+
+        <!-- OTHER SERVICES -->
+        <record id="other_product_design" model="product.template">
+            <field name="name">Design</field>
+            <field name="website_published">true</field>
+            <field name="list_price">70.00</field>
+            <field name="type">other</field>
+            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+        </record>
+
+        <!-- OPTIONAL SERVICES -->
+        <record id="option_product_imple" model="product.template">
+            <field name="name">Implementation</field>
+            <field name="website_published">true</field>
+            <field name="list_price">1000.00</field>
+            <field name="type">optional</field>
+            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+        </record>
+        
     </data>
 </openerp>

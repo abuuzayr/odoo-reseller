@@ -17,3 +17,21 @@ label.module-select .cb_module:checked + .check {
 }
 
 .cb_module { display: none; }
+
+h4.green_header { background-color: #018738; color: #fff; padding: 10px 15px; margin: 0; }
+
+.product_row {
+}
+.product_row .header {
+	background-color: #f2f2f2;
+	padding: 10px 15px;
+}
+.product_row .header span{
+	color: #018738;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.product_row .desc {
+	background: #ffffff;
+	padding: 10px 15px;
+}

@@ -4,8 +4,10 @@
         <title>GV Reseller</title>
         <t t-call="website.layout">
         <div class="oe_structure">
-            <t t-esc="user"></t>
-            <div class="container">            
+            <div class="container">
+            <t t-foreach="user.groups_id" t-as="u">                
+                <t t-esc="u.name"></t> <br/>
+            </t>
             <h1>Module Selection</h1>
             <div class="row">
                 <div class="col-md-8">
@@ -29,6 +31,44 @@
                             </label>
                         </t>
                     </div>
+                    <h3>Miscellanous</h3>
+                    <div class="row">
+                        <t t-foreach="misc_product_product" t-as="pt">
+                            <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
+                                <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
+                                <div class="check"><i class="fa fa-check-circle"></i></div>
+                                <t t-foreach="misc_product_product[pt]" t-as="pp">
+                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                        <m-data 
+                                            class="variant"
+                                            t-att-year="attr.name"
+                                            t-attf-price="${{pp.price_extra}}"/>
+                                    </t>
+                                </t>
+                            </label>
+                        </t>
+                    </div>
+                    <h3>Other Services</h3>
+                    <h4 class="green_header">Eligible for Package: <span id="module_count"></span>Selected Modules</h4>
+                    <t t-foreach="other_product_product" t-as="pt">
+                        <div class="product_row" t-att-listprice="pt.list_price">
+                            <div class="header">
+                                <span><t t-esc="pt.name"></t></span>                                
+                                <t t-foreach="other_product_product[pt]" t-as="pp">
+                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                        <input type="checkbox" 
+                                            t-attf-name="ch_{{pt.name}}_{{attr.name}}"
+                                            t-att-value="pp.price_extra"/>
+                                    </t>
+                                </t>
+                            </div>
+                            <div class="desc">
+                                <b>Description</b> <br/>
+                                <t t-esc="pt.description_sale"></t>
+                            </div>
+                        </div>
+                    </t>
                 </div>
                 <div class="col-md-4"></div>
             </div>
