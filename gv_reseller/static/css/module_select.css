@@ -1,0 +1,19 @@
+label.module-select { cursor: pointer; position: relative; margin: 10px 0px; }
+label.module-select img { width: 100%; }
+.check {
+	display: none;
+	position: absolute;
+	bottom: 5%;
+	left: 10%;
+	z-index: 10;
+	color: #fff;
+	font-size: 1.8em;
+}
+.check .fa {
+	text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5)
+}
+label.module-select .cb_module:checked + .check {
+	display: block;
+}
+
+.cb_module { display: none; }
