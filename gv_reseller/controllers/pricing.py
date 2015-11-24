@@ -33,7 +33,8 @@ class booking(http.Controller):
 
 		return http.request.render('gv_reseller.pricing', {
 			'consu_product_templates': consu_product_templates,
-			'consu_product_product': consu_product_product
+			'consu_product_product': consu_product_product,
+			'user': request.env.user
 		})
 
 

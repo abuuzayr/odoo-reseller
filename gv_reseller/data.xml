@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="product_att_year" model="product.attribute">
             <field name="name">Year</field>
             <field name="type">radio</field>
@@ -8,64 +8,90 @@
 
         <record id="product_att_year_1" model="product.attribute.value">
             <field name="name">1</field>
-            <field name="price_extra">0</field>
+            <field name="price_extra">50.00</field>
             <field name="attribute_id" eval="product_att_year"></field>
         </record>
         <record id="product_att_year_2" model="product.attribute.value">
             <field name="name">2</field>
-            <field name="price_extra">200</field>
+            <field name="price_extra">200.00</field>
             <field name="attribute_id" eval="product_att_year"></field>
         </record>
         <record id="product_att_year_3" model="product.attribute.value">
             <field name="name">3</field>
-            <field name="price_extra">120</field>
+            <field name="price_extra">120.00</field>
             <field name="attribute_id" eval="product_att_year"></field>
         </record>
 
         <record id="product_pos" model="product.template">
             <field name="name">Point of Sale System</field>
             <field name="website_published">true</field>
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(4, product_att_year_1 ),(1, product_att_year_1, { 'price_extra': 97.00 })] }), ]"></field>            
+            <field name="image" type="base64" file="gv_reseller/static/img/POS.png"/>
         </record>
         <record id="product_crm" model="product.template">
             <field name="name">CRM</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [6, 0, (product_att_year_1, product_att_year_2, product_att_year_3, )] }), ]"></field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/CRM.png"/>
         </record>
         <record id="product_am" model="product.template">
             <field name="name">Accounting Management</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/ACCOUNTING.png"/>
         </record>
         <record id="product_pm" model="product.template">
             <field name="name">Project Management</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/PROJECT.png"/>
         </record>
         <record id="product_mm" model="product.template">
             <field name="name">Marketing Management</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/MARKETING.png"/>
         </record>        
         <record id="product_im" model="product.template">
             <field name="name">Inventory Management</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/INVENTORY.png"/>
         </record>        
         <record id="product_hr" model="product.template">
             <field name="name">Human Resource</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/HR.png"/>
         </record>        
         <record id="product_wm" model="product.template">
             <field name="name">Website Management</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/WEB.png"/>
         </record>
         <record id="product_ecom" model="product.template">
             <field name="name">E-Commerce</field>
             <field name="website_published">true</field>
-            <field name="type">consu</field>
+            <field name="type">consu</field>            
+            <field name="list_price">100.00</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="image" type="base64" file="gv_reseller/static/img/E-COMM.png"/>
         </record>
     </data>
 </openerp>

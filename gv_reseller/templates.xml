@@ -4,41 +4,44 @@
         <title>GV Reseller</title>
         <t t-call="website.layout">
         <div class="oe_structure">
+            <t t-esc="user"></t>
             <div class="container">            
             <h1>Module Selection</h1>
             <div class="row">
                 <div class="col-md-8">
                     <h3>Number of Users</h3>
                     <input class="form-control" type="number" id="client_count" min="1"></input>
-                    <hr></hr>
-
                     <h3>Modules</h3>
                     <div class="row">
                         <t t-foreach="consu_product_product" t-as="pt">
-                            <div class="col-md-4" t-att-listprice="pt.list_price">
-                                <t t-esc="pt.name"></t>
-                                <img t-att-src="'data:image/png;base64,%s' % pt.image_medium"/>
-
+                            <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
+                                <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
+                                <div class="check"><i class="fa fa-check-circle"></i></div>
                                 <t t-foreach="consu_product_product[pt]" t-as="pp">
-                                        <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                            <div class="variant"
-                                                t-att-year="attr.name"
-                                                t-attf-price="${{pp.price_extra}}">
-                                            </div>
-                                        </t>
+                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                        <m-data 
+                                            class="variant"
+                                            t-att-year="attr.name"
+                                            t-attf-price="${{pp.price_extra}}"/>
+                                    </t>
                                 </t>
-                            </div>
+                            </label>
                         </t>
                     </div>
-                    <hr></hr>
-                    
                 </div>
-
                 <div class="col-md-4"></div>
             </div>
             </div>
         </div>
         </t>
+    </template>
+
+    <template id="gvrs_assets" name="My Style" inherit_id="website.assets_frontend">
+        <xpath expr="link[last()]" position="after">
+            <link href="/gv_reseller/static/css/module_select.css" rel="stylesheet" type="text/css"/>
+            <script src="/gv_reseller/static/js/module_select.js"></script>
+        </xpath>
     </template>
 </data>
 </openerp>
