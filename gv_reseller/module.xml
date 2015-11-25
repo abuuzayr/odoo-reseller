@@ -21,9 +21,9 @@
                 <form string="Module Form">
                     <sheet>
                     	<group col="2">
-							<field name="duration" />   
-							<field name="name" />
-
+							<field name="product_tmpl_id">ABC</field>
+							<field name="dependencies"/>
+							<field name="dependents" />
 						</group>                    
                     </sheet>
                 </form>
@@ -36,8 +36,7 @@
             <field name="name">gv.module.tree.view</field>
             <field name="model">gv.module</field>
             <field name="arch" type="xml">
-                <tree string="Modules">
-						<field name="duration" />   
+                <tree string="Modules"> 
  						<field name="name" />
                 </tree>
             </field>
