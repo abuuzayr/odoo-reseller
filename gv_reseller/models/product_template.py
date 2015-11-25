@@ -28,5 +28,3 @@ class gv_product_template(models.Model):
 	def _compute_dependents(self):
 		if self.id:
 			self.dependents = self.env["product.template"].search([('dependencies', 'in', self.id)])
-		
-	

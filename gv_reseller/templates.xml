@@ -141,7 +141,7 @@
                         No Service Selected
                     </div>
 
-                    <div class="btn-green top-space">Continue</div>
+                    <div id="continue_btn" class="btn-green top-space">Continue</div>
                 </div>
             </div>
             </div>
