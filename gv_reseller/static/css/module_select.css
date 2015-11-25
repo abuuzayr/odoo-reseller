@@ -1,14 +1,30 @@
+body { font-family: 'Lato', sans-serif; }
+
 label.module-select { cursor: pointer; position: relative; margin: 10px 0px; }
-label.module-select img { width: 100%; }
+label.module-select img { width: 100%; max-width: 240px; }
 .check {
 	display: none;
 	position: absolute;
 	bottom: 5%;
-	left: 10%;
+	right: 10%;
 	z-index: 10;
 	color: #fff;
-	font-size: 1.8em;
+	font-size: 2.2em;
 }
+.module_title, .module_price {
+	color: #ffffff;
+	font-weight: bold;
+	text-transform: uppercase;
+	position: absolute;
+	top:25%;
+	left: 15%;
+	max-width: 120px;
+	display: block;
+	text-shadow: -1px 1px 2px rgba(0,0,0,0.3);
+	font-size: 0.9em;
+}
+.module_price { top: auto; bottom: 10%; }
+.module_price i { font-weight: normal; text-transform: lowercase; }
 .check .fa {
 	text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5)
 }
@@ -20,18 +36,46 @@ label.module-select .cb_module:checked + .check {
 
 h4.green_header { background-color: #018738; color: #fff; padding: 10px 15px; margin: 0; }
 
-.product_row {
+.c_header {
+	padding: 8px;
+	font-weight: bold;
 }
 .product_row .header {
 	background-color: #f2f2f2;
 	padding: 10px 15px;
+	margin: 0px !important;
 }
-.product_row .header span{
+.product_row .header .title {
 	color: #018738;
 	font-size: 1.2em;
 	font-weight: bold;
+	padding: 0px !important;
 }
 .product_row .desc {
 	background: #ffffff;
-	padding: 10px 15px;
+	padding: 5px 15px;
+}
+
+h3 { text-transform: uppercase; }
+h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
+#total_amt { color: #018738; font-size: 4em; margin-bottom: 0.8em; }
+.summary_tabs { width: 240px; margin: 0 0 10px; }
+.summary_tabs .tab { cursor:pointer; font-weight: bold; font-size: 1.1em; width: 33.33%; float: left; text-align: center; padding: 7px;  }
+.summary_tabs .tab.active, .summary_tabs .tab:hover { background-color:#018738; color:#f2f2f2; }
+
+.summary_list { width: 240px; font-weight: light; font-size: 1.1em; font-weight: 300; }
+.summary_list .row { padding: 10px 0; border-bottom: 2px solid #e7e7e7; margin: 2px 0px; }
+.summary_list .col-sm-6:nth-child(1) { text-align: left; padding-left: 0px; }
+.summary_list .col-sm-6:nth-child(2) { text-align: right; padding-right: 0px; }
+
+.top-space { margin-top: 2em; }
+.btn-green { cursor: pointer; font-weight: bold; color: #ffffff; background-color: #018738; display: inline-block; padding: 7px 20px; font-size: 1.1em; text-transform: uppercase; }
+
+.sticky {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 55px;
 }

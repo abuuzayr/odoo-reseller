@@ -5,8 +5,9 @@
         <t t-call="website.layout">
         <div class="oe_structure">
             <div class="container">
-            <t t-foreach="user.groups_id" t-as="u">                
-                <t t-esc="u.name"></t> <br/>
+            <t t-set="isAdmin" t-value="user.user_has_groups('base.group_sale_manager')"/>
+            <t t-foreach="user.groups_id" t-as="u">     
+                <t t-esc="isAdmin"></t> : <t t-esc="u.name"></t> <br/>
             </t>
             <h1>Module Selection</h1>
             <div class="row">
@@ -18,6 +19,8 @@
                         <t t-foreach="consu_product_product" t-as="pt">
                             <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
                                 <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                <span class="module_title"><t t-esc="pt.name"></t></span>
+                                <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
                                 <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
                                 <div class="check"><i class="fa fa-check-circle"></i></div>
                                 <t t-foreach="consu_product_product[pt]" t-as="pp">
@@ -25,7 +28,8 @@
                                         <m-data 
                                             class="variant"
                                             t-att-year="attr.name"
-                                            t-attf-price="${{pp.price_extra}}"/>
+                                            t-att-ppid="pp.id"
+                                            t-att-price="pp.price_extra + pt.list_price"/>
                                     </t>
                                 </t>
                             </label>
@@ -34,8 +38,10 @@
                     <h3>Miscellanous</h3>
                     <div class="row">
                         <t t-foreach="misc_product_product" t-as="pt">
-                            <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
+                            <label class="col-md-4 module-select misc" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
                                 <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                <span class="module_title"><t t-esc="pt.name"></t></span>
+                                <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
                                 <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
                                 <div class="check"><i class="fa fa-check-circle"></i></div>
                                 <t t-foreach="misc_product_product[pt]" t-as="pp">
@@ -43,7 +49,8 @@
                                         <m-data 
                                             class="variant"
                                             t-att-year="attr.name"
-                                            t-attf-price="${{pp.price_extra}}"/>
+                                            t-att-ppid="pp.id"
+                                            t-att-price="pp.price_extra + pt.list_price"/>
                                     </t>
                                 </t>
                             </label>
@@ -51,15 +58,59 @@
                     </div>
                     <h3>Other Services</h3>
                     <h4 class="green_header">Eligible for Package: <span id="module_count"></span>Selected Modules</h4>
+                    <div class="row c_header">
+                        <div class="col-md-offset-8 col-md-2">On Site</div>
+                        <div class="col-md-2">Remote</div>
+                    </div>
                     <t t-foreach="other_product_product" t-as="pt">
                         <div class="product_row" t-att-listprice="pt.list_price">
-                            <div class="header">
-                                <span><t t-esc="pt.name"></t></span>                                
+                            <div class="header row">
+                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>                                
                                 <t t-foreach="other_product_product[pt]" t-as="pp">
                                     <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <input type="checkbox" 
-                                            t-attf-name="ch_{{pt.name}}_{{attr.name}}"
-                                            t-att-value="pp.price_extra"/>
+                                        <div class="col-md-2">
+                                        <label>
+                                        <input type="checkbox" class="cb_service"
+                                            t-att-title="pt.name"
+                                            t-att-stype="attr.name"
+                                            t-att-value="pt.list_price + pp.price_extra"
+                                            t-att-ppid="pp.id"
+                                            t-attf-cname="cb_{{pt.name}}" />
+                                         $S<t t-esc="pp.price_extra + pt.list_price"></t>
+                                        </label>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                            <div class="desc">
+                                <b>Description</b> <br/>
+                                <t t-esc="pt.description_sale"></t>
+                            </div>
+                        </div>
+                    </t>
+                    <h3>Optional</h3>
+                    <h4 class="green_header">Eligible for Package: <span id="module_count"></span>Selected Modules</h4>
+                    <div class="row c_header">
+                        <div class="col-md-offset-8 col-md-2">On Site</div>
+                        <div class="col-md-2">Remote</div>
+                    </div>
+                    <t t-foreach="optional_product_product" t-as="pt">
+                        <div class="product_row" t-att-listprice="pt.list_price">
+                            <div class="header row">
+                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>                                
+                                <t t-foreach="optional_product_product[pt]" t-as="pp">
+                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                        <div class="col-md-2">
+                                        <label>
+                                        <input type="checkbox" class="cb_service"
+                                            t-att-title="pt.name"
+                                            t-att-stype="attr.name"
+                                            t-att-value="pt.list_price + pp.price_extra"
+                                            t-att-ppid="pp.id"
+                                            t-attf-cname="cb_{{pt.name}}" />
+                                         $S<t t-esc="pp.price_extra + pt.list_price"></t>
+                                        </label>
+                                        </div>
                                     </t>
                                 </t>
                             </div>
@@ -70,7 +121,28 @@
                         </div>
                     </t>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4 sticky">
+                    <h3 class="sub">Subscription</h3>
+                    <h4 class="total_amt">Total Amount:</h4>
+                    <div id="total_amt">S$0.00</div>
+                    <div class="summary_tabs row">
+                        <div class="tab active" val="1">1 YR</div>
+                        <div class="tab" val="2">2 YR</div>
+                        <div class="tab" val="3">3 YR</div>
+                    </div>
+                    <div id="summary_list_modules" class="summary_list">
+                        No Module Selected
+                    </div>
+                    <div id="summary_list_modules_misc" class="summary_list">
+                        No Misc Module Selected
+                    </div>
+                    <h3 class="sub">Services</h3>
+                    <div id="summary_list_service" class="summary_list">
+                        No Service Selected
+                    </div>
+
+                    <div class="btn-green top-space">Continue</div>
+                </div>
             </div>
             </div>
         </div>

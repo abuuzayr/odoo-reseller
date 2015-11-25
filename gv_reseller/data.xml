@@ -29,7 +29,7 @@
             <field name="type">consu</field>
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/POS.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
         </record>
         <record id="product_crm" model="product.template">
             <field name="name">CRM</field>
@@ -37,7 +37,7 @@
             <field name="type">consu</field>
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/CRM.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/CRM1.png"/>
         </record>
         <record id="product_am" model="product.template">
             <field name="name">Accounting Management</field>
@@ -45,7 +45,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/ACCOUNTING.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/ACCOUNTING1.png"/>
         </record>
         <record id="product_pm" model="product.template">
             <field name="name">Project Management</field>
@@ -53,7 +53,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/PROJECT.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/PROJECT1.png"/>
         </record>
         <record id="product_mm" model="product.template">
             <field name="name">Marketing Management</field>
@@ -61,7 +61,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/MARKETING.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/MARKETING1.png"/>
         </record>        
         <record id="product_im" model="product.template">
             <field name="name">Inventory Management</field>
@@ -69,7 +69,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/INVENTORY.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/INVENTORY1.png"/>
         </record>        
         <record id="product_hr" model="product.template">
             <field name="name">Human Resource</field>
@@ -77,7 +77,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/HR.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/HR1.png"/>
         </record>        
         <record id="product_wm" model="product.template">
             <field name="name">Website Management</field>
@@ -85,7 +85,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/WEB.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/WEB1.png"/>
         </record>
         <record id="product_ecom" model="product.template">
             <field name="name">E-Commerce</field>
@@ -93,7 +93,7 @@
             <field name="type">consu</field>            
             <field name="list_price">100.00</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/E-COMM.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/E-COMM1.png"/>
         </record>
 
         <!-- MISC MODULES -->        
@@ -103,16 +103,34 @@
             <field name="list_price">200.00</field>
             <field name="type">misc</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
-            <field name="image" type="base64" file="gv_reseller/static/img/POS.png"/>
+            <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
+        </record>
+        
+        <!-- IMPLEMENTATION VAIRANTS -->
+        <record id="product_att_impl" model="product.attribute">
+            <field name="name">Implementation</field>
+            <field name="type">radio</field>
+        </record>
+
+        <record id="product_impl_onsite" model="product.attribute.value">
+            <field name="name">On Site</field>
+            <field name="price_extra">50.00</field>
+            <field name="attribute_id" eval="product_att_impl"></field>
+        </record>
+        <record id="product_impl_remote" model="product.attribute.value">
+            <field name="name">Remote</field>
+            <field name="price_extra">200.00</field>
+            <field name="attribute_id" eval="product_att_impl"></field>
         </record>
 
         <!-- OTHER SERVICES -->
         <record id="other_product_design" model="product.template">
             <field name="name">Design</field>
             <field name="website_published">true</field>
-            <field name="list_price">70.00</field>
+            <field name="list_price">700.00</field>
             <field name="type">other</field>
             <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_impl, 'value_ids': [(6, 0, [product_impl_onsite, product_impl_remote])] }), ]"></field>
         </record>
 
         <!-- OPTIONAL SERVICES -->
@@ -122,6 +140,7 @@
             <field name="list_price">1000.00</field>
             <field name="type">optional</field>
             <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_impl, 'value_ids': [(6, 0, [product_impl_onsite, product_impl_remote])] }), ]"></field>
         </record>
         
     </data>

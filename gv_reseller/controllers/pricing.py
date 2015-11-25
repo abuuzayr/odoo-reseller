@@ -35,9 +35,19 @@ class booking(http.Controller):
 			other_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
 		for x in optional_product_templates:
 			optional_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
-	
+		
 		for attr in dir(request.env.user.groups_id[0]):
 			print attr
+		print request.env.user.groups_id[0]
+		print request.env.user.groups_id[0].name
+		print request.env.user.groups_id[0].id
+		print request.env.user.groups_id[0].ids
+		print request.env.user.groups_id[0].display_name
+		print request.env.user.groups_id[0].implied_ids
+		print request.env.user.groups_id[0].full_name
+		print request.env.user.groups_id[0].get_xml_id()
+
+		print request.env.user.user_has_groups('base.group_sale_manager')
 
 		return http.request.render('gv_reseller.pricing', {
 			'consu_product_templates': consu_product_templates,
