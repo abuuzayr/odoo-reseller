@@ -97,21 +97,41 @@
                     <t t-foreach="optional_product_product" t-as="pt">
                         <div class="product_row" t-att-listprice="pt.list_price">
                             <div class="header row">
-                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>                                
+                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>
+                                <div class="col-md-2">
+                                    <label>
+                                        <input type="checkbox" class="cb_service onsite"
+                                            t-att-title="pt.name"/>
+                                        <span class="pprice">
+                                            $S<t t-esc="pt.list_price"></t>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>
+                                        <input type="checkbox" class="cb_service remote"
+                                            t-att-title="pt.name"/>
+                                        <span class="pprice">
+                                            $S<t t-esc="pt.list_price"></t>
+                                        </span>
+                                    </label>
+                                </div>
+
                                 <t t-foreach="optional_product_product[pt]" t-as="pp">
+                                    <t t-esc="pp.lst_price"></t> -- 
                                     <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <div class="col-md-2">
-                                        <label>
-                                        <input type="checkbox" class="cb_service"
+                                        <t t-esc="attr"></t> -- 
+                                        <t t-esc="attr.name"></t> -- 
+                                        <t t-esc="attr.price_extra"></t>
+
+                                        <!-- <input type="checkbox" class="cb_service"
                                             t-att-title="pt.name"
                                             t-att-stype="attr.name"
                                             t-att-value="pt.list_price + pp.price_extra"
                                             t-att-ppid="pp.id"
-                                            t-attf-cname="cb_{{pt.name}}" />
-                                         $S<t t-esc="pp.price_extra + pt.list_price"></t>
-                                        </label>
-                                        </div>
+                                            t-attf-cname="cb_{{pt.name}}" /> -->
                                     </t>
+                                    <br/>
                                 </t>
                             </div>
                             <div class="desc">
