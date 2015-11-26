@@ -1,2 +1,1 @@
 import product_template
-import module

@@ -155,5 +155,6 @@
             <script src="/gv_reseller/static/js/module_select.js"></script>
         </xpath>
     </template>
+        
 </data>
 </openerp>
