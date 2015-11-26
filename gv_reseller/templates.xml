@@ -57,7 +57,7 @@
                         </t>
                     </div>
                     <h3>Other Services</h3>
-                    <h4 class="green_header">Eligible for Package: <span id="module_count"></span>Selected Modules</h4>
+                    <h4 class="green_header">Eligible for Package <span class="module_count other"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
                         <div class="col-md-offset-8 col-md-2">On Site</div>
                         <div class="col-md-2">Remote</div>
@@ -65,22 +65,36 @@
                     <t t-foreach="other_product_product" t-as="pt">
                         <div class="product_row" t-att-listprice="pt.list_price">
                             <div class="header row">
-                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>                                
+                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>
+                                <div class="col-md-2">
+                                    <label>
+                                        <input type="checkbox" class="cb_service onsite"
+                                            vtype="On Site"
+                                            t-att-title="pt.name"/>
+                                        <span class="pprice">
+                                            $S<t t-esc="pt.list_price"></t>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>
+                                        <input type="checkbox" class="cb_service remote"
+                                            vtype="Remote"
+                                            t-att-title="pt.name"/>
+                                        <span class="pprice">
+                                            $S<t t-esc="pt.list_price"></t>
+                                        </span>
+                                    </label>
+                                </div>
+                                <m-data>
                                 <t t-foreach="other_product_product[pt]" t-as="pp">
-                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <div class="col-md-2">
-                                        <label>
-                                        <input type="checkbox" class="cb_service"
-                                            t-att-title="pt.name"
-                                            t-att-stype="attr.name"
-                                            t-att-value="pt.list_price + pp.price_extra"
-                                            t-att-ppid="pp.id"
-                                            t-attf-cname="cb_{{pt.name}}" />
-                                         $S<t t-esc="pp.price_extra + pt.list_price"></t>
-                                        </label>
-                                        </div>
-                                    </t>
+                                    <input type="hidden"
+                                        t-att-group="pt.name"
+                                        t-att-price="pp.lst_price"
+                                        t-att-ppid="pp.id"
+                                        t-attf-vrnt="{{pp.attribute_value_ids[0].name}}_{{pp.attribute_value_ids[1].name}}" />
                                 </t>
+                                </m-data>
                             </div>
                             <div class="desc">
                                 <b>Description</b> <br/>
@@ -89,7 +103,7 @@
                         </div>
                     </t>
                     <h3>Optional</h3>
-                    <h4 class="green_header">Eligible for Package: <span id="module_count"></span>Selected Modules</h4>
+                    <h4 class="green_header">Eligible for Package <span class="module_count optional"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
                         <div class="col-md-offset-8 col-md-2">On Site</div>
                         <div class="col-md-2">Remote</div>
@@ -101,6 +115,7 @@
                                 <div class="col-md-2">
                                     <label>
                                         <input type="checkbox" class="cb_service onsite"
+                                            vtype="On Site"
                                             t-att-title="pt.name"/>
                                         <span class="pprice">
                                             $S<t t-esc="pt.list_price"></t>
@@ -110,29 +125,22 @@
                                 <div class="col-md-2">
                                     <label>
                                         <input type="checkbox" class="cb_service remote"
+                                            vtype="Remote"
                                             t-att-title="pt.name"/>
                                         <span class="pprice">
                                             $S<t t-esc="pt.list_price"></t>
                                         </span>
                                     </label>
-                                </div>
-
+                                </div>                                
+                                <m-data>
                                 <t t-foreach="optional_product_product[pt]" t-as="pp">
-                                    <t t-esc="pp.lst_price"></t> -- 
-                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <t t-esc="attr"></t> -- 
-                                        <t t-esc="attr.name"></t> -- 
-                                        <t t-esc="attr.price_extra"></t>
-
-                                        <!-- <input type="checkbox" class="cb_service"
-                                            t-att-title="pt.name"
-                                            t-att-stype="attr.name"
-                                            t-att-value="pt.list_price + pp.price_extra"
-                                            t-att-ppid="pp.id"
-                                            t-attf-cname="cb_{{pt.name}}" /> -->
-                                    </t>
-                                    <br/>
+                                    <input type="hidden"
+                                        t-att-group="pt.name"
+                                        t-att-price="pp.lst_price"
+                                        t-att-ppid="pp.id"
+                                        t-attf-vrnt="{{pp.attribute_value_ids[0].name}}_{{pp.attribute_value_ids[1].name}}" />
                                 </t>
+                                </m-data>
                             </div>
                             <div class="desc">
                                 <b>Description</b> <br/>

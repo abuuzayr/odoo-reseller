@@ -25,6 +25,7 @@ class booking(http.Controller):
 
 		optional_product_templates = request.env['product.template'].search([('type','=','optional')])
 		optional_product_product = {}
+		optional_product_product_base = {}
 
 		for x in consu_product_templates:
 			consu_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
@@ -34,6 +35,20 @@ class booking(http.Controller):
 			other_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
 		for x in optional_product_templates:
 			optional_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
+
+		print dir(optional_product_templates[0])
+		print optional_product_templates[0].product_variant_ids
+		print optional_product_product
+
+		# print dir(optional_product_templates)
+		# print optional_product_templates.attribute_line_ids
+
+		# print dir(optional_product_templates.attribute_line_ids[0])
+		# print optional_product_templates.attribute_line_ids[0]
+		# print optional_product_templates.attribute_line_ids[0].display_name
+		# print optional_product_templates.attribute_line_ids[1].display_name
+
+		# print dir(request.env.ref('gv_reseller.product_att_impl'))
 
 		return http.request.render('gv_reseller.pricing', {
 			'consu_product_templates': consu_product_templates,
@@ -54,8 +69,38 @@ class booking(http.Controller):
 		methods=['post'],
 		website=True)
 	def pricing_post(self, **kw):
-		for attr in dir(kw):
-			print attr
+		so = request.env['sale.order']
+		sol = request.env['sale.order.line']
+		pp = request.env['product.product']
+
+		pplist = pp.browse(kw['ppids'].split(','))
+		print 'HERE '
+		#print pplist[0].product_tmpl_id
+		# return
+
+		#perform validation if ppids has val
+		print kw['ppids'].split(',')
+
+		soid = request.website.sale_get_order(force_create=1).id;
+		# 	'partner_id': request.env.user.partner_id.id,
+		# 	'state': 'draft',
+		# })
+
+		sollist = []
+		for x in kw['ppids'].split(','):
+			print pp.search([('id','=',x)])[0].product_tmpl_id
+			solid = sol.sudo().create({
+				'name': '-',
+				'product_id': pp.search([('id','=',x)])[0].id,
+				'order_id': soid
+			})
+			sollist.append((2,solid))
+
+		soid.write({
+			'order_line': sollist
+		})
+
+		print sollist;
 
 	#Handles the POST request for the route '/bookings'
 	# @http.route(
