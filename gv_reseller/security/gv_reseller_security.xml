@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+		
+		<!-- Add new category for this module's access rules -->
+        <record model="ir.module.category" id="module_category_gv_reseller">
+            <field name="name">Reseller</field>
+            <field name="parent_id" ref="base.module_category_tools"/>
+            <field name="sequence">1</field>
+        </record>
+	
+		<!-- Create new role for service employee -->
+		<record id="group_reseller_salesperson" model="res.groups">
+		    <field name="name">Reseller Salesperson</field>
+    		<field name="category_id" ref="module_category_gv_reseller"/>
+		    <field name="implied_ids" eval="[(4, ref('base.group_sale_salesman'))]"/>
+		</record>
+		
+		<!-- Create new role for service manager and give sale manager 
+		and service employee rights as well -->
+		<!-- Super admin is added to this group by default -->
+		<record id="group_reseller_admin" model="res.groups">
+		    <field name="name">Reseller Administrator</field>
+    		<field name="category_id" ref="module_category_gv_reseller"/>
+        	<field name="users" eval="[(4, ref('base.user_root'))]"/>
+		    <field name="implied_ids" eval="[(4, ref('group_reseller_salesperson')), (4, ref('base.group_sale_manager'))]"/>
+		</record>
+	</data>
+</openerp>
