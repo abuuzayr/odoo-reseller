@@ -114,13 +114,30 @@
 
         <record id="product_impl_onsite" model="product.attribute.value">
             <field name="name">On Site</field>
-            <field name="price_extra">50.00</field>
             <field name="attribute_id" eval="product_att_impl"></field>
         </record>
         <record id="product_impl_remote" model="product.attribute.value">
             <field name="name">Remote</field>
-            <field name="price_extra">200.00</field>
             <field name="attribute_id" eval="product_att_impl"></field>
+        </record>
+
+        <!-- PACKAGE VARIANTS -->
+        <record id="product_att_package" model="product.attribute">
+            <field name="name">Package</field>
+            <field name="type">radio</field>
+        </record>
+
+        <record id="product_pack_a" model="product.attribute.value">
+            <field name="name">A</field>
+            <field name="attribute_id" eval="product_att_package"></field>
+        </record>
+        <record id="product_pack_b" model="product.attribute.value">
+            <field name="name">B</field>
+            <field name="attribute_id" eval="product_att_package"></field>
+        </record>
+        <record id="product_pack_c" model="product.attribute.value">
+            <field name="name">C</field>
+            <field name="attribute_id" eval="product_att_package"></field>
         </record>
 
         <!-- OTHER SERVICES -->
@@ -131,6 +148,12 @@
             <field name="type">other</field>
             <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
             <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_impl, 'value_ids': [(6, 0, [product_impl_onsite, product_impl_remote])] }), ]"></field>
+        </record>
+
+        <record id="prod_att_price" model="product.attribute.price">
+            <field name="product_tmpl_id" eval="other_product_design"></field>
+            <field name="value_id" eval="product_impl_remote"></field>
+            <field name="price_extra">99.99</field>
         </record>
 
         <!-- OPTIONAL SERVICES -->
