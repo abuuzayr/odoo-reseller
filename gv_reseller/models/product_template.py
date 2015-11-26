@@ -9,4 +9,3 @@ class gv_product_template(models.Model):
 		('optional', 'Optional')
 	])
 	
-	dependent_modules = fields.Many2many('product.template')

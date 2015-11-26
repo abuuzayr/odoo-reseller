@@ -41,7 +41,7 @@
                 </tree>
             </field>
         </record>
-        <menuitem id="main_menu" name="Main Menu" />
+        <menuitem id="main_menu" name="Products" />
 		<menuitem id="menu_products" name="Products" parent="main_menu"  />
 		<menuitem id="submenu_modules" name="Modules" parent="menu_products" action="module_form_action" />
 		
