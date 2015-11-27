@@ -12,7 +12,7 @@
 						<group string="Dependencies" col="1"  >
 							<field name="dependencies" domain="['|', ('type', '=', 'misc'), ('type', '=', 'module')]"/>
 							<field name="dependents" />
-							<field name="other_services" domain="[('type', '=', 'other')"/>
+							<field name="other_services" domain="[('type', '=', 'other')]"/>
 						</group>
 					</page>
 				</xpath>
