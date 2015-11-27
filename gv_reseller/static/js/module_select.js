@@ -201,6 +201,7 @@
 
 		$('#total_amt').html('S$' + (total + service_total).toFixed(2));
 		updateServiceDisplayPrice();
+		updateServiceList();
 	}
 
 	function updateServiceList(){
