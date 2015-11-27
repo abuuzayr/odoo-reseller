@@ -14,7 +14,7 @@ class booking(http.Controller):
 		methods=['get'],
 		website=True)
 	def pricing_get(self):
-		consu_product_templates = request.env['product.template'].search([('type','=','consu')])
+		consu_product_templates = request.env['product.template'].search([('type','=','module')])
 		consu_product_product = {}
 
 		misc_product_templates = request.env['product.template'].search([('type','=','misc')])
