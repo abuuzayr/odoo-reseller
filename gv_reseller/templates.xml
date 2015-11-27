@@ -59,14 +59,15 @@
                     <h3>Other Services</h3>
                     <h4 class="green_header">Eligible for Package <span class="module_count other"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
-                        <div class="col-md-offset-8 col-md-2">On Site</div>
-                        <div class="col-md-2">Remote</div>
+                        <div class="col-xs-offset-3 col-xs-3">Duration</div>
+                        <div class="col-xs-3">On Site</div>
+                        <div class="col-xs-3">Remote</div>
                     </div>
                     <t t-foreach="other_product_product" t-as="pt">
                         <div class="product_row" t-att-listprice="pt.list_price">
                             <div class="header row">
-                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>
-                                <div class="col-md-2">
+                                <div class="title col-xs-6"><t t-esc="pt.name"></t></div>
+                                <div class="col-xs-3">
                                     <label>
                                         <input type="checkbox" class="cb_service onsite"
                                             vtype="On Site"
@@ -76,7 +77,7 @@
                                         </span>
                                     </label>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xs-3">
                                     <label>
                                         <input type="checkbox" class="cb_service remote"
                                             vtype="Remote"
@@ -105,14 +106,15 @@
                     <h3>Optional</h3>
                     <h4 class="green_header">Eligible for Package <span class="module_count optional"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
-                        <div class="col-md-offset-8 col-md-2">On Site</div>
-                        <div class="col-md-2">Remote</div>
+                        <div class="col-xs-offset-3 col-xs-3">Duration</div>
+                        <div class="col-xs-3">On Site</div>
+                        <div class="col-xs-3">Remote</div>
                     </div>
                     <t t-foreach="optional_product_product" t-as="pt">
                         <div class="product_row" t-att-listprice="pt.list_price">
                             <div class="header row">
-                                <div class="title col-md-8"><t t-esc="pt.name"></t></div>
-                                <div class="col-md-2">
+                                <div class="title col-xs-6"><t t-esc="pt.name"></t></div>
+                                <div class="col-xs-3">
                                     <label>
                                         <input type="checkbox" class="cb_service onsite"
                                             vtype="On Site"
@@ -122,7 +124,7 @@
                                         </span>
                                     </label>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xs-3">
                                     <label>
                                         <input type="checkbox" class="cb_service remote"
                                             vtype="Remote"

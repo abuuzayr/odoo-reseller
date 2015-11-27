@@ -81,7 +81,10 @@ class booking(http.Controller):
 		#perform validation if ppids has val
 		print kw['ppids'].split(',')
 
+		soc = request.website.sale_get_order(force_create=1);	
+		soc.write({'order_line': [(5,)] })
 		soc = request.website.sale_get_order(force_create=1);
+
 		soid = soc.id
 		# 	'partner_id': request.env.user.partner_id.id,
 		# 	'state': 'draft',
@@ -98,11 +101,9 @@ class booking(http.Controller):
 			print solid
 			sollist.append((4,solid.id))
 
-		soc.write({
-			'order_line': sollist
-		})
 
 		print sollist;
+		soc.write({'order_line': sollist })
 
 	#Handles the POST request for the route '/bookings'
 	# @http.route(

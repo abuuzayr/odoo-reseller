@@ -118,7 +118,7 @@
 			$(elem).on('change', function(){
 				var title = $(this).attr('title');
 				if ($(this).prop('checked')) {
-					$('input.cb_service[cname="'+$(this).attr('cname')+'"]').prop('checked', false);
+					$('input.cb_service[title="'+$(this).attr('title')+'"]').prop('checked', false);
 					$(this).prop('checked', true);
 
 					selected_service[title] = {

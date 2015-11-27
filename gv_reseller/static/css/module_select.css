@@ -1,6 +1,8 @@
 body { font-family: 'Lato', sans-serif; }
+html[data-view-xmlid="gv_reseller.pricing"] .col-md-4 { width: 33%; float:left; }
+html[data-view-xmlid="gv_reseller.pricing"] .col-md-8 { width: 66%; float:left; }
 
-label.module-select { cursor: pointer; position: relative; margin: 10px 0px; }
+label.module-select { padding:0 5px; cursor: pointer; position: relative; margin: 10px 0px; }
 label.module-select img { width: 100%; max-width: 240px; }
 .check {
 	display: none;
@@ -16,14 +18,15 @@ label.module-select img { width: 100%; max-width: 240px; }
 	font-weight: bold;
 	text-transform: uppercase;
 	position: absolute;
-	top:25%;
-	left: 15%;
+	top:20%;
+	left: 10%;
 	max-width: 120px;
 	display: block;
 	text-shadow: -1px 1px 2px rgba(0,0,0,0.3);
 	font-size: 0.9em;
+	line-height: 15px;
 }
-.module_price { top: auto; bottom: 10%; }
+.module_price { top: auto; bottom: 12.5%; }
 .module_price i { font-weight: normal; text-transform: lowercase; }
 .check .fa {
 	text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5)
@@ -78,4 +81,9 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
   position: -o-sticky;
   position: sticky;
   top: 55px;
+}
+
+@media screen and (max-width: 991px){
+	.module_title, .module_price { font-size: 0.8em; line-height: 11px;  }
+	label.module-select { margin: 5px 0; }
 }
