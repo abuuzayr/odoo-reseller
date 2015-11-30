@@ -150,6 +150,53 @@
                             </div>
                         </div>
                     </t>
+                    <br/>
+                    <hr/>
+
+                    <h3>Client Details</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Company Name</label>
+                            <input class="form-control" id="co_name" name="co_name" type="text"/>
+                        </div>
+                        <div class="col-lg-6">                            
+                            <label>Business Registration No.</label>
+                            <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
+                        </div>
+                        <div class="col-lg-6">                            
+                            <label>Address</label>
+                            <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
+                            <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Mobile No.</label>
+                            <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                        </div>
+                    </div>
+
+                    <h3>Point of Contact</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Title</label>
+                            <input class="form-control" id="poc_title" name="poc_title" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Name</label>
+                            <input class="form-control" id="poc_name" name="poc_name" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Email Address</label>
+                            <input class="form-control" id="poc_email" name="poc_email" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Mobile No.</label>
+                            <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Remarks</label>
+                            <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 sticky">
                     <h3 class="sub">Subscription</h3>
