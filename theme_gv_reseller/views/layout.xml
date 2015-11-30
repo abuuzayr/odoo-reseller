@@ -21,11 +21,11 @@
 
 	  <!-- Assign #top_menu items -->
 	  <xpath expr="//ul[@id='top_menu']" position="inside">
-	  	<li><a href="/"><i class="fa fa-bars"></i>Menu</a></li>
-	  	<li><a href="/shop"><i class="fa fa-shopping-cart"></i>Cart</a></li>
-	  	<li><i class="fa fa-database"></i>Projects</li>
-	  	<li><i class="fa fa-cloud-download"></i>Cloud</li>
-	  	<li><i class="fa fa-question-circle"></i>Info</li>
+	  	<li id="sidemenu"><a><i class="fa fa-bars"></i><span>Menu</span></a></li>
+	  	<li><a href="/pricing"><i class="fa fa-shopping-cart"></i><span>Purchase</span></a></li>
+	  	<li><a href="/pricing"><i class="fa fa-database"></i><span>Projects</span></a></li>
+	  	<li><a href="/pricing"><i class="fa fa-cloud-download"></i><span>Resources</span></a></li>
+	  	<li><a href="/pricing"><i class="fa fa-question-circle"></i><span>Support</span></a></li>
 	  </xpath>
 
 	  <!-- Remove menu items -->

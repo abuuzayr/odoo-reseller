@@ -6,15 +6,23 @@
 
 @menuwidth: 55px;
 .fixed_left {
-	text-align: center;
-	ul, li { list-style: none; margin: 0; padding: 0; font-size: 0; }
+	text-align: left;
 	li { 
+		list-style: none; margin: 0; padding: 0; font-size: 0;
 		height: @menuwidth;
 		line-height: @menuwidth;
-		&::first-letter, .fa {font-size: 20px; color: #fff; line-height: inherit;}
+		cursor: pointer;
+		a::first-letter, .fa {font-size: 20px; color: #fff; line-height: inherit;}
 		&.divider { height: 2px; background-color:#777; }
 		&:hover { background-color: #018738; }
 		a:hover { text-decoration: none; }
+		a { 
+			height: @menuwidth;
+			width: @menuwidth;
+			line-height: @menuwidth;
+			text-align: center;
+			display: inline-block;
+		}
 	}
 	position: absolute;
 	height: ~"calc(100vh - 50px)";
@@ -26,6 +34,15 @@
 	padding-left: 0px;
 	z-index: 5;
 	color: #eee;
+	transition: all 0.4s;
+	&.expand {
+		width: 200px;
+		li .menu_label {
+			width: ~"calc(100% - @{menuwidth})";
+			display: inline-block;
+			font-size: 11pt; 
+		}
+	}
 }
 
 .gvrs_nav {
