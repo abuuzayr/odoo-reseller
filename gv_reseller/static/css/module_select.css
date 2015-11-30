@@ -2,6 +2,9 @@ body { font-family: 'Lato', sans-serif; }
 html[data-view-xmlid="gv_reseller.pricing"] .col-md-4 { width: 33%; float:left; }
 html[data-view-xmlid="gv_reseller.pricing"] .col-md-8 { width: 66%; float:left; }
 
+html[data-view-xmlid="gv_reseller.pricing"] input.form-control { border-radius: 0px; }
+html[data-view-xmlid="gv_reseller.pricing"] textarea.form-control { border-radius: 0px; }
+
 label.module-select { padding:0 5px; cursor: pointer; position: relative; margin: 10px 0px; }
 label.module-select img { width: 100%; max-width: 240px; }
 .check {
@@ -79,6 +82,7 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
   position: -moz-sticky;
   position: -ms-sticky;
   position: -o-sticky;
+  -webkit-position: sticky;
   position: sticky;
   top: 55px;
 }

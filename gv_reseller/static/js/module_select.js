@@ -73,6 +73,7 @@
 		retrieveGoogleFonts();
 		registerServiceSelection();
 		registerModuleSelection();
+		polyfillSticky();
 	}
 
 	function registerModuleSelection(){
@@ -248,5 +249,13 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(wf, s);
 		})();
+	}
+
+	function polyfillSticky(){
+		var stickyElements = document.getElementsByClassName('sticky');
+
+		for (var i = stickyElements.length - 1; i >= 0; i--) {
+		    Stickyfill.add(stickyElements[i]);
+		}
 	}
 })(jQuery);
