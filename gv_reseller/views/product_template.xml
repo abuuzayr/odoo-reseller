@@ -10,9 +10,9 @@
 				<xpath expr="//page[@string='Information']" position="after">
 					<page string="Module Dependencies" attrs="{'invisible':[('type', '!=', 'misc'), ('type', '!=', 'module')]}" >
 						<group string="Dependencies" col="1"  >
-							<field name="dependencies" domain="['|', ('type', '=', 'misc'), ('type', '=', 'module')]"/>
+							<field name="dependencies" />
 							<field name="dependents" />
-							<field name="other_services" domain="[('type', '=', 'other')]"/>
+							<field name="other_services" />
 						</group>
 					</page>
 				</xpath>
