@@ -1,1 +1,2 @@
 import product_template
+import project_template

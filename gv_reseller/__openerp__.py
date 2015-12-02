@@ -28,6 +28,7 @@
         'security/gv_reseller_security.xml',
         'templates.xml',
         'views/product_template.xml',
+        'views/project_template.xml',
         'data.xml',
     ]
 }
