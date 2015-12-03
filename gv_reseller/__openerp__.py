@@ -29,6 +29,7 @@
         'templates.xml',
         'views/product_template.xml',
         'views/project_template.xml',
+        'views/user_template.xml',
         'data.xml',
     ]
 }
