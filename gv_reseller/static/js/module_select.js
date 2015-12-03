@@ -10,32 +10,12 @@
 	var module_ppid = [],
 		service_ppid = [];
 
+	var pageState = 'selection';
+
 	var packageData = {
-		'A': 3,
-		'B': 7,
-		'C': 10
-	}
-
-	function getCurrentPackage(moduleCount){
-		moduleCount = (moduleCount !== void(0)) ? moduleCount : 0;
-		if (moduleCount <= packageData.A) {
-			return 'A';
-		} else if (moduleCount <= packageData.B){
-			return 'B';
-		} else {
-			return 'C';
-		}
-	}
-
-	function getCurrentPackageRange(ptype){
-		var keys = Object.keys(packageData);
-		if (keys.indexOf(ptype) === keys.length-1) {
-			return packageData[keys[keys.indexOf(ptype) - 1]] + '+';
-		} else if (keys.indexOf(ptype) === 0){
-			return '1 - ' + packageData[ptype];
-		} else {
-			return '' + (packageData[keys[keys.indexOf(ptype) - 1]]+1) + ' - ' +  packageData[ptype];
-		}
+		'A': 3, // 1-3
+		'B': 7, // 4-7
+		'C': 10 // 7+
 	}
 
 	var year = 1,
@@ -48,21 +28,101 @@
 		'</div>'
 	]; //replace values of index: 2 and 5
 
-	function collatePIDs(){
-		return module_ppid.concat(service_ppid);
-	}
-
-	function getModuleCount(){
-		return Object.keys(selected_module).length + Object.keys(selected_module_misc).length;
-	}
-
+	/** Continue Button Event */
 	$('#continue_btn').on('click', function(){
-		if (!collatePIDs()) {
+		if (collatePIDs().length === 0) {
+			alert('You have not selected any modules');
 			console.warn('No Selection Made, perform validation here');
+			return;
 		}
-		$.post('/pricing',{ 'ppids': collatePIDs().join() }, function(){
-			console.log('test');
-		});
+
+		toggleState();
+
+		function toggleState(){
+			if (pageState == 'selection') {
+				hideAllUnselectedModules();
+				setConfirmStateTexts();
+			} else {
+				showAllModules();
+				setSelectionStateTexts();
+			}
+
+			pageState = (pageState === 'selection') ? 'confirm' : 'selection';
+		}
+
+		function setConfirmStateTexts(){			
+			$('#continue_btn').attr('prevText', $('#continue_btn').html());
+			$('#continue_btn').html('Back');
+
+			$('#modules_h3').attr('prevText', $('#modules_h3').html());
+			$('#modules_h3').html('Modules Selected');
+
+			$('#no_users_div').hide();
+			$('#misc_module_div').hide();
+
+			$('.product_row .desc, .c_header').hide();
+			$('#optional_service_div').hide();
+
+			$('.cb_service').parent().hide();
+			$('.cb_service').hide();
+			$('.cb_service:checked').parent().show();
+		}
+
+		function setSelectionStateTexts(){			
+			$('#continue_btn').html($('#continue_btn').attr('prevText'));
+			$('#modules_h3').html($('#modules_h3').attr('prevText'));
+			$('#no_users_div').show();
+			$('#misc_module_div').show();
+			$('.product_row .desc, .c_header').show();
+			$('#optional_service_div').show();
+			$('.cb_service').parent().show();
+			$('.cb_service').show();
+		}
+
+		function hideAllUnselectedServices(){
+
+		}
+
+		function hideAllUnselectedModules(){
+			var allSelectedModuleTitles = Object.keys(selected_module).concat(Object.keys(selected_module_misc));
+
+			$('label.module-select').each(function(i, elem){
+				elem = $(elem);
+				if (elem.hasClass('misc')) {
+					$('#module_div div.row').append(elem);
+				}
+				if (allSelectedModuleTitles.indexOf(elem.attr('title')) === -1) {
+					elem.hide();
+				}
+				elem.off('click.module_select'); //Disables click fn
+				elem.css({'cursor':'not-allowed'});
+			});
+
+			$('#misc_module_div').hide();
+		}
+		function showAllModules(){
+			$('label.module-select').each(function(i, elem){
+				elem = $(elem);
+				elem.show();
+				elem.on('click.module_select', _moduleSelectHandler);
+				if (elem.hasClass('misc')) {
+					$('#misc_module_div div.row').append(elem);
+				}
+				elem.removeAttr('style');
+			});
+		}
+
+		// $.ajax('/pricing', { 
+		// 	type:'post',
+		// 	data: {
+		// 	  ppids: collatePIDs().join() 
+		// 	},
+		// 	dataType:'html',
+		// 	success: function(rs){
+		// 		document.write(rs);
+		// 	},
+		// 	error: function(err){ console.error(err); }
+		// });
 	});
 
 	init();
@@ -77,33 +137,7 @@
 	}
 
 	function registerModuleSelection(){
-		$('label.module-select').on('click', function(){
-			var lbl = $(this),
-				isSelected = !lbl.find('input').prop('checked'),
-				targetObj = lbl.hasClass('misc') ? selected_module_misc : selected_module;
-
-			lbl.find('input').prop('checked', isSelected);
-			if (!!isSelected) {
-				targetObj[lbl.attr('title')] = {
-					base: lbl.attr('listprice'),
-					year1: {
-						price: lbl.find('m-data[year="1"]').attr('price'),
-						ppid: lbl.find('m-data[year="1"]').attr('ppid')
-					},
-					year2: {
-						price: lbl.find('m-data[year="2"]').attr('price'),
-						ppid: lbl.find('m-data[year="2"]').attr('ppid')
-					},
-					year3: {
-						price: lbl.find('m-data[year="3"]').attr('price'),
-						ppid: lbl.find('m-data[year="3"]').attr('ppid')
-					}
-				}
-			} else {
-				delete targetObj[lbl.attr('title')];
-			}
-			updateList();
-		});
+		$('label.module-select').on('click.module_select', _moduleSelectHandler);
 
 		$('.summary_tabs .tab').on('click', function(){
 			$('.summary_tabs .tab').removeClass('active');
@@ -112,6 +146,34 @@
 			updateList();
 			updateDisplayPrice();
 		});
+	}
+
+	function _moduleSelectHandler(){
+		var lbl = $(this),
+			isSelected = !lbl.find('input').prop('checked'),
+			targetObj = lbl.hasClass('misc') ? selected_module_misc : selected_module;
+
+		lbl.find('input').prop('checked', isSelected);
+		if (!!isSelected) {
+			targetObj[lbl.attr('title')] = {
+				base: lbl.attr('listprice'),
+				year1: {
+					price: lbl.find('m-data[year="1"]').attr('price'),
+					ppid: lbl.find('m-data[year="1"]').attr('ppid')
+				},
+				year2: {
+					price: lbl.find('m-data[year="2"]').attr('price'),
+					ppid: lbl.find('m-data[year="2"]').attr('ppid')
+				},
+				year3: {
+					price: lbl.find('m-data[year="3"]').attr('price'),
+					ppid: lbl.find('m-data[year="3"]').attr('ppid')
+				}
+			}
+		} else {
+			delete targetObj[lbl.attr('title')];
+		}
+		updateList();
 	}
 
 	function registerServiceSelection(){
@@ -250,6 +312,40 @@
 			s.parentNode.insertBefore(wf, s);
 		})();
 	}
+	/** UTIL FUNCTIONS START **/
+
+		function getCurrentPackage(moduleCount){
+			moduleCount = (moduleCount !== void(0)) ? moduleCount : 0;
+			if (moduleCount <= packageData.A) {
+				return 'A';
+			} else if (moduleCount <= packageData.B){
+				return 'B';
+			} else {
+				return 'C';
+			}
+		}
+
+		function getCurrentPackageRange(ptype){
+			var keys = Object.keys(packageData);
+			if (keys.indexOf(ptype) === keys.length-1) {
+				return packageData[keys[keys.indexOf(ptype) - 1]] + '+';
+			} else if (keys.indexOf(ptype) === 0){
+				return '1 - ' + packageData[ptype];
+			} else {
+				return '' + (packageData[keys[keys.indexOf(ptype) - 1]]+1) + ' - ' +  packageData[ptype];
+			}
+		}
+
+
+		function collatePIDs(){
+			return module_ppid.concat(service_ppid);
+		}
+
+		function getModuleCount(){
+			return Object.keys(selected_module).length + Object.keys(selected_module_misc).length;
+		}
+
+	/** UTIL FUNCTIONS END **/
 
 	function polyfillSticky(){
 		var stickyElements = document.getElementsByClassName('sticky');
