@@ -5,16 +5,16 @@
         <t t-call="website.layout">
         <div class="oe_structure">
             <div class="container">
-            <t t-set="isAdmin" t-value="user.user_has_groups('base.group_sale_manager')"/>
-            <t t-foreach="user.groups_id" t-as="u">     
-                <t t-esc="isAdmin"></t> : <t t-esc="u.name"></t> <br/>
-            </t>
             <h1>Module Selection</h1>
             <div class="row">
-                <div class="col-md-8">
-                    <h3>Number of Users</h3>
-                    <input class="form-control" type="number" id="client_count" min="1"></input>
-                    <h3>Modules</h3>
+                <div class="col-md-8" style="padding-bottom: 50px;">
+                    <div id="no_users_div">
+                        <h3>Number of Users</h3>
+                        <input class="form-control" type="number" id="client_count" min="1"></input>
+                    </div>
+
+                    <div id="module_div">
+                    <h3 id="modules_h3">Modules</h3>
                     <div class="row">
                         <t t-foreach="consu_product_product" t-as="pt">
                             <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
@@ -35,27 +35,33 @@
                             </label>
                         </t>
                     </div>
-                    <h3>Miscellanous</h3>
-                    <div class="row">
-                        <t t-foreach="misc_product_product" t-as="pt">
-                            <label class="col-md-4 module-select misc" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
-                                <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
-                                <span class="module_title"><t t-esc="pt.name"></t></span>
-                                <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
-                                <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
-                                <div class="check"><i class="fa fa-check-circle"></i></div>
-                                <t t-foreach="misc_product_product[pt]" t-as="pp">
-                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <m-data 
-                                            class="variant"
-                                            t-att-year="attr.name"
-                                            t-att-ppid="pp.id"
-                                            t-att-price="pp.price_extra + pt.list_price"/>
-                                    </t>
-                                </t>
-                            </label>
-                        </t>
                     </div>
+
+                    <div id="misc_module_div">
+                        <h3>Miscellanous</h3>
+                        <div class="row">
+                            <t t-foreach="misc_product_product" t-as="pt">
+                                <label class="col-md-4 module-select misc" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
+                                    <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                    <span class="module_title"><t t-esc="pt.name"></t></span>
+                                    <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
+                                    <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
+                                    <div class="check"><i class="fa fa-check-circle"></i></div>
+                                    <t t-foreach="misc_product_product[pt]" t-as="pp">
+                                        <t t-foreach="pp.attribute_value_ids" t-as="attr">
+                                            <m-data 
+                                                class="variant"
+                                                t-att-year="attr.name"
+                                                t-att-ppid="pp.id"
+                                                t-att-price="pp.price_extra + pt.list_price"/>
+                                        </t>
+                                    </t>
+                                </label>
+                            </t>
+                        </div>
+                    </div>
+
+                    <div id="other_service_div">
                     <h3>Other Services</h3>
                     <h4 class="green_header">Eligible for Package <span class="module_count other"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
@@ -103,6 +109,9 @@
                             </div>
                         </div>
                     </t>
+                    </div>
+                    
+                    <div id="optional_service_div">
                     <h3>Optional</h3>
                     <h4 class="green_header">Eligible for Package <span class="module_count optional"></span>: <span class="module_count_range"></span> Selected Modules</h4>
                     <div class="row c_header">
@@ -150,8 +159,57 @@
                             </div>
                         </div>
                     </t>
+                    </div>
+
+                    <br/>
+                    <hr/>
+
+                    <h3>Client Details</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Company Name</label>
+                            <input class="form-control" id="co_name" name="co_name" type="text"/>
+                        </div>
+                        <div class="col-lg-6">                            
+                            <label>Business Registration No.</label>
+                            <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
+                        </div>
+                        <div class="col-lg-6">                            
+                            <label>Address</label>
+                            <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
+                            <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Mobile No.</label>
+                            <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                        </div>
+                    </div>
+
+                    <h3>Point of Contact</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Title</label>
+                            <input class="form-control" id="poc_title" name="poc_title" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Name</label>
+                            <input class="form-control" id="poc_name" name="poc_name" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Email Address</label>
+                            <input class="form-control" id="poc_email" name="poc_email" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Mobile No.</label>
+                            <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Remarks</label>
+                            <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 sticky">
+                <div class="col-md-4 sticky" style="padding-bottom: 50px;">
                     <h3 class="sub">Subscription</h3>
                     <h4 class="total_amt">Total Amount:</h4>
                     <div id="total_amt">S$0.00</div>
@@ -179,10 +237,28 @@
         </t>
     </template>
 
+    <template id="pricing2">
+        <title>GV Reseller</title>
+        <t t-call="website.layout">
+        <div class="oe_structure">
+        <div class="container">
+            <h1>Module Selected</h1>
+            <div class="row">
+                <div class="row">
+                    
+                </div>
+            </div>
+            <h3>Service Selected</h3>
+        </div>
+        </div>
+        </t>
+    </template>
+
     <template id="gvrs_assets" name="My Style" inherit_id="website.assets_frontend">
         <xpath expr="link[last()]" position="after">
             <link href="/gv_reseller/static/css/module_select.css" rel="stylesheet" type="text/css"/>
-            <script src="/gv_reseller/static/js/module_select.js"></script>
+            <script src="/gv_reseller/static/js/stickyfill.js"></script>    
+            <script src="/gv_reseller/static/js/module_select.js"></script>        
         </xpath>
     </template>
         
