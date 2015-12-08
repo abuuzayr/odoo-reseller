@@ -1,0 +1,47 @@
+<openerp>
+<data>
+
+    <template id="projects">
+        <title>GV Reseller</title>
+        <t t-call="website.layout">
+        <div class="oe_structure">
+	        <div class="container">
+	            <h1 class="pull-left">Projects 1</h1>
+	            <div class="pull-right">
+	            	<input type="text" placeholder="Type here..." />
+	            	<input type="submit" value="Search" />
+	            </div>
+	        </div>
+	        
+	        <div class="container">
+	        <table class="gv_reseller-status-filter">
+		      <tr>
+		        <td>ALL<hr class="gv_reseller-line-up-arrow" /></td>
+		        <td>PENDING<hr /></td>
+		        <td>APPROVED<hr /></td>
+		        <td>PAID<hr /></td>
+		        <td>ACTIVE<hr /></td>
+		        <td>EXPIRED<hr/></td>
+		        <td>REJECTED<hr/></td>
+		        <td>CANCELLED<hr/></td>
+		        <td>CUSTOM<hr/></td>
+		      </tr>  
+		    </table>
+	        
+	        </div>
+        </div>
+        </t>
+        <script type="text/javascript">
+        	var abc = "XYZ"
+        </script>
+    </template>
+    
+    <template id="project_frontend_assets" name="Project Frontend Assets" inherit_id="projects">
+        <xpath expr="." position="inside">
+			<link rel="stylesheet" href="/gv_reseller/static/css/project_overview.css" />
+			<script type="text/javascript" src="/gv_reseller//static/js/project_filter.js" />       
+        </xpath>
+    </template>
+
+</data>
+</openerp>
