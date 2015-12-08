@@ -7,7 +7,7 @@ import json
 
 class projects(http.Controller):
     
-    #Handles the GET request for the route '/pricing'
+    #Handles the GET request for the route '/projects'
     @http.route(
         ['/projects'],
         auth='user',
@@ -16,8 +16,16 @@ class projects(http.Controller):
     def projects_get(self):
         user_ids = []
         user_ids.append(request.uid)
-#         projects = request.env['project.project'].search([('partner_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
         
+        
+        projects = request.env['project.project'].search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
+        print projects
+        
+        res = {}
+        
+        return http.request.render('gv_reseller.projects', {
+            'projects': projects
+       
 #         consu_product_product = {}
 #  
 #         for x in consu_product_templates:

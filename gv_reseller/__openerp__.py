@@ -28,8 +28,8 @@
         'security/gv_reseller_security.xml',
         'templates.xml',
         'views/product_template.xml',
-        'views/project_template.xml',
-        'views/user_template.xml',
+        'views/project_project.xml',
+        'views/res_user.xml',
         'data.xml',
     ]
 }
