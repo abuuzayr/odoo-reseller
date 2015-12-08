@@ -23,7 +23,7 @@
 	  <xpath expr="//ul[@id='top_menu']" position="inside">
 	  	<li id="sidemenu"><a><i class="fa fa-bars"></i><span>Menu</span></a></li>
 	  	<li><a href="/pricing"><i class="fa fa-shopping-cart"></i><span>Purchase</span></a></li>
-	  	<li><a href="/pricing"><i class="fa fa-database"></i><span>Projects</span></a></li>
+	  	<li><a href="/projects"><i class="fa fa-database"></i><span>Projects</span></a></li>
 	  	<li><a href="/pricing"><i class="fa fa-cloud-download"></i><span>Resources</span></a></li>
 	  	<li><a href="/pricing"><i class="fa fa-question-circle"></i><span>Support</span></a></li>
 	  </xpath>

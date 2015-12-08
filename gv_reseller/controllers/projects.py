@@ -13,14 +13,17 @@ class projects(http.Controller):
         auth='user',
         methods=['get'],
         website=True)
-    def pricing_get(self):
-#         projects = request.env['product.template'].search([('type','=','module')])
+    def projects_get(self):
+        user_ids = []
+        user_ids.append(request.uid)
+#         projects = request.env['project.project'].search([('partner_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
+        
 #         consu_product_product = {}
-# 
+#  
 #         for x in consu_product_templates:
 #             consu_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
-# 
-# 
+#  
+#  
 #         return http.request.render('gv_reseller.pricing', {
 #             'consu_product_templates': consu_product_templates,
 #             'consu_product_product': consu_product_product,
@@ -31,4 +34,4 @@ class projects(http.Controller):
 #             'optional_product_templates': optional_product_templates,
 #             'optional_product_product': optional_product_product,
 #             'user': request.env.user
-#         })
+        })
