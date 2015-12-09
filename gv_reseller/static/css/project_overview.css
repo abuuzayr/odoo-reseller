@@ -48,3 +48,15 @@
     top: -10px;
     left: 45%;
 }
+
+.gv_reseller-project-table {
+	width: 100%
+}
+
+.gv_reseller-project-table th {
+	background-color: #018738;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: normal;
+}

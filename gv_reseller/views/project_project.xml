@@ -22,6 +22,10 @@
 						</group>
 					</page>
 				</xpath>
+				
+				<xpath expr="//field[@name='date_start']" position="before">
+					<field name="date_created" />
+				</xpath>
 			</field>
 			
 

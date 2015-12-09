@@ -16,16 +16,58 @@ class projects(http.Controller):
     def projects_get(self):
         user_ids = []
         user_ids.append(request.uid)
+        user = {
+                'id': request.env.user.id,
+                'is_admin': request.env.user.partner_id.is_company
+                }
+        
+        rs_projects = request.env['project.project'].search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
+        
+        project_arr = []
+        
+        for rs_project in rs_projects:
+            contact = rs_project.partner_id.child_ids[0]        
+            if request.env.user.partner_id.is_company:
+                project = {
+                           'id': rs_project.id,
+                           'created_date': rs_project.date_created or '-', 
+                           'sales_person': rs_project.sale_order.user_id.name or '-',
+                           'price': rs_project.sale_order.amount_total or '-',
+                           'sales_contact': rs_project.sale_order.user_id.phone or '-',
+                           'sales_email': rs_project.sale_order.user_id.email or '-',
+                            'customer_company': rs_project.partner_id.name or '-',
+                            'customer_contact_name': contact.name or '-',
+                            'customer_contact_no': contact.phone or '-',
+                            'customer_email': contact.email or '-',
+                            'start_date': rs_project.date_start or '-', 
+                            'expiry_date': rs_project.date or '-',
+                            'status': rs_project.status or '-',
+                            'approve': rs_project.status == 'pending',
+                            'reject': rs_project.status == 'pending' or rs_project.status == 'approved'
+                           }
+            
+            else:
+                project = {
+                           'id': rs_project.id,
+                           'created_date': rs_project.date_created or '-', 
+                            'customer_company': rs_project.partner_id.name or '-',
+                            'customer_contact_name': contact.name or '-',
+                            'customer_contact_no': contact.phone or '-',
+                            'customer_email': contact.email or '-',
+                            'start_date': rs_project.date_start or '-', 
+                            'expiry_date': rs_project.date or '-',
+                            'status': rs_project.status or '-',
+                            'approve': False,
+                            'reject': rs_project.status == 'pending'
+                           }
 
-        
-        projects = request.env['project.project'].search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
-        print projects
-        
-        res = {}
+            
+            project_arr.append(project)
+             
         
         return http.request.render('gv_reseller.projects', {
-            'projects': projects,
-            'user' : request.env.user
+            'projects': project_arr,
+            'user' : user
        
 #         consu_product_product = {}
 #  

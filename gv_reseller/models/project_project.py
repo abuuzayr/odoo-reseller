@@ -1,4 +1,5 @@
 from openerp import models, fields, api, exceptions
+
 import re
 '''
 Created on 27 Nov 2015
@@ -13,6 +14,7 @@ class gv_project_template(models.Model):
     customer_remarks = fields.Text(string='Customer Remarks')
     admin_remarks = fields.Text(string='Admin Remarks')
     sale_order = fields.Many2one('sale.order', string='Sale Order')
+    date_created = fields.Date(string='Created Date', default=fields.Date.today())
     status = fields.Selection([('pending', 'Pending'),
            ('approved','Approved'),
            ('paid','Paid'),

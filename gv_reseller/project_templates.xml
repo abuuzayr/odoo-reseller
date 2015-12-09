@@ -27,12 +27,67 @@
 		        <td>CUSTOM<hr/></td>
 		      </tr>  
 		    </table>
-	        
+	        <t t-esc="projects"></t>
+	        <hr/>
+	        <t t-esc="user"></t>
+	        </div>
+	        <div class="container">
+	        	<table class="gv_reseller-project-table">
+	        		<tr>
+	        			<th>Project ID</th>
+	        			<th>Created Date</th>
+	        			<t t-if="user['is_admin']">
+	        				<th>Sales Person</th>
+		        			<th>Price</th>
+		        			<th>Sales Contact</th>
+		        			<th>Sales Email</th>
+	        			</t>
+	        			<th>Company</th>
+	        			<th>P.O.C.</th>
+	        			<th>Contact</th>
+	        			<th>Email</th>
+	        			<th>Start</th>
+	        			<th>Expiry</th>
+	        			<th>Status</th>
+	        			<th>Actions</th>
+	        		</tr>
+	        		
+	        		<t t-foreach="projects" t-as="project">
+	        			<tr id="{{project['id']}}">
+		        			<td><t t-esc="project['id']" /></td>
+		        			<td><t t-esc="project['created_date']" /></td>
+		        			<t t-if="user['is_admin']">
+		        				<td><t t-esc="project['sales_person']" /></td>
+			        			<td><t t-esc="project['price']" /></td>
+			        			<td><t t-esc="project['sales_contact']" /></td>
+			        			<td><t t-esc="project['sales_email']" /></td>
+		        			</t>
+		        			<td><t t-esc="project['customer_company']" /></td>
+		        			<td><t t-esc="project['customer_contact_name']" /></td>
+		        			<td><t t-esc="project['customer_contact_no']" /></td>
+		        			<td><t t-esc="project['customer_email']" /></td>
+		        			<td><t t-esc="project['start_date']" /></td>
+		        			<td><t t-esc="project['expiry_date']" /></td>
+		        			<td class="{{project['status']}}"><t t-esc="project['status']" /></td>
+		        			<td>
+		        				<t t-if="project['approve']">
+		        					<input type="submit" value="Approve" class="gv_reseller-approve-button"></input>
+		        				</t>
+		        				<t t-if="project['reject']">
+		        					<input type="submit" value="Reject" class="gv_reseller-reject-button"></input>
+		        				</t>
+		        				
+		        			</td>
+	        			
+	        			</tr>
+	        		</t>
+	        	</table>
 	        </div>
         </div>
         </t>
         <script type="text/javascript">
-        	var abc = "XYZ"
+        	var projects = {{projects}}
+        	var user = <t t-esc="user"></t>
         </script>
     </template>
     
