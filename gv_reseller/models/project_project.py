@@ -13,7 +13,14 @@ class gv_project_template(models.Model):
     customer_remarks = fields.Text(string='Customer Remarks')
     admin_remarks = fields.Text(string='Admin Remarks')
     sale_order = fields.Many2one('sale.order', string='Sale Order')
-
+    status = fields.Selection([('pending', 'Pending'),
+           ('approved','Approved'),
+           ('paid','Paid'),
+           ('active', 'Active'),
+           ('expired','Expired'),
+           ('rejected', 'Rejected'),
+           ('cancelled','cancelled'),
+           ('custom', 'Custom')], string="Status")
 
 
 

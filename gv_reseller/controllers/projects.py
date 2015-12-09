@@ -16,7 +16,7 @@ class projects(http.Controller):
     def projects_get(self):
         user_ids = []
         user_ids.append(request.uid)
-        
+
         
         projects = request.env['project.project'].search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
         print projects
@@ -24,7 +24,8 @@ class projects(http.Controller):
         res = {}
         
         return http.request.render('gv_reseller.projects', {
-            'projects': projects
+            'projects': projects,
+            'user' : request.env.user
        
 #         consu_product_product = {}
 #  

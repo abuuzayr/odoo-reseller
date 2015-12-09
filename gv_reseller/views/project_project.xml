@@ -8,15 +8,24 @@
 			<field name="inherit_id" ref="project.edit_project" />
 			<field name="arch" type="xml">			
 				<xpath expr="//field[@name='partner_id']" position="after">
-					<newline/>
+					<newline />
 					<field name="sale_order" />
-					<newline/>
-					<field name="admin_remarks" />
-					<newline/>
-					<field name="customer_remarks" />
-
+					<newline></newline>
+					<field name="status" />
+				</xpath>
+				
+				<xpath expr="//page[@string='Project Stages']" position="after">
+					<page string="Remarks">
+						<group col="2" string="Remarks">
+							<field name="admin_remarks" />
+							<field name="customer_remarks" />
+						</group>
+					</page>
 				</xpath>
 			</field>
+			
+
+
         </record>
         
         
