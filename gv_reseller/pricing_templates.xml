@@ -42,7 +42,7 @@
                                 t-att-ppid="consu_product_product[pt][0].id">
                                     <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
                                     <span class="module_title"><t t-esc="pt.name"></t></span>
-                                    <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span>
+                                    <span class="module_price">$<t t-esc="pt.list_price"></t></span>
                                     <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
                                     <div class="check"><i class="fa fa-check-circle"></i></div>
                             </label>
