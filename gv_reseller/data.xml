@@ -1,169 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        <record id="product_att_year" model="product.attribute">
-            <field name="name">Year</field>
-            <field name="type">radio</field>
-        </record>
-
-        <record id="product_att_year_1" model="product.attribute.value">
-            <field name="name">1</field>
-            <field name="price_extra">50.00</field>
-            <field name="attribute_id" eval="product_att_year"></field>
-        </record>
-        <record id="product_att_year_2" model="product.attribute.value">
-            <field name="name">2</field>
-            <field name="price_extra">200.00</field>
-            <field name="attribute_id" eval="product_att_year"></field>
-        </record>
-        <record id="product_att_year_3" model="product.attribute.value">
-            <field name="name">3</field>
-            <field name="price_extra">120.00</field>
-            <field name="attribute_id" eval="product_att_year"></field>
-        </record>
-
         <!-- CORE MODULES -->
         <record id="product_pos" model="product.template">
             <field name="name">Point of Sale System</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
             <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
         </record>
         <record id="product_crm" model="product.template">
             <field name="name">CRM</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
             <field name="image" type="base64" file="gv_reseller/static/img/CRM1.png"/>
         </record>
         <record id="product_am" model="product.template">
             <field name="name">Accounting Management</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/ACCOUNTING1.png"/>
         </record>
         <record id="product_pm" model="product.template">
             <field name="name">Project Management</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/PROJECT1.png"/>
         </record>
         <record id="product_mm" model="product.template">
             <field name="name">Marketing Management</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/MARKETING1.png"/>
         </record>        
         <record id="product_im" model="product.template">
             <field name="name">Inventory Management</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/INVENTORY1.png"/>
         </record>        
         <record id="product_hr" model="product.template">
             <field name="name">Human Resource</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/HR1.png"/>
         </record>        
         <record id="product_wm" model="product.template">
             <field name="name">Website Management</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/WEB1.png"/>
         </record>
         <record id="product_ecom" model="product.template">
             <field name="name">E-Commerce</field>
             <field name="website_published">true</field>
-            <field name="type">module</field>            
-            <field name="list_price">100.00</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/E-COMM1.png"/>
         </record>
-
-        <!-- MISC MODULES -->        
+   
         <record id="misc_product_pos" model="product.template">
             <field name="name">Point of Sale System (MISC)</field>
             <field name="website_published">true</field>
-            <field name="list_price">200.00</field>
-            <field name="type">misc</field>
-            <field name="attribute_line_ids" eval="[(0, 0, { 'attribute_id': product_att_year, 'value_ids': [(6, 0, [product_att_year_1, product_att_year_2, product_att_year_3, ])] }), ]"></field>
+            <field name="type">module</field>
             <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
         </record>
         
         <!-- IMPLEMENTATION VAIRANTS -->
-        <record id="product_att_impl" model="product.attribute">
-            <field name="name">Implementation</field>
-            <field name="type">radio</field>
+        <record id="prod_att_optservice_hour" model="product.attribute">
+            <field name="name">Hours</field>
+            <field name="type">select</field>
         </record>
 
-        <record id="product_impl_onsite" model="product.attribute.value">
-            <field name="name">On Site</field>
-            <field name="attribute_id" eval="product_att_impl"></field>
+        <record id="att_val_optservice_13hr" model="product.attribute.value">
+            <field name="name">13</field>
+            <field name="attribute_id" eval="prod_att_optservice_hour"></field>
         </record>
-        <record id="product_impl_remote" model="product.attribute.value">
-            <field name="name">Remote</field>
-            <field name="attribute_id" eval="product_att_impl"></field>
+        <record id="att_val_optservice_25hr" model="product.attribute.value">
+            <field name="name">25</field>
+            <field name="attribute_id" eval="prod_att_optservice_hour"></field>
         </record>
-
-        <!-- PACKAGE VARIANTS -->
-        <record id="product_att_package" model="product.attribute">
-            <field name="name">Package</field>
-            <field name="type">radio</field>
+        <record id="att_val_optservice_30hr" model="product.attribute.value">
+            <field name="name">30</field>
+            <field name="attribute_id" eval="prod_att_optservice_hour"></field>
         </record>
-
-        <record id="product_pack_a" model="product.attribute.value">
-            <field name="name">A</field>
-            <field name="attribute_id" eval="product_att_package"></field>
-        </record>
-        <record id="product_pack_b" model="product.attribute.value">
-            <field name="name">B</field>
-            <field name="attribute_id" eval="product_att_package"></field>
-        </record>
-        <record id="product_pack_c" model="product.attribute.value">
-            <field name="name">C</field>
-            <field name="attribute_id" eval="product_att_package"></field>
+        <record id="att_val_optservice_56hr" model="product.attribute.value">
+            <field name="name">56</field>
+            <field name="attribute_id" eval="prod_att_optservice_hour"></field>
         </record>
 
         <!-- OTHER SERVICES -->
-        <record id="other_product_design" model="product.template">
-            <field name="name">Design</field>
-            <field name="website_published">true</field>
-            <field name="list_price">700.00</field>
-            <field name="type">other</field>
-            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
-            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': product_att_impl, 'value_ids': [(6, 0, [product_impl_onsite, product_impl_remote])] }), (0, 0, {'attribute_id': product_att_package, 'value_ids': [(6, 0, [product_pack_a, product_pack_b, product_pack_c])] }), ]"/>
-        </record>
-
-        <!-- OPTIONAL SERVICES -->
-        <record id="option_product_imple" model="product.template">
+        <record id="prod_tmpl_implementation" model="product.template">
             <field name="name">Implementation</field>
             <field name="website_published">true</field>
-            <field name="list_price">1000.00</field>
+            <field name="list_price">0.00</field>
             <field name="type">optional</field>
             <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
-            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': product_att_impl, 'value_ids': [(6, 0, [product_impl_onsite, product_impl_remote])] }), (0, 0, {'attribute_id': product_att_package, 'value_ids': [(6, 0, [product_pack_a, product_pack_b, product_pack_c])] }), ]"/>
+            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': prod_att_optservice_hour, 'value_ids': [(6, 0, [att_val_optservice_13hr, att_val_optservice_25hr, att_val_optservice_30hr, att_val_optservice_56hr])]}), ]"/>
+        </record>
+
+        <record id="prod_tmpl_coordination" model="product.template">
+            <field name="name">Coordination</field>
+            <field name="website_published">true</field>
+            <field name="list_price">0.00</field>
+            <field name="type">optional</field>
+            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': prod_att_optservice_hour, 'value_ids': [(6, 0, [att_val_optservice_13hr, att_val_optservice_25hr, att_val_optservice_30hr, att_val_optservice_56hr])]}), ]"/>
+        </record>
+
+        <record id="prod_tmpl_consultation" model="product.template">
+            <field name="name">Consultation</field>
+            <field name="website_published">true</field>
+            <field name="list_price">0.00</field>
+            <field name="type">optional</field>
+            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': prod_att_optservice_hour, 'value_ids': [(6, 0, [att_val_optservice_13hr, att_val_optservice_25hr, att_val_optservice_30hr, att_val_optservice_56hr])]}), ]"/>
+        </record>
+
+        <record id="prod_tmpl_training" model="product.template">
+            <field name="name">Training</field>
+            <field name="website_published">true</field>
+            <field name="list_price">0.00</field>
+            <field name="type">optional</field>
+            <field name="description_sale">Lorem Ipsum blah blah blah Redondo Luxury Cream Wafers and Earplugs too</field>
+            <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': prod_att_optservice_hour, 'value_ids': [(6, 0, [att_val_optservice_13hr, att_val_optservice_25hr, att_val_optservice_30hr, att_val_optservice_56hr])]}), ]"/>
         </record>
 
         <!-- PRICE EXTRA -->
-        <record id="prod_att_price" model="product.attribute.price">
-            <field name="product_tmpl_id" eval="other_product_design"></field>
-            <field name="value_id" eval="product_impl_remote"></field>
+        <record id="att_price_imple_13" model="product.attribute.price">
+            <field name="product_tmpl_id" eval="prod_tmpl_implementation"></field>
+            <field name="value_id" eval="att_val_optservice_13hr"></field>
             <field name="price_extra">99.99</field>
         </record>
         
