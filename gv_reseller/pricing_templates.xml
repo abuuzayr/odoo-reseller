@@ -22,10 +22,9 @@
             </t>
             </script>
             <div class="container-fluid">
-            <t t-set="isAdmin" t-value="user.user_has_groups('base.group_sale_manager')"/>
             <h1>Module Selection</h1>
             <div class="row">
-                <div class="col-md-9" style="padding-bottom: 50px;">
+                <div class="col-sm-9" style="padding-bottom: 50px;">
                     <div id="no_users_div">
                         <h3>Number of Users</h3>
                         <input class="form-control" type="number" id="client_count" min="1"></input>
@@ -35,55 +34,27 @@
                     <h3 id="modules_h3">Modules</h3>
                     <div class="row">
                         <t t-foreach="consu_product_product" t-as="pt">
-                            <label class="col-md-4 module-select" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
-                                <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
-                                <span class="module_title"><t t-esc="pt.name"></t></span>
-                                <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
-                                <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
-                                <div class="check"><i class="fa fa-check-circle"></i></div>
-                                <t t-foreach="consu_product_product[pt]" t-as="pp">
-                                    <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                        <m-data 
-                                            class="variant"
-                                            t-att-year="attr.name"
-                                            t-att-ppid="pp.id"
-                                            t-att-price="pp.price_extra + pt.list_price"/>
-                                    </t>
-                                </t>
+                            <label 
+                                class="col-sm-4 module-select" 
+                                t-attf-for="cb_{{pt.name}}" 
+                                t-att-title="pt.name" 
+                                t-att-listprice="pt.list_price"
+                                t-att-ppid="consu_product_product[pt][0].id">
+                                    <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                    <span class="module_title"><t t-esc="pt.name"></t></span>
+                                    <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span>
+                                    <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
+                                    <div class="check"><i class="fa fa-check-circle"></i></div>
                             </label>
                         </t>
                     </div>
                     </div>
 
-                    <!-- <div id="misc_module_div">
-                        <h3>Miscellanous</h3>
-                        <div class="row">
-                            <t t-foreach="misc_product_product" t-as="pt">
-                                <label class="col-md-4 module-select misc" t-attf-for="cb_{{pt.name}}" t-att-title="pt.name" t-att-listprice="pt.list_price">
-                                    <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
-                                    <span class="module_title"><t t-esc="pt.name"></t></span>
-                                    <t t-if="isAdmin"> <span class="module_price">$<t t-esc="pt.list_price"></t><i>/month</i></span> </t>
-                                    <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
-                                    <div class="check"><i class="fa fa-check-circle"></i></div>
-                                    <t t-foreach="misc_product_product[pt]" t-as="pp">
-                                        <t t-foreach="pp.attribute_value_ids" t-as="attr">
-                                            <m-data 
-                                                class="variant"
-                                                t-att-year="attr.name"
-                                                t-att-ppid="pp.id"
-                                                t-att-price="pp.price_extra + pt.list_price"/>
-                                        </t>
-                                    </t>
-                                </label>
-                            </t>
-                        </div>
-                    </div> -->
-
                     <div id="other_service_div">
                     <h3>Other Services</h3>
                     <div class="row">                        
                         <t t-foreach="optional_product_product" t-as="pt">
-                            <div class="other_service col-sm-6 col-md-3" t-attf-id="optional_{{pt.name}}">
+                            <div class="other_service col-xs-6 col-sm-3" t-attf-id="optional_{{pt.name}}">
                                 <!-- <header><t t-esc="pt.name"></t></header>
                                 <p><t t-esc="pt.description"></t></p>
                                 <span class="opt_serv_price">$0</span>
@@ -149,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 sticky" style="padding-bottom: 50px;">
+                <div class="col-sm-3 sticky" style="padding-bottom: 50px;">
                     <h3 class="sub">Subscription</h3>
                     <h4 class="total_amt">Total Amount:</h4>
                     <div id="total_amt">S$0.00</div>

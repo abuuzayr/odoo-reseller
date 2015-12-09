@@ -1,16 +1,12 @@
 (function($){
 	var selected_module = {},
 		selected_module_elem = $('#summary_list_modules');
-	var selected_module_misc = {},
-		selected_module_misc_elem = $('#summary_list_modules_misc');
 
 	var selected_service = {},
 		selected_service_elem =	$('#summary_list_service');
 
 	var module_ppid = [],
 		service_ppid = [];
-
-	var pageState = 'selection';
 
 	var packageData = {
 		'A': 3, // 1-3
@@ -28,117 +24,17 @@
 		'</div>'
 	]; //replace values of index: 2 and 5
 
-	/** Continue Button Event */
-	$('#continue_btn').on('click', function(){
-		if (collatePIDs().length === 0) {
-			alert('You have not selected any modules');
-			console.warn('No Selection Made, perform validation here');
-			return;
-		}
-
-		toggleState();
-
-		function toggleState(){
-			if (pageState == 'selection') {
-				hideAllUnselectedModules();
-				setConfirmStateTexts();
-			} else {
-				showAllModules();
-				setSelectionStateTexts();
-			}
-
-			pageState = (pageState === 'selection') ? 'confirm' : 'selection';
-		}
-
-		function setConfirmStateTexts(){			
-			$('#continue_btn').attr('prevText', $('#continue_btn').html());
-			$('#continue_btn').html('Back');
-
-			$('#modules_h3').attr('prevText', $('#modules_h3').html());
-			$('#modules_h3').html('Modules Selected');
-
-			$('#no_users_div').hide();
-			$('#misc_module_div').hide();
-
-			$('.product_row .desc, .c_header').hide();
-			$('#optional_service_div').hide();
-
-			$('.cb_service').parent().hide();
-			$('.cb_service').hide();
-			$('.cb_service:checked').parent().show();
-		}
-
-		function setSelectionStateTexts(){			
-			$('#continue_btn').html($('#continue_btn').attr('prevText'));
-			$('#modules_h3').html($('#modules_h3').attr('prevText'));
-			$('#no_users_div').show();
-			$('#misc_module_div').show();
-			$('.product_row .desc, .c_header').show();
-			$('#optional_service_div').show();
-			$('.cb_service').parent().show();
-			$('.cb_service').show();
-		}
-
-		function hideAllUnselectedServices(){
-
-		}
-
-		function hideAllUnselectedModules(){
-			var allSelectedModuleTitles = Object.keys(selected_module).concat(Object.keys(selected_module_misc));
-
-			$('label.module-select').each(function(i, elem){
-				elem = $(elem);
-				if (elem.hasClass('misc')) {
-					$('#module_div div.row').append(elem);
-				}
-				if (allSelectedModuleTitles.indexOf(elem.attr('title')) === -1) {
-					elem.hide();
-				}
-				elem.off('click.module_select'); //Disables click fn
-				elem.css({'cursor':'not-allowed'});
-			});
-
-			$('#misc_module_div').hide();
-		}
-		function showAllModules(){
-			$('label.module-select').each(function(i, elem){
-				elem = $(elem);
-				elem.show();
-				elem.on('click.module_select', _moduleSelectHandler);
-				if (elem.hasClass('misc')) {
-					$('#misc_module_div div.row').append(elem);
-				}
-				elem.removeAttr('style');
-			});
-		}
-
-		// $.ajax('/pricing', { 
-		// 	type:'post',
-		// 	data: {
-		// 	  ppids: collatePIDs().join() 
-		// 	},
-		// 	dataType:'html',
-		// 	success: function(rs){
-		// 		document.write(rs);
-		// 	},
-		// 	error: function(err){ console.error(err); }
-		// });
-	});
-
 	init();
 	function init(){
 		$('label.module-select').find('input').prop('checked', false);
 		updateDisplayPrice();
-		updateServiceDisplayPrice();
 		retrieveGoogleFonts();
-		registerServiceSelection();
 		registerModuleSelection();
 		polyfillSticky();
 	}
 
 	function registerModuleSelection(){
 		$('label.module-select').on('click.module_select', _moduleSelectHandler);
-
 		$('.summary_tabs .tab').on('click', function(){
 			$('.summary_tabs .tab').removeClass('active');
 			$(this).addClass('active');
@@ -150,29 +46,20 @@
 
 	function _moduleSelectHandler(){
 		var lbl = $(this),
-			isSelected = !lbl.find('input').prop('checked'),
-			targetObj = lbl.hasClass('misc') ? selected_module_misc : selected_module;
+			targetObj = {},
+			isSelected = !lbl.find('input').prop('checked');
 
 		lbl.find('input').prop('checked', isSelected);
 		if (!!isSelected) {
 			targetObj[lbl.attr('title')] = {
 				base: lbl.attr('listprice'),
-				year1: {
-					price: lbl.find('m-data[year="1"]').attr('price'),
-					ppid: lbl.find('m-data[year="1"]').attr('ppid')
-				},
-				year2: {
-					price: lbl.find('m-data[year="2"]').attr('price'),
-					ppid: lbl.find('m-data[year="2"]').attr('ppid')
-				},
-				year3: {
-					price: lbl.find('m-data[year="3"]').attr('price'),
-					ppid: lbl.find('m-data[year="3"]').attr('ppid')
-				}
-			}
+				ppid: lbl.attr('ppid')
+			};
 		} else {
 			delete targetObj[lbl.attr('title')];
 		}
+
+		selected_module = targetObj;
 		updateList();
 	}
 
@@ -208,8 +95,7 @@
 	function updateDisplayPrice(){
 		$('label.module-select').each(function(i, elem){
 			var l_price = Number($(elem).attr('listprice'));
-			var e_price = Number($(elem).find('m-data[year="'+year+'"]').attr('price'));
-			$(elem).find('.module_price').html('S$' + (e_price + l_price).toFixed(2));
+			$(elem).find('.module_price').html('S$' + (l_price).toFixed(2));
 		});
 	}
 
@@ -234,33 +120,29 @@
 
 	function updateList(){
 		selected_module_elem.empty();
-		selected_module_misc_elem.empty();
 		total = 0;
 		module_ppid.length = 0;
 
 		extractData(selected_module, selected_module_elem);
-		extractData(selected_module_misc, selected_module_misc_elem);
 
 		function extractData(targetObj, targetElem){
 			var keys = Object.keys(targetObj);
 			for (var i = keys.length - 1; i >= 0; i--) {
 				var temp = module_list_elem_tpl.slice(0),
 					key = keys[i],
-					amount = Number(targetObj[key]['year'+year].price);
+					amount = Number(targetObj[key].base);
+
 				temp[2] = key;
 				temp[5] = '$' + amount.toFixed(2);
 				targetElem.append(temp.join(''));
 
 				total = total + amount;
-				module_ppid.push(targetObj[key]['year'+year].ppid);
+				module_ppid.push(targetObj[key].ppid);
 			}
-
 		}
 
 		if(selected_module_elem.children().length === 0)
-			selected_module_elem.html('No module selected');
-		if(selected_module_misc_elem.children().length === 0)
-			selected_module_misc_elem.html('No misc module selected');			
+			selected_module_elem.html('No module selected');			
 
 		$('#total_amt').html('S$' + (total + service_total).toFixed(2));
 		updateServiceDisplayPrice();
@@ -342,7 +224,7 @@
 		}
 
 		function getModuleCount(){
-			return Object.keys(selected_module).length + Object.keys(selected_module_misc).length;
+			return Object.keys(selected_module).length;
 		}
 
 	/** UTIL FUNCTIONS END **/
