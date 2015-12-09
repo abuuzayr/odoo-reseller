@@ -5,6 +5,7 @@
         <t t-call="website.layout">
         <div class="oe_structure">
             <div class="container">
+            <t t-set="isAdmin" t-value="user.user_has_groups('base.group_sale_manager')"/>
             <h1>Module Selection</h1>
             <div class="row">
                 <div class="col-md-8" style="padding-bottom: 50px;">
