@@ -26,7 +26,7 @@
     # always loaded
     'data': [
         'security/gv_reseller_security.xml',
-        'templates.xml',
+        'pricing_templates.xml',
         'project_templates.xml',
         'views/product_template.xml',
         'views/project_project.xml',

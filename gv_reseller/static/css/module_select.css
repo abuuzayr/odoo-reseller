@@ -5,6 +5,11 @@ html[data-view-xmlid="gv_reseller.pricing"] .col-md-8 { width: 66%; float:left; 
 html[data-view-xmlid="gv_reseller.pricing"] input.form-control { border-radius: 0px; }
 html[data-view-xmlid="gv_reseller.pricing"] textarea.form-control { border-radius: 0px; }
 
+/*** bookmarks
+	the green: #018738;
+ */
+
+/*** MODULE BOXES ***/
 label.module-select { padding:0 5px; cursor: pointer; position: relative; margin: 10px 0px; }
 label.module-select img { width: 100%; max-width: 240px; }
 .check {
@@ -31,36 +36,24 @@ label.module-select img { width: 100%; max-width: 240px; }
 }
 .module_price { top: auto; bottom: 12.5%; }
 .module_price i { font-weight: normal; text-transform: lowercase; }
-.check .fa {
-	text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5)
-}
-label.module-select .cb_module:checked + .check {
-	display: block;
-}
+.check .fa {text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5);}
+label.module-select .cb_module:checked + .check {display: block;}
+.cb_module {display: none;}
+/*** MODULE BOXES [END] ***/
 
-.cb_module { display: none; }
+/*** SERVICES ***/
 
-h4.green_header { background-color: #018738; color: #fff; padding: 10px 15px; margin: 0; }
-
-.c_header {
-	padding: 8px;
-	font-weight: bold;
-}
-.product_row .header {
-	background-color: #f2f2f2;
-	padding: 10px 15px;
-	margin: 0px !important;
-}
-.product_row .header .title {
-	color: #018738;
-	font-size: 1.2em;
-	font-weight: bold;
-	padding: 0px !important;
-}
-.product_row .desc {
-	background: #ffffff;
-	padding: 5px 15px;
-}
+.other_service {background: #eee; padding: 20px; text-align: center;min-height: 160px;border:8px solid #fff;}
+.other_service header {display: block;font-weight: bold;}
+.other_service p {display: none; }
+.opt_serv_price {display: inline-block; color: #018738; font-weight: bold; font-size: 1.5em; margin: 10px;}
+.opt_serv_dropdown { box-shadow:-1px 1px 3px rgba(0,0,0,0.2);cursor:pointer;list-style: none; margin:0; padding:0; position: absolute; width: 80%; background: #f3f3f3; height: 25px; left: 10%;overflow: hidden;}
+.opt_serv_dropdown:before { content: '\f0d7';font-family: FontAwesome; position: absolute; right: 8%; top:3px;}
+.opt_serv_dropdown:focus { height: calc(25px * 5); outline:0; }
+.opt_serv_dropdown li {height: 25px; line-height: 25px;background: #fafafa;border:1px solid #CCC; border-bottom: 0;}
+.opt_serv_dropdown li:first-child { background-color: #fff; font-size: 0.8em; color:#AAA; border:none; }
+.opt_serv_dropdown li:last-child { border-bottom:1px solid #CCC; }
+/*** SERVICES [END]***/
 
 h3 { text-transform: uppercase; }
 h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }

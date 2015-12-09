@@ -64,102 +64,24 @@
 
                     <div id="other_service_div">
                     <h3>Other Services</h3>
-                    <h4 class="green_header">Eligible for Package <span class="module_count other"></span>: <span class="module_count_range"></span> Selected Modules</h4>
-                    <div class="row c_header">
-                        <div class="col-xs-offset-3 col-xs-3">Duration</div>
-                        <div class="col-xs-3">On Site</div>
-                        <div class="col-xs-3">Remote</div>
+                    <div class="row">                        
+                        <t t-foreach="optional_product_product" t-as="pt">
+                            <div class="other_service col-sm-6 col-md-3" t-att-listprice="pt.list_price">
+                                <header><t t-esc="pt.name"></t></header>
+                                <p><t t-esc="pt.description"></t></p>
+                                <span class="opt_serv_price">$0</span>
+                                <ul tabindex="-1" id="implementation_service" class="opt_serv_dropdown">
+                                    <li t-attf-class="first">Select one...</li>
+                                    <t t-foreach="optional_product_product[pt]" t-as="pp">
+                                        <li tabindex="-1" t-att-price="pp.lst_price" 
+                                            t-att-ppid="pp.id">
+                                            <t t-esc="pp.attribute_value_ids[0].name"></t> Hours
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+                        </t>
                     </div>
-                    <t t-foreach="other_product_product" t-as="pt">
-                        <div class="product_row" t-att-listprice="pt.list_price">
-                            <div class="header row">
-                                <div class="title col-xs-6"><t t-esc="pt.name"></t></div>
-                                <div class="col-xs-3">
-                                    <label>
-                                        <input type="checkbox" class="cb_service onsite"
-                                            vtype="On Site"
-                                            t-att-title="pt.name"/>
-                                        <span class="pprice">
-                                            $S<t t-esc="pt.list_price"></t>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label>
-                                        <input type="checkbox" class="cb_service remote"
-                                            vtype="Remote"
-                                            t-att-title="pt.name"/>
-                                        <span class="pprice">
-                                            $S<t t-esc="pt.list_price"></t>
-                                        </span>
-                                    </label>
-                                </div>
-                                <m-data>
-                                <t t-foreach="other_product_product[pt]" t-as="pp">
-                                    <input type="hidden"
-                                        t-att-group="pt.name"
-                                        t-att-price="pp.lst_price"
-                                        t-att-ppid="pp.id"
-                                        t-attf-vrnt="{{pp.attribute_value_ids[0].name}}_{{pp.attribute_value_ids[1].name}}" />
-                                </t>
-                                </m-data>
-                            </div>
-                            <div class="desc">
-                                <b>Description</b> <br/>
-                                <t t-esc="pt.description_sale"></t>
-                            </div>
-                        </div>
-                    </t>
-                    </div>
-                    
-                    <div id="optional_service_div">
-                    <h3>Optional</h3>
-                    <h4 class="green_header">Eligible for Package <span class="module_count optional"></span>: <span class="module_count_range"></span> Selected Modules</h4>
-                    <div class="row c_header">
-                        <div class="col-xs-offset-3 col-xs-3">Duration</div>
-                        <div class="col-xs-3">On Site</div>
-                        <div class="col-xs-3">Remote</div>
-                    </div>
-                    <t t-foreach="optional_product_product" t-as="pt">
-                        <div class="product_row" t-att-listprice="pt.list_price">
-                            <div class="header row">
-                                <div class="title col-xs-6"><t t-esc="pt.name"></t></div>
-                                <div class="col-xs-3">
-                                    <label>
-                                        <input type="checkbox" class="cb_service onsite"
-                                            vtype="On Site"
-                                            t-att-title="pt.name"/>
-                                        <span class="pprice">
-                                            $S<t t-esc="pt.list_price"></t>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label>
-                                        <input type="checkbox" class="cb_service remote"
-                                            vtype="Remote"
-                                            t-att-title="pt.name"/>
-                                        <span class="pprice">
-                                            $S<t t-esc="pt.list_price"></t>
-                                        </span>
-                                    </label>
-                                </div>                                
-                                <m-data>
-                                <t t-foreach="optional_product_product[pt]" t-as="pp">
-                                    <input type="hidden"
-                                        t-att-group="pt.name"
-                                        t-att-price="pp.lst_price"
-                                        t-att-ppid="pp.id"
-                                        t-attf-vrnt="{{pp.attribute_value_ids[0].name}}_{{pp.attribute_value_ids[1].name}}" />
-                                </t>
-                                </m-data>
-                            </div>
-                            <div class="desc">
-                                <b>Description</b> <br/>
-                                <t t-esc="pt.description_sale"></t>
-                            </div>
-                        </div>
-                    </t>
                     </div>
 
                     <br/>
@@ -258,6 +180,8 @@
     <template id="gvrs_assets" name="My Style" inherit_id="website.assets_frontend">
         <xpath expr="link[last()]" position="after">
             <link href="/gv_reseller/static/css/module_select.css" rel="stylesheet" type="text/css"/>
+            <script src="/gv_reseller/static/js/react.js"></script>
+            <script src="/gv_reseller/static/js/react-dom.js"></script>
             <script src="/gv_reseller/static/js/stickyfill.js"></script>    
             <script src="/gv_reseller/static/js/module_select.js"></script>        
         </xpath>
