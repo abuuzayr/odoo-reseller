@@ -25,29 +25,29 @@
 		registerModuleSelectEvents();
 	}
 
-	function registerModuleSelectEvents(){
-		$('label.module-select').on('click.module_select', _moduleSelectHandler);
-		function _moduleSelectHandler(){
-			var lbl = $(this),
-				targetObj = selected_module,
-				isSelected = !lbl.find('input').prop('checked');
+	/** INIT FUNCTIONS START */
+		function registerModuleSelectEvents(){
+			$('label.module-select').on('click.module_select', _moduleSelectHandler);
+			function _moduleSelectHandler(){
+				var lbl = $(this),
+					targetObj = selected_module,
+					isSelected = !lbl.find('input').prop('checked');
 
-			lbl.find('input').prop('checked', isSelected);
+				lbl.find('input').prop('checked', isSelected);
 
-			if (!!isSelected) {
-				targetObj[lbl.attr('title')] = {
-					base: lbl.attr('listprice'),
-					ppid: lbl.attr('ppid')
-				};
-			} else {
-				delete targetObj[lbl.attr('title')];
+				if (!!isSelected) {
+					targetObj[lbl.attr('title')] = {
+						base: lbl.attr('listprice'),
+						ppid: lbl.attr('ppid')
+					};
+				} else {
+					delete targetObj[lbl.attr('title')];
+				}
+
+				updateSummary();
 			}
-
-			updateSummary();
 		}
-	}
-
-	function updateSummary(){
+		function updateSummary(){
 		selected_module_elem.empty();
 		total = 0;
 		module_ppid.length = 0;
@@ -72,8 +72,10 @@
 		if(selected_module_elem.children().length === 0)
 			selected_module_elem.html('No module selected');			
 
-		$('#total_amt').html('S$' + (total).toFixed(2));
+		$('#total_amt').html('$' + total);
 	}
+	/** INIT FUNCTIONS END */
+
 	/** UTIL FUNCTIONS START **/
 		function getCurrentPackage(moduleCount){
 			moduleCount = (moduleCount !== void(0)) ? moduleCount : 0;
@@ -104,6 +106,10 @@
 			return Object.keys(selected_module).length;
 		}
 	/** UTIL FUNCTIONS END **/
+
+	/** REACT CODE START */
+		
+	/** REACT CODE END */
 
 	/** EXTERNALS */
 	function __polyfillSticky(){
