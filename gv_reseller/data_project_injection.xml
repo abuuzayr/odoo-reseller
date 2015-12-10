@@ -26,9 +26,255 @@
     		<field name="street2">#12-17</field>
     		<field name="zip">70138</field>
     		<field name="website">http://www.gronex.tempus.com</field>
-    		<field name="child_ids" eval="[(0, 0, {'name': 'Yvonne Yong', 'display_name': 'Yvonne Yong', 'phone': '6994-5585', 'mobile': '9979-4578', 'email':'yvonneyung@tempus.com', 'employee': False, 'user_parent_address': True}), ]" />
+    		<field name="business_registration_number">NL43BWBC2777152181</field>
+    		<field name="child_ids" eval="[(0, 0, {'name': 'Yvonne Yong', 'display_name': 'Yvonne Yong', 'phone': '6994-5585', 'mobile': '9979-4578', 'email':'yvonneyung@tempus.com', 'employee': False, 'use_parent_address': True}), ]" />
     	</record>
-    	
+    	    	<record id="id_c2_partner" model="res.partner">
+    		<field name="name">Vulputate Eu PC</field>
+    		<field name="display_name">Vulputate Eu PC</field>
+            <field name="business_registration_number">CR7170153803822213335</field>
+    		<field name="employee">False</field>
+    		<field name="is_company">True</field>
+    		<field name="street">4 Hougang Estate</field>
+    		<field name="street2"></field>
+    		<field name="zip">2932</field>
+    		<field name="website">http://www.gronex.vulpiutate.com</field>
+    		<field name="child_ids" eval="[(0, 0, {'name': 'Ngiam Cheng Yu Sam', 'display_name': 'Ngiam Cheng Yu Sam', 'phone': '6604-4177', 'mobile': '9389-7609', 'email':'cysngiam@vulputate.com', 'employee': False, 'use_parent_address': True}), ]" />
+    	</record>
+
+        <record id="id_c3_partner" model="res.partner">
+            <field name="name">Curabitur Consequat Foundation</field>
+            <field name="display_name">Curabitur Consequat Foundation</field>
+            <field name="business_registration_number">NL43BWBC2777152181</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">Blk 114</field>
+            <field name="street2">Pasir Panjang Avenue</field>
+            <field name="zip">6577</field>
+            <field name="website">http://www.gronex.consequat.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Dora Low', 'display_name': 'Dora Low', 'phone': '6819-3158', 'mobile': '9342-0752', 'email':'doralow@curabitur.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c4_partner" model="res.partner">
+            <field name="name">Orci Company</field>
+            <field name="display_name">Orci Company</field>
+            <field name="business_registration_number">SE8128575125822590813963</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">54 Jalan Gumilang</field>
+            <field name="street2"></field>
+            <field name="zip">51134</field>
+            <field name="website">http://www.gronex.orci.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Kee Hui Hoon Azusa', 'display_name': 'Kee Hui Hoon Azusa', 'phone': '6363-7804', 'mobile': '8043-8693', 'email':'', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c5_partner" model="res.partner">
+            <field name="name">Nonummy Ut Consulting</field>
+            <field name="display_name">Nonummy Ut Consulting</field>
+            <field name="business_registration_number">HU96373482975482264790767436</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">Blk 21 Clementi Street 89</field>
+            <field name="street2"> #07-27</field>
+            <field name="zip">13483</field>
+            <field name="website">http://www.gronex.nonummy.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Jonas Tay', 'display_name': 'Jonas Tay', 'phone': '6076-9632', 'mobile': '8119-4335', 'email':'jonastay@nonummy.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c6_partner" model="res.partner">
+            <field name="name">Adipiscing Lobortis Risus LLC</field>
+            <field name="display_name">Adipiscing Lobortis Risus LLC</field>
+            <field name="business_registration_number">MK47390982794329833</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street"></field>
+            <field name="street2"></field>
+            <field name="zip">756052</field>
+            <field name="website">http://www.gronex.tempus.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': '', 'display_name': '', 'phone': '', 'mobile': '', 'email':'', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c7_partner" model="res.partner">
+            <field name="name">Etiam Laoreet Libero Consulting</field>
+            <field name="display_name">Etiam Laoreet Libero Consulting</field>
+            <field name="business_registration_number">NL86RDNL2716258534</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">64 Pioneer Crescent</field>
+            <field name="street2"></field>
+            <field name="zip">9494</field>
+            <field name="website">http://www.gronex.etiam.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Natasha Wee', 'display_name': 'Natasha Wee', 'phone': '6565-7059', 'mobile': '8702-6838', 'email':'natashawee@etiam.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c8_partner" model="res.partner">
+            <field name="name">Malesuada Fringilla Est Institute</field>
+            <field name="display_name">Malesuada Fringilla Est Institute</field>
+            <field name="business_registration_number">BG26DQJC16593227013818</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">Blk 263 Lorong 3 Farrer</field>
+            <field name="street2"> #07-18</field>
+            <field name="zip">4577</field>
+            <field name="website">http://www.gronex.malesuada.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Sonny Tan', 'display_name': 'Sonny Tan', 'phone': '6225-3011', 'mobile': '9994-1850', 'email':'sonnytan@malesuada.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c9_partner" model="res.partner">
+            <field name="name">Odio Etiam Limited</field>
+            <field name="display_name">Odio Etiam Limited</field>
+            <field name="business_registration_number">KW5465902229993042179286047497</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">Blk 149 Ang Mo Kio Street 84</field>
+            <field name="street2">#08-08</field>
+            <field name="zip">13862</field>
+            <field name="website">http://www.gronex.odio.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Charlotte Zhen Cheng Moy', 'display_name': 'Charlotte Zhen Cheng Moy', 'phone': '6706-7482', 'mobile': '9135-0873', 'email':'charlotte@odio.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c10_partner" model="res.partner">
+            <field name="name">Ultrices Posuere Cubilia PC</field>
+            <field name="display_name">Ultrices Posuere Cubilia PC</field>
+            <field name="business_registration_number">RS87885263632884913511</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">16 Jalan Kilang</field>
+            <field name="street2"></field>
+            <field name="zip">08089</field>
+            <field name="website">http://www.gronex.ultrices.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Vicente Wong', 'display_name': 'Vicente Wong', 'phone': '6032-2726', 'mobile': '8752-4410', 'email':'vincentewong@ultrices.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c11_partner" model="res.partner">
+            <field name="name">Fermentum Industries</field>
+            <field name="display_name">Fermentum Industries</field>
+            <field name="business_registration_number">FI1200430816155882</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">58 Balestier Estate</field>
+            <field name="street2"></field>
+            <field name="zip">2318</field>
+            <field name="website">http://www.gronex.fermentum.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Ashley Mok', 'display_name': 'Ashley Mok', 'phone': '6146-6482', 'mobile': '9078-6763', 'email':'ashleymok@fermentum.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c12_partner" model="res.partner">
+            <field name="name">Ac Mattis Corporation</field>
+            <field name="display_name">Ac Mattis Corporation</field>
+            <field name="business_registration_number">GE40905826948907109598</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">16 Hougang Garden</field>
+            <field name="street2"></field>
+            <field name="zip">81250</field>
+            <field name="website">http://www.gronex.acmattis.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Rudy Kwok', 'display_name': 'Rudy Kwok', 'phone': '6954-5534', 'mobile': '9466-6887', 'email':'rudykwok@acmattis.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c13_partner" model="res.partner">
+            <field name="name">Quis Turpis Incorporated</field>
+            <field name="display_name">Quis Turpis Incorporated</field>
+            <field name="business_registration_number">FR0630987715984449761421610</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">2 Jalan Tarum</field>
+            <field name="street2"></field>
+            <field name="zip">301854</field>
+            <field name="website">http://www.gronex.quisturpis.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Nicole Choo Bee Choo', 'display_name': 'Nicole Choo Bee Choo', 'phone': '6577-1800', 'mobile': '9646-6318', 'email':'nicolechoo@quisturpis.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c14_partner" model="res.partner">
+            <field name="name">Eget Laoreet Posuere Company</field>
+            <field name="display_name">Eget Laoreet Posuere Company</field>
+            <field name="business_registration_number">TN6045859944404479720369</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">15 Geylang Green </field>
+            <field name="street2">#14-38</field>
+            <field name="zip">27182</field>
+            <field name="website">http://www.gronex.egetlaoreetposuere.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Darrell Sheares', 'display_name': 'Darrell Sheares', 'phone': '6526-5493', 'mobile': '9415-7931', 'email':'darrelsheares@egetlaoreetposuere.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c15_partner" model="res.partner">
+            <field name="name">Adipiscing Elit Institut</field>
+            <field name="display_name">Adipiscing Elit Institute</field>
+            <field name="business_registration_number">DE60224388264403727007</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">2 Woodlands Lane</field>
+            <field name="street2">#15-43</field>
+            <field name="zip">762268</field>
+            <field name="website">http://www.gronex.adipiscing.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Maria Khoo', 'display_name': 'Maria Khoo', 'phone': '6840-7226', 'mobile': '8621-6579', 'email':'mariakhoo@adipiscing.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c16_partner" model="res.partner">
+            <field name="name">Velit</field>
+            <field name="display_name">Velit</field>
+            <field name="business_registration_number">IE63PGGN15630147301367</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">37 Lavender Crescent</field>
+            <field name="street2"></field>
+            <field name="zip">31322</field>
+            <field name="website">http://www.gronex.velit.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Nelson Chin', 'display_name': 'Nelson Chin', 'phone': '6538-6877', 'mobile': '9087-7001', 'email':'nelsonchin@velit.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c17_partner" model="res.partner">
+            <field name="name">Ultricies Dignissim Lacus Ltd</field>
+            <field name="display_name">Ultricies Dignissim Lacus Ltd</field>
+            <field name="business_registration_number">LV19JBHK2400165688753</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">84 Joo Koon Terrace</field>
+            <field name="street2"> #09-24</field>
+            <field name="zip">485715</field>
+            <field name="website">http://www.gronex.ultricies.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Anabelle Bhaskar', 'display_name': 'Anabelle Bhaskar', 'phone': '6801-3079', 'mobile': '9230-8243', 'email':'anabellebhaskar@ultricies.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c18_partner" model="res.partner">
+            <field name="name">Mauris Sapien Cursus Ltd</field>
+            <field name="display_name">Mauris Sapien Cursus Ltd</field>
+            <field name="business_registration_number">GB60JMDA30463783747312</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">Blk 31 Lorong 5 Kembangan</field>
+            <field name="street2">#18-01</field>
+            <field name="zip">73394</field>
+            <field name="website">http://www.gronex.maurissapiencursus.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Kelvin Peck', 'display_name': 'Kelvin Peck', 'phone': '6524-8450', 'mobile': '8717-2808', 'email':'kelvinpeck@maurissapiencursus.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c19_partner" model="res.partner">
+            <field name="name">Mus Proin LLP</field>
+            <field name="display_name">Mus Proin LLP</field>
+            <field name="business_registration_number">IE70EUCK55439077576182</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">21 Boon Keng Court</field>
+            <field name="street2"> #12-37</field>
+            <field name="zip">9783</field>
+            <field name="website">http://www.gronex.musproinllp.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Neva Low', 'display_name': 'Neva Low', 'phone': '6156-6397', 'mobile': '8504-0101', 'email':'nevalow@musproinllp.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
+
+        <record id="id_c20_partner" model="res.partner">
+            <field name="name">Sed Eget Corporation</field>
+            <field name="display_name">Sed Eget Corporation</field>
+            <field name="business_registration_number">PT41079095885447066864065</field>
+            <field name="employee">False</field>
+            <field name="is_company">True</field>
+            <field name="street">42 Jalan Terang Bulan</field>
+            <field name="street2">Opera Estate</field>
+            <field name="zip">3599</field>
+            <field name="website">http://www.gronex.sedeget.com</field>
+            <field name="child_ids" eval="[(0, 0, {'name': 'Mervin Avadai', 'display_name': 'Mervin Avadai', 'phone': '6301-7661', 'mobile': '9113-4357', 'email':'mervinavadai@sedeget.com', 'employee': False, 'use_parent_address': True}), ]" />
+        </record>
     	
         <!-- RSA and RS Users -->
         <record id="id_rsa_user" model="res.users">
