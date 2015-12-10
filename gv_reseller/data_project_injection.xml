@@ -16,6 +16,36 @@
     		<field name="parent_id" ref="id_rsa_partner" />
     	</record>
     	
+    	<record id="id_rs2_partner" model="res.partner">
+    		<field name="name">rs2</field>
+    		<field name="display_name">rs2</field>
+    		<field name="employee">False</field>
+    		<field name="parent_id" ref="id_rsa_partner" />
+    	</record>
+    	
+    	<!-- RSA and RS Users -->
+        <record id="id_rsa_user" model="res.users">
+            <field name="name">rsa</field>
+            <field name="login">rsa</field>
+            <field name="password">rsa</field>
+            <field name="partner_id" ref="id_rsa_partner"/>            
+        </record>
+        
+        <record id="id_rs1_user" model="res.users">
+            <field name="name">rs1</field>
+            <field name="login">rs1</field>
+            <field name="password">rs1</field>
+            <field name="partner_id" ref="id_rs1_partner"/>            
+        </record>
+        
+        <record id="id_rs2_user" model="res.users">
+            <field name="name">rs2</field>
+            <field name="login">rs2</field>
+            <field name="password">rs2</field>
+            <field name="partner_id" ref="id_rs2_partner"/>            
+        </record>
+   
+    	
     	<!--  Customers -->
     	<record id="id_c1_partner" model="res.partner">
     		<field name="name">Tempus Incorporated</field>
@@ -276,21 +306,259 @@
             <field name="child_ids" eval="[(0, 0, {'name': 'Mervin Avadai', 'display_name': 'Mervin Avadai', 'phone': '6301-7661', 'mobile': '9113-4357', 'email':'mervinavadai@sedeget.com', 'employee': False, 'use_parent_address': True}), ]" />
         </record>
     	
-        <!-- RSA and RS Users -->
-        <record id="id_rsa_user" model="res.users">
-            <field name="name">rsa</field>
-            <field name="login">rsa</field>
-            <field name="password">rsa</field>
-            <field name="partner_id" ref="id_rsa_partner"/>            
+    	<!-- sales orders -->
+    	<record id="id_sale_1" model="sale.order">
+            <field name="partner_id" ref="id_c1_partner" />
+            <field name="user_id" ref="id_rs1_user" />
         </record>
         
-        <record id="id_rs1_user" model="res.users">
-            <field name="name">rs1</field>
-            <field name="login">rs1</field>
-            <field name="password">rs1</field>
-            <field name="partner_id" ref="id_rs1_partner"/>            
+        <record id="id_sale_2" model="sale.order">
+            <field name="partner_id" ref="id_c2_partner" />
+            <field name="user_id" ref="id_rs1_user" />
         </record>
-   
         
+        <record id="id_sale_3" model="sale.order">
+            <field name="partner_id" ref="id_c3_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_4" model="sale.order">
+            <field name="partner_id" ref="id_c4_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_5" model="sale.order">
+            <field name="partner_id" ref="id_c5_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_6" model="sale.order">
+            <field name="partner_id" ref="id_c6_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_7" model="sale.order">
+            <field name="partner_id" ref="id_c7_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_8" model="sale.order">
+            <field name="partner_id" ref="id_c8_partner" />
+            <field name="user_id" ref="id_rs1_user" />
+        </record>
+        
+        <record id="id_sale_9" model="sale.order">
+            <field name="partner_id" ref="id_c9_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_10" model="sale.order">
+            <field name="partner_id" ref="id_c10_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_11" model="sale.order">
+            <field name="partner_id" ref="id_c11_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_12" model="sale.order">
+            <field name="partner_id" ref="id_c12_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_13" model="sale.order">
+            <field name="partner_id" ref="id_c13_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_14" model="sale.order">
+            <field name="partner_id" ref="id_c14_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_15" model="sale.order">
+            <field name="partner_id" ref="id_c15_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_16" model="sale.order">
+            <field name="partner_id" ref="id_c16_partner" />
+            <field name="user_id" ref="id_rs2_user" />
+        </record>
+        
+        <record id="id_sale_17" model="sale.order">
+            <field name="partner_id" ref="id_c17_partner" />
+            <field name="user_id" ref="id_rsa_user" />
+        </record>
+        
+        <record id="id_sale_18" model="sale.order">
+            <field name="partner_id" ref="id_c18_partner" />
+            <field name="user_id" ref="id_rsa_user" />
+        </record>
+        
+        <record id="id_sale_19" model="sale.order">
+            <field name="partner_id" ref="id_c19_partner" />
+            <field name="user_id" ref="id_rsa_user" />
+        </record>
+        
+        <record id="id_sale_20" model="sale.order">
+            <field name="partner_id" ref="id_c20_partner" />
+            <field name="user_id" ref="id_rsa_user" />
+        </record>
+        
+    	<!-- projects -->
+    	
+    	<record id="id_project_1" model="project.project">
+    		<field name="name">RS1 Project 1</field>
+    		<field name="partner_id" ref="id_c1_partner" />
+    		<field name="sale_order" ref="id_sale_1" />
+    		<field name="status">pending</field>
+    	</record>   
+    	
+        <record id="id_project_2" model="project.project">
+            <field name="name">RS1 Project 2</field>
+            <field name="partner_id" ref="id_c2_partner" />
+            <field name="sale_order" ref="id_sale_2" />
+            <field name="status">approved</field>
+        </record>
+        
+        <record id="id_project_3" model="project.project">
+            <field name="name">RS1 Project 3</field>
+            <field name="partner_id" ref="id_c3_partner" />
+            <field name="sale_order" ref="id_sale_3" />
+            <field name="project_start_date">2015-12-10</field>
+            <field name="date">2015-12-17</field>
+            <field name="status">paid</field>
+        </record>
+        
+        <record id="id_project_4" model="project.project">
+            <field name="name">RS1 Project 4</field>
+            <field name="partner_id" ref="id_c4_partner" />
+            <field name="sale_order" ref="id_sale_4" />
+            <field name="status">active</field>
+            <field name="project_start_date">2015-11-08</field>
+            <field name="date">2015-11-15</field>
+        </record>
+        
+        <record id="id_project_5" model="project.project">
+            <field name="name">RS1 Project 5</field>
+            <field name="partner_id" ref="id_c5_partner" />
+            <field name="sale_order" ref="id_sale_5" />
+            <field name="project_start_date">2015-01-01</field>
+            <field name="date">2015-01-08</field>
+            <field name="status">expired</field>
+        </record>
+        
+        <record id="id_project_6" model="project.project">
+            <field name="name">RS1 Project 6</field>
+            <field name="partner_id" ref="id_c6_partner" />
+            <field name="sale_order" ref="id_sale_6" />
+            <field name="status">rejected</field>
+        </record>
+        
+        <record id="id_project_7" model="project.project">
+            <field name="name">RS1 Project 7</field>
+            <field name="partner_id" ref="id_c7_partner" />
+            <field name="sale_order" ref="id_sale_7" />
+            <field name="status">cancelled</field>
+        </record>
+        
+        <record id="id_project_8" model="project.project">
+            <field name="name">RS1 Project 8</field>
+            <field name="partner_id" ref="id_c8_partner" />
+            <field name="sale_order" ref="id_sale_8" />
+            <field name="status">custom</field>
+        </record> 
+        
+        <record id="id_project_9" model="project.project">
+            <field name="name">RS2 Project 9</field>
+            <field name="partner_id" ref="id_c9_partner" />
+            <field name="sale_order" ref="id_sale_9" />
+            <field name="status">pending</field>
+        </record>   
+        
+        <record id="id_project_10" model="project.project">
+            <field name="name">RS2 Project 10</field>
+            <field name="partner_id" ref="id_c10_partner" />
+            <field name="sale_order" ref="id_sale_10" />
+            <field name="status">approved</field>
+        </record>
+        
+        <record id="id_project_11" model="project.project">
+            <field name="name">RS2 Project 11</field>
+            <field name="partner_id" ref="id_c11_partner" />
+            <field name="sale_order" ref="id_sale_11" />
+            <field name="project_start_date">2015-12-11</field>
+            <field name="date">2015-12-18</field>
+            <field name="status">paid</field>
+        </record>
+        
+        <record id="id_project_12" model="project.project">
+            <field name="name">RS2 Project 12</field>
+            <field name="partner_id" ref="id_c12_partner" />
+            <field name="sale_order" ref="id_sale_12" />
+            <field name="status">active</field>
+            <field name="project_start_date">2015-8-4</field>
+            <field name="date">2015-8-11</field>
+        </record>
+        
+        <record id="id_project_13" model="project.project">
+            <field name="name">RS2 Project 13</field>
+            <field name="partner_id" ref="id_c13_partner" />
+            <field name="sale_order" ref="id_sale_13" />
+            <field name="project_start_date">2015-01-01</field>
+            <field name="date">2015-01-08</field>
+            <field name="status">expired</field>
+        </record>
+        
+        <record id="id_project_14" model="project.project">
+            <field name="name">RS2 Project 14</field>
+            <field name="partner_id" ref="id_c14_partner" />
+            <field name="sale_order" ref="id_sale_14" />
+            <field name="status">rejected</field>
+        </record>
+        
+        <record id="id_project_15" model="project.project">
+            <field name="name">RS2 Project 15</field>
+            <field name="partner_id" ref="id_c15_partner" />
+            <field name="sale_order" ref="id_sale_15" />
+            <field name="status">cancelled</field>
+        </record>
+        
+        <record id="id_project_16" model="project.project">
+            <field name="name">RS2 Project 16</field>
+            <field name="partner_id" ref="id_c16_partner" />
+            <field name="sale_order" ref="id_sale_16" />
+            <field name="status">custom</field>
+        </record>
+        
+        <record id="id_project_17" model="project.project">
+            <field name="name">RSA Project 17</field>
+            <field name="partner_id" ref="id_c17_partner" />
+            <field name="sale_order" ref="id_sale_17" />
+            <field name="status">pending</field>
+        </record>   
+        
+        <record id="id_project_18" model="project.project">
+            <field name="name">RSA Project 18</field>
+            <field name="partner_id" ref="id_c18_partner" />
+            <field name="sale_order" ref="id_sale_18" />
+            <field name="status">approved</field>
+        </record>
+        
+        <record id="id_project_19" model="project.project">
+            <field name="name">RSA Project 19</field>
+            <field name="partner_id" ref="id_c19_partner" />
+            <field name="sale_order" ref="id_sale_19" />
+            <field name="status">rejected</field>
+        </record>
+        
+        <record id="id_project_20" model="project.project">
+            <field name="name">RSA Project 20</field>
+            <field name="partner_id" ref="id_c20_partner" />
+            <field name="sale_order" ref="id_sale_20" />
+            <field name="status">cancelled</field>
+        </record>
     </data>
 </openerp>

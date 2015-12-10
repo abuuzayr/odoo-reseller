@@ -23,8 +23,8 @@
 					</page>
 				</xpath>
 				
-				<xpath expr="//field[@name='date_start']" position="before">
-					<field name="date_created" />
+				<xpath expr="//field[@name='date_start']" position="after">
+					<field name="project_start_date" />
 				</xpath>
 			</field>
 			

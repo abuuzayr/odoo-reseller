@@ -14,14 +14,26 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def projects_get(self):
+        user = request.env.user
         user_ids = []
         user_ids.append(request.uid)
+
+        if user.child_ids:
+#             child_ids = []
+#             for child in user.child_ids:
+#                 child_ids.append(child.id)
+#             children = request.env['res.user'].sudo().search([('partner_id', 'in', child_ids)])
+            children = request.env['res.users'].sudo().search([('partner_id.parent_id', '=', user.partner_id.id)])
+            print children
+            for child in children:
+                user_ids.append(child.id)
+        
         user = {
-                'id': request.env.user.id,
-                'is_admin': request.env.user.partner_id.is_company
+                'id': user.id,
+                'is_admin': user.partner_id.is_company
                 }
         
-        rs_projects = request.env['project.project'].search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
+        rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids)]) #WHERE USER IS CUSTOMER OF PROJECT
         
         project_arr = []
         
@@ -30,7 +42,7 @@ class projects(http.Controller):
             if request.env.user.partner_id.is_company:
                 project = {
                            'id': rs_project.id,
-                           'created_date': rs_project.date_created or '-', 
+                           'created_date': rs_project.date_start or '-', 
                            'sales_person': rs_project.sale_order.user_id.name or '-',
                            'price': rs_project.sale_order.amount_total or '-',
                            'sales_contact': rs_project.sale_order.user_id.phone or '-',
@@ -39,7 +51,7 @@ class projects(http.Controller):
                             'customer_contact_name': contact.name or '-',
                             'customer_contact_no': contact.phone or '-',
                             'customer_email': contact.email or '-',
-                            'start_date': rs_project.date_start or '-', 
+                            'start_date': rs_project.project_start_date or '-', 
                             'expiry_date': rs_project.date or '-',
                             'status': rs_project.status or '-',
                             'approve': rs_project.status == 'pending',
