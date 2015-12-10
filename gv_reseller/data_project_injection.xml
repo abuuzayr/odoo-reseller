@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    	<!-- Partners -->
+    	<record id="id_rsa_partner" model="res.partner">
+    		<field name="name">rsa</field>
+    		<field name="display_name">rsa</field>
+    		<field name="employee">False</field>
+    		<field name="is_company">True</field>
+    	</record>
+    	
+    	<record id="id_rs1_partner" model="res.partner">
+    		<field name="name">rs1</field>
+    		<field name="display_name">rs1</field>
+    		<field name="employee">False</field>
+    		<field name="parent_id" ref="id_rsa_partner" />
+    	</record>
+    	
+    	<!--  Customers -->
+    	<record id="id_c1_partner" model="res.partner">
+    		<field name="name">Tempus Incorporated</field>
+    		<field name="display_name">Tempus Incorporated</field>
+    		<field name="employee">False</field>
+    		<field name="is_company">True</field>
+    		<field name="street">2 Bencoolen Walk</field>
+    		<field name="street2">#12-17</field>
+    		<field name="zip">70138</field>
+    		<field name="website">http://www.gronex.tempus.com</field>
+    		<field name="child_ids" eval="[(0, 0, {'name': 'Yvonne Yong', 'display_name': 'Yvonne Yong', 'phone': '6994-5585', 'mobile': '9979-4578', 'email':'yvonneyung@tempus.com', 'employee': False, 'user_parent_address': True}), ]" />
+    	</record>
+    	
+    	
+        <!-- RSA and RS Users -->
+        <record id="id_rsa_user" model="res.users">
+            <field name="name">rsa</field>
+            <field name="login">rsa</field>
+            <field name="password">rsa</field>
+            <field name="partner_id" ref="id_rsa_partner"/>            
+        </record>
+        
+        <record id="id_rs1_user" model="res.users">
+            <field name="name">rs1</field>
+            <field name="login">rs1</field>
+            <field name="password">rs1</field>
+            <field name="partner_id" ref="id_rs1_partner"/>            
+        </record>
+   
+        
+    </data>
+</openerp>

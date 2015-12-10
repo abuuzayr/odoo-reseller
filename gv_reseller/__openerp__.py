@@ -32,5 +32,6 @@
         'views/project_project.xml',
         'views/res_user.xml',
         'data.xml',
+        'data_project_injection.xml',
     ]
 }
