@@ -9,6 +9,9 @@ html[data-view-xmlid="gv_reseller.pricing"] textarea.form-control { border-radiu
 	the green: #018738;
  */
 
+#no_users_div h3 { display: inline-block; margin-right: 50px; margin-top: 0px;}
+#client_count { display: inline-block; width: auto; background: #f3f3f3; border:none; outline: none;}
+
 /*** MODULE BOXES ***/
 label.module-select { padding:0 5px; cursor: pointer; position: relative; margin: 10px 0px; }
 label.module-select img { width: 100%; /*max-width: 240px*/; }
@@ -27,7 +30,7 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 	text-transform: uppercase;
 	position: absolute;
 	top:20%;
-	left: 10%;
+	left: 20%;
 	max-width: 120px;
 	display: block;
 	text-shadow: -1px 1px 2px rgba(0,0,0,0.3);
@@ -36,9 +39,7 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 }
 .module_price { top: auto; bottom: 12.5%; }
 .module_price i { font-weight: normal; text-transform: lowercase; }
-.check .fa {text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5);}
-label.module-select .cb_module:checked + .check {display: block;}
-.cb_module {display: none;}
+.cb_module { position: absolute; left: 8%; top:50%; transform:translateY(-50%); width: 20px; height: 20px; }
 /*** MODULE BOXES [END] ***/
 
 /*** SERVICES ***/
@@ -57,18 +58,14 @@ label.module-select .cb_module:checked + .check {display: block;}
 
 h3 { text-transform: uppercase; }
 h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
-#total_amt { color: #018738; font-size: 4em; margin-bottom: 0.8em; }
-.summary_tabs { /*width: 240px;*/width:100%; margin: 0 0 10px; }
-.summary_tabs .tab { cursor:pointer; font-weight: bold; font-size: 1.1em; width: 33.33%; float: left; text-align: center; padding: 7px;  }
-.summary_tabs .tab.active, .summary_tabs .tab:hover { background-color:#018738; color:#f2f2f2; }
-
-.summary_list { /*width: 240px;*/ width:100%; font-weight: light; font-size: 1.1em; font-weight: 300; }
+#total_amt { color: #018738; font-size: 4em; margin-bottom: 0.8em; font-weight: bold; }
+.summary_list { /*width: 240px;*/ width:100%; font-weight: bold; font-size: 1.1em; font-weight: 300; }
 .summary_list .row { padding: 10px 0; border-bottom: 2px solid #e7e7e7; margin: 2px 0px; }
 .summary_list .col-sm-6:nth-child(1) { text-align: left; padding-left: 0px; }
-.summary_list .col-sm-6:nth-child(2) { text-align: right; padding-right: 0px; }
+.summary_list .col-sm-6:nth-child(2) { text-align: right; padding-right: 0px; color:#018738; }
 
 .top-space { margin-top: 2em; }
-.btn-green { cursor: pointer; font-weight: bold; color: #ffffff; background-color: #018738; /*display: inline-block;*/ padding: 7px 20px; font-size: 1.1em; text-transform: uppercase; text-align: center; }
+.btn-green { cursor: pointer; font-weight: bold; color: #ffffff; background-color: #018738; /*display: inline-block;*/ padding: 7px 20px; font-size: 0.9em; text-transform: uppercase; text-align: center; }
 
 .sticky {
   position: -webkit-sticky;

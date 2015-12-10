@@ -24,18 +24,22 @@
             <div class="container-fluid">
             <h1>Module Selection</h1>
             <div class="row">
-                <div class="col-sm-9" style="padding-bottom: 50px;">
+                <div class="col-sm-9">                    
                     <div id="no_users_div">
                         <h3>Number of Users</h3>
                         <input class="form-control" type="number" id="client_count" min="1"></input>
                     </div>
-
+                </div>
+                <div class="col-sm-3">                    
+                    <div id="request_quote_btn" class="btn-green">Request for custom quote</div>
+                </div>
+                <div class="col-sm-9" style="padding-bottom: 50px;">
                     <div id="module_div">
                     <h3 id="modules_h3">Modules</h3>
                     <div class="row">
                         <t t-foreach="consu_product_product" t-as="pt">
                             <label 
-                                class="col-sm-4 module-select" 
+                                class="col-xs-6 col-sm-4 module-select" 
                                 t-attf-for="cb_{{pt.name}}" 
                                 t-att-title="pt.name" 
                                 t-att-listprice="pt.list_price"
@@ -44,7 +48,6 @@
                                     <span class="module_title"><t t-esc="pt.name"></t></span>
                                     <span class="module_price">$<t t-esc="pt.list_price"></t></span>
                                     <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
-                                    <div class="check"><i class="fa fa-check-circle"></i></div>
                             </label>
                         </t>
                     </div>
@@ -124,23 +127,16 @@
                     <h3 class="sub">Subscription</h3>
                     <h4 class="total_amt">Total Amount:</h4>
                     <div id="total_amt">S$0.00</div>
-                    <div class="summary_tabs row">
-                        <div class="tab active" val="1">1 YR</div>
-                        <div class="tab" val="2">2 YR</div>
-                        <div class="tab" val="3">3 YR</div>
-                    </div>
                     <div id="summary_list_modules" class="summary_list">
-                        No Module Selected
-                    </div>
-                    <div id="summary_list_modules_misc" class="summary_list">
-                        No Misc Module Selected
-                    </div>
-                    <h3 class="sub">Services</h3>
-                    <div id="summary_list_service" class="summary_list">
-                        No Service Selected
+                        No modules and services selected
                     </div>
 
                     <div id="continue_btn" class="btn-green top-space">Continue</div>
+                    <h3 class="sub">Recommended Services</h3>
+                    <div id="summary_list_service" class="summary_list">
+                        No modules and services selected
+                    </div>
+                    <div id="select_all_btn" class="btn-green top-space">Select All</div>
                 </div>
             </div>
             </div>
@@ -171,7 +167,9 @@
             <script src="/gv_reseller/static/js/react.js"></script>
             <script src="/gv_reseller/static/js/react-dom.js"></script>
             <script src="/gv_reseller/static/js/stickyfill.js"></script>    
-            <script src="/gv_reseller/static/js/module_select.js"></script>        
+            <script src="/gv_reseller/static/js/module_select.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+            <script src="/gv_reseller/static/js/custom.jsx" type="text/babel"></script>        
         </xpath>
     </template>
         
