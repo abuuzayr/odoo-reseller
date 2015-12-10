@@ -1,5 +1,11 @@
 /* Styles go here */
-
+.gv_reseller-container {
+	width:100%;
+	min-width: 800px;
+	padding-left: 10px;
+	padding-right: 10px;
+	clear: both;
+}
 .gv_reseller-searchbar {
   margin-top: 25px;
   margin-bottom: 25px;
@@ -59,4 +65,11 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-weight: normal;
+}
+
+.gv_reseller-project-table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 2px;
 }

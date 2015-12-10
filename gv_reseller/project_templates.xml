@@ -5,37 +5,36 @@
         <title>GV Reseller</title>
         <t t-call="website.layout">
         <div class="oe_structure">
-	        <div class="container">
-	            <h1 class="pull-left">Projects 1</h1>
+	        <div class="gv_reseller-container">
+	            <h1 class="pull-left">PROJECT</h1>
 	            <div class="pull-right">
-	            	<input type="text" placeholder="Type here..." />
-	            	<input type="submit" value="Search" />
+	            	<input type="text" id="input-search-filter" placeholder="Type here..." />
+	            	<input type="submit" id="button-search-filter" value="Search" />
 	            </div>
 	        </div>
 	        
-	        <div class="container">
-	        <table class="gv_reseller-status-filter">
-		      <tr>
-		        <td>ALL<hr class="gv_reseller-line-up-arrow" /></td>
-		        <td>PENDING<hr /></td>
-		        <td>APPROVED<hr /></td>
-		        <td>PAID<hr /></td>
-		        <td>ACTIVE<hr /></td>
-		        <td>EXPIRED<hr/></td>
-		        <td>REJECTED<hr/></td>
-		        <td>CANCELLED<hr/></td>
-		        <td>CUSTOM<hr/></td>
-		      </tr>  
-		    </table>
-	        <t t-esc="projects"></t>
-	        <hr/>
+	        <div class="gv_reseller-container">
+		        <table class="gv_reseller-status-filter">
+			      <tr>
+			        <td value="">ALL<hr class="gv_reseller-line-up-arrow" /></td>
+			        <td value="pending">PENDING<hr /></td>
+			        <td value="approved">APPROVED<hr /></td>
+			        <td value="paid">PAID<hr /></td>
+			        <td value="active">ACTIVE<hr /></td>
+			        <td value="expired">EXPIRED<hr/></td>
+			        <td value="rejected">REJECTED<hr/></td>
+			        <td value="cancelled">CANCELLED<hr/></td>
+			        <td value="custom">CUSTOM<hr/></td>
+			      </tr>  
+			    </table>
+			
 	        <t t-esc="user"></t>
-	        </div>
-	        <div class="container">
+	        </div> 
+	        <div class="gv_reseller-container">
 	        	<table class="gv_reseller-project-table">
 	        		<tr>
-	        			<th>Project ID</th>
-	        			<th>Created Date</th>
+	        			<th>ID</th>
+	        			<th>Created</th>
 	        			<t t-if="user['is_admin']">
 	        				<th>Sales Person</th>
 		        			<th>Price</th>
@@ -53,7 +52,7 @@
 	        		</tr>
 	        		
 	        		<t t-foreach="projects" t-as="project">
-	        			<tr id="{{project['id']}}">
+	        			<tr>
 		        			<td><t t-esc="project['id']" /></td>
 		        			<td><t t-esc="project['created_date']" /></td>
 		        			<t t-if="user['is_admin']">
@@ -83,12 +82,12 @@
 	        		</t>
 	        	</table>
 	        </div>
-        </div>
-        </t>
-        <script type="text/javascript">
-        	var projects = {{projects}}
+
+	    <script type="text/javascript">
         	var user = <t t-esc="user"></t>
         </script>
+        </div>
+        </t>
     </template>
     
     <template id="project_frontend_assets" name="Project Frontend Assets" inherit_id="projects">
