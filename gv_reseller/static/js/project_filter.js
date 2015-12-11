@@ -20,6 +20,18 @@
 		})
 		
 		$('.gv_reseller-project-table').tablesorter();
+		
+	    $('.gv_reseller-approve-button').click(function(){
+	        var project_id = $(this)[0].id;
+	        console.log($(this))
+			console.log(project_id);
+	        jQuery.get('/projects/approve-project',{
+	                project_id: project_id
+	            }, function(rs){
+	                location.reload();
+	            });
+	    });
+
 	});
 	
 	function set_project_table_status_index(){

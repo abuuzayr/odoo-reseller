@@ -71,10 +71,10 @@
 			        			<td data-label="Status" t-attf-class="{{project['status']}}"><t t-esc="project['status']" /></td>
 			        			<td data-label="Actions">
 			        				<t t-if="project['approve']">
-			        					<input type="submit" value="Approve" class="gv_reseller-approve-button"></input>
+			        					<input type="submit" value="Approve" class="gv_reseller-approve-button" t-attf-id="{{project['id']}}"></input>
 			        				</t>
 			        				<t t-if="project['reject']">
-			        					<input type="submit" value="Reject" class="gv_reseller-reject-button"></input>
+			        					<input type="submit" value="Reject" class="gv_reseller-reject-button" t-attf-id="{{project['id']}}"></input>
 			        				</t>
 			        				
 			        			</td>

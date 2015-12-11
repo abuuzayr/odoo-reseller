@@ -72,29 +72,22 @@ class projects(http.Controller):
                             'approve': False,
                             'reject': rs_project.status == 'pending'
                            }
-
-            print project
             project_arr.append(project)
              
-        
         return http.request.render('gv_reseller.projects', {
             'projects': project_arr,
             'user' : user
-       
-#         consu_product_product = {}
-#  
-#         for x in consu_product_templates:
-#             consu_product_product[x] = request.env['product.product'].search([('product_tmpl_id', '=', x.id)])
-#  
-#  
-#         return http.request.render('gv_reseller.pricing', {
-#             'consu_product_templates': consu_product_templates,
-#             'consu_product_product': consu_product_product,
-#             'misc_product_templates': misc_product_templates,
-#             'misc_product_product': misc_product_product,
-#             'other_product_templates': other_product_templates,
-#             'other_product_product': other_product_product,
-#             'optional_product_templates': optional_product_templates,
-#             'optional_product_product': optional_product_product,
-#             'user': request.env.user
         })
+        
+    @http.route(
+        ['/projects/approve-project'],
+        auth='user',
+        methods=['get'],
+        website=True)
+    def approve_project(self, **kwargs):
+        project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
+        print project
+        if project and request.env.user.partner_id.is_company:
+            if project.status == 'pending':
+                project.status = 'approved'
+            
