@@ -7,6 +7,10 @@
     		<field name="display_name">rsa</field>
     		<field name="employee">False</field>
     		<field name="is_company">True</field>
+    		<field name="phone">6823-8010</field>
+    		<field name="mobile">9223-7669</field>
+    		<field name="email">rsa@test.com</field>
+    		
     	</record>
     	
     	<record id="id_rs1_partner" model="res.partner">
@@ -14,6 +18,9 @@
     		<field name="display_name">rs1</field>
     		<field name="employee">False</field>
     		<field name="parent_id" ref="id_rsa_partner" />
+    		<field name="phone">6823-6895</field>
+    		<field name="mobile">8013-2249</field>
+    		<field name="email">rs1@test.com</field>
     	</record>
     	
     	<record id="id_rs2_partner" model="res.partner">
@@ -21,6 +28,9 @@
     		<field name="display_name">rs2</field>
     		<field name="employee">False</field>
     		<field name="parent_id" ref="id_rsa_partner" />
+    		<field name="phone">6823-8011</field>
+    		<field name="mobile">9314-6921</field>
+    		<field name="email">rs2@test.com</field>
     	</record>
     	
     	<!-- RSA and RS Users -->
@@ -59,7 +69,8 @@
     		<field name="business_registration_number">NL43BWBC2777152181</field>
     		<field name="child_ids" eval="[(0, 0, {'name': 'Yvonne Yong', 'display_name': 'Yvonne Yong', 'phone': '6994-5585', 'mobile': '9979-4578', 'email':'yvonneyung@tempus.com', 'employee': False, 'use_parent_address': True}), ]" />
     	</record>
-    	    	<record id="id_c2_partner" model="res.partner">
+    	
+    	<record id="id_c2_partner" model="res.partner">
     		<field name="name">Vulputate Eu PC</field>
     		<field name="display_name">Vulputate Eu PC</field>
             <field name="business_registration_number">CR7170153803822213335</field>

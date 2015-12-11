@@ -24,7 +24,6 @@ class projects(http.Controller):
 #                 child_ids.append(child.id)
 #             children = request.env['res.user'].sudo().search([('partner_id', 'in', child_ids)])
             children = request.env['res.users'].sudo().search([('partner_id.parent_id', '=', user.partner_id.id)])
-            print children
             for child in children:
                 user_ids.append(child.id)
         
@@ -38,7 +37,8 @@ class projects(http.Controller):
         project_arr = []
         
         for rs_project in rs_projects:
-            contact = rs_project.partner_id.child_ids[0]        
+            
+            contact = rs_project.partner_id.child_ids[0]
             if request.env.user.partner_id.is_company:
                 project = {
                            'id': rs_project.id,
@@ -73,7 +73,7 @@ class projects(http.Controller):
                             'reject': rs_project.status == 'pending'
                            }
 
-            
+            print project
             project_arr.append(project)
              
         
