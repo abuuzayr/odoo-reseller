@@ -61,12 +61,12 @@ class projects(http.Controller):
             else:
                 project = {
                            'id': rs_project.id,
-                           'created_date': rs_project.date_created or '-', 
+                           'created_date': rs_project.date_start or '-',  
                             'customer_company': rs_project.partner_id.name or '-',
                             'customer_contact_name': contact.name or '-',
                             'customer_contact_no': contact.phone or '-',
                             'customer_email': contact.email or '-',
-                            'start_date': rs_project.date_start or '-', 
+                            'start_date': rs_project.project_start_date or '-', 
                             'expiry_date': rs_project.date or '-',
                             'status': rs_project.status or '-',
                             'approve': False,

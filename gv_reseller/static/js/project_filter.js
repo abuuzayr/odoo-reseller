@@ -18,6 +18,8 @@
 		$('#button-search-filter').click(function(){
 			filter(filter_status,  $('#input-search-filter')[0].value);
 		})
+		
+		$('.gv_reseller-project-table').tablesorter();
 	});
 	
 	function set_project_table_status_index(){

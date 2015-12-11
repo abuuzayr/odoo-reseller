@@ -1,7 +1,6 @@
 /* Styles go here */
 .gv_reseller-container {
 	width:100%;
-	min-width: 800px;
 	padding-left: 10px;
 	padding-right: 10px;
 	clear: both;
@@ -72,4 +71,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-left: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  table td:before, table th:before{
+    content: attr(data-label)!important;
+    float: left!important;
+    text-transform: uppercase!important;
+    font-weight: bold!important;
+  }
 }
