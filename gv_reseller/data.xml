@@ -131,5 +131,25 @@
             <field name="price_extra">99.99</field>
         </record>
         
+        <!-- CUSTOM PROD EXTRA -->
+
+        <record id="product_custom_tmpl" model="product.template">
+            <field name="name">Custom Product</field>
+            <field name="website_published">false</field>
+            <field name="type">consu</field>
+        </record>
+
+        <record id="product_service_tmpl" model="product.template">
+            <field name="name">Service</field>
+            <field name="website_published">false</field>
+            <field name="type">consu</field>
+        </record>
+
+        <record id="product_user_tmpl" model="product.template">
+            <field name="name">User</field>
+            <field name="website_published">false</field>
+            <field name="type">consu</field>
+            <field name="list_price">30.00</field>
+        </record>
     </data>
 </openerp>
