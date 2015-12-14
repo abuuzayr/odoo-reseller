@@ -8,7 +8,7 @@
                 opsvTmpl = {};
                 <t t-foreach="optional_product_product" t-as="pt">
                     opsvTmpl.<t t-esc="pt.name"></t> = {
-                        price: "<t t-esc="pt.list_price"></t>",
+                        price: "<t t-esc="pt.price"></t>",
                         description: "<t t-esc="pt.description"></t>",
                         variants: []
                     };
@@ -16,7 +16,7 @@
                     opsvTmpl.<t t-esc="pt.name"></t>.variants.push({
                         ppid: "<t t-esc="pp.id"></t>",
                         vName: "<t t-esc="pp.attribute_value_ids[0].name"></t>",
-                        lstPrice: "<t t-esc="pp.lst_price"></t>"
+                        lstPrice: "<t t-esc="pp.price"></t>"
                     });
                     </t>
                 </t>
@@ -42,11 +42,11 @@
                                 class="col-xs-6 col-sm-4 module-select" 
                                 t-attf-for="cb_{{pt.name}}" 
                                 t-att-title="pt.name" 
-                                t-att-listprice="pt.list_price"
+                                t-att-listprice="pt.price"
                                 t-att-ppid="consu_product_product[pt][0].id">
                                     <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
                                     <span class="module_title"><t t-esc="pt.name"></t></span>
-                                    <span class="module_price">$<t t-esc="pt.list_price"></t></span>
+                                    <span class="module_price">$<t t-esc="pt.price"></t></span>
                                     <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
                             </label>
                         </t>
@@ -82,8 +82,16 @@
                             <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
                         </div>
                         <div class="col-lg-6">
+                            <label>Postal code</label>
+                            <input class="form-control" id="co_post_code" name="co_post_code" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
                             <label>Mobile No.</label>
                             <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Email</label>
+                            <input class="form-control" id="co_email" name="co_email" type="text"/>
                         </div>
                     </div>
 

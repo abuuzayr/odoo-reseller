@@ -87,6 +87,8 @@ var __rsGlobal = {};
 		fieldVals['Address 1'] = $('#co_addr1').val();
 		fieldVals['Address 2'] = $('#co_addr2').val();
 		fieldVals['Company Mobile'] = $('#co_mob_no').val();
+		fieldVals['Company Email'] = $('#co_email').val();
+		fieldVals['Postal Code'] = $('#co_post_code').val();
 
 		fieldVals['Point of Contact Title'] = $('#poc_title').val();	
 		fieldVals['Point of Contact Name'] = $('#poc_name').val();	

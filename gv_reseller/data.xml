@@ -151,5 +151,9 @@
             <field name="type">consu</field>
             <field name="list_price">30.00</field>
         </record>
+
+        <record id="price_list_setting" model="sale.config.settings">
+            <field name="group_sale_pricelist">True</field>
+        </record>
     </data>
 </openerp>
