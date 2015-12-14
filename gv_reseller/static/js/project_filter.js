@@ -31,6 +31,17 @@
 	                location.reload();
 	            });
 	    });
+	    
+	    $('.gv_reseller-reject-button').click(function(){
+	        var project_id = $(this)[0].id;
+	        console.log($(this))
+			console.log(project_id);
+	        jQuery.get('/projects/reject-project',{
+	                project_id: project_id
+	            }, function(rs){
+	                location.reload();
+	            });
+	    });
 
 	});
 	

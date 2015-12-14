@@ -91,3 +91,14 @@ class projects(http.Controller):
             if project.status == 'pending':
                 project.status = 'approved'
             
+    @http.route(
+        ['/projects/reject-project'],
+        auth='user',
+        methods=['get'],
+        website=True)
+    def reject_project(self, **kwargs):
+        project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
+        print project
+        if project:
+            if project.status == 'pending' or (project.status == 'approved' and request.env.user.partner_id.is_company):
+                project.status = 'rejected'
