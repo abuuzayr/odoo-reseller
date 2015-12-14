@@ -7,9 +7,9 @@
         <div class="oe_structure">
 	        <div class="gv_reseller-container">
 	            <h1 class="pull-left">PROJECT</h1>
-	            <div class="pull-right">
+	            <div class="pull-right gv_reseller-searchbar">
 	            	<input type="text" id="input-search-filter" placeholder="Type here..." />
-	            	<input type="submit" id="button-search-filter" value="Search" />
+	            	<div id="button-search-filter" class="btn-green pull-right">Search</div>
 	            </div>
 	        </div>
 	        

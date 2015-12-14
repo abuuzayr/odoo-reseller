@@ -5,16 +5,18 @@
 	padding-right: 10px;
 	clear: both;
 }
+
 .gv_reseller-searchbar {
   margin-top: 25px;
   margin-bottom: 25px;
-  font-size: 1.5em;
+}
+#input-search-filter {	
+	padding: 4px 5px 4px 5px;
 }
 
 .gv_reseller-status-filter{
   width: 100%;
   text-align: center;
-  
 }
 
 .gv_reseller-status-filter td{
