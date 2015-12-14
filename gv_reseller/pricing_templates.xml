@@ -5,29 +5,29 @@
         <t t-call="website.layout">
         <div class="oe_structure">
             <script>
-            var opsvTmpl = {};
-            <t t-foreach="optional_product_product" t-as="pt">
-                opsvTmpl.<t t-esc="pt.name"></t> = {
-                    price: "<t t-esc="pt.list_price"></t>",
-                    description: "<t t-esc="pt.description"></t>",
-                    variants: []
-                };
-                <t t-foreach="optional_product_product[pt]" t-as="pp">
-                opsvTmpl.<t t-esc="pt.name"></t>.variants.push({
-                    ppid: "<t t-esc="pp.id"></t>",
-                    vName: "<t t-esc="pp.attribute_value_ids[0].name"></t>",
-                    lstPrice: "<t t-esc="pp.lst_price"></t>"
-                });
+                opsvTmpl = {};
+                <t t-foreach="optional_product_product" t-as="pt">
+                    opsvTmpl.<t t-esc="pt.name"></t> = {
+                        price: "<t t-esc="pt.list_price"></t>",
+                        description: "<t t-esc="pt.description"></t>",
+                        variants: []
+                    };
+                    <t t-foreach="optional_product_product[pt]" t-as="pp">
+                    opsvTmpl.<t t-esc="pt.name"></t>.variants.push({
+                        ppid: "<t t-esc="pp.id"></t>",
+                        vName: "<t t-esc="pp.attribute_value_ids[0].name"></t>",
+                        lstPrice: "<t t-esc="pp.lst_price"></t>"
+                    });
+                    </t>
                 </t>
-            </t>
             </script>
             <div class="container-fluid">
             <h1>Module Selection</h1>
             <div class="row">
-                <div class="col-sm-9">                    
+                <div class="col-sm-9">
                     <div id="no_users_div">
                         <h3>Number of Users</h3>
-                        <input class="form-control" type="number" id="client_count" min="1"></input>
+                        <input class="form-control" type="number" id="client_count" min="1" value="1"></input>
                     </div>
                 </div>
                 <div class="col-sm-3">                    
@@ -53,26 +53,14 @@
                     </div>
                     </div>
 
-                    <div id="other_service_div">
-                    <h3>Other Services</h3>
-                    <div class="row">                        
-                        <t t-foreach="optional_product_product" t-as="pt">
-                            <div class="other_service col-xs-6 col-sm-3" t-attf-id="optional_{{pt.name}}">
-                                <!-- <header><t t-esc="pt.name"></t></header>
-                                <p><t t-esc="pt.description"></t></p>
-                                <span class="opt_serv_price">$0</span>
-                                <ul tabindex="-1" id="implementation_service" class="opt_serv_dropdown">
-                                    <li t-attf-class="first">Select one...</li>
-                                    <t t-foreach="optional_product_product[pt]" t-as="pp">
-                                        <li tabindex="-1" t-att-price="pp.lst_price" 
-                                            t-att-ppid="pp.id">
-                                            <t t-esc="pp.attribute_value_ids[0].name"></t> Hours
-                                        </li>
-                                    </t>
-                                </ul> -->
-                            </div>
-                        </t>
+                    <div id="optional_service_div">
+                        <h3>Optional Services</h3>
+                        <div class="row" id="os_container"></div>
                     </div>
+
+                    <div id="other_service_div">
+                        <h3>Other Services</h3>
+                        <div class="row" id="ots_container"> </div>
                     </div>
 
                     <br/>
@@ -161,15 +149,23 @@
         </t>
     </template>
 
+    <template id="gvrs_react_stuff" name="reactftw" inherit_id="pricing">
+        <xpath expr="//div[@class='container-fluid']" position="after">
+            <script src="/gv_reseller/static/js/summary.jsx" type="text/babel"></script>
+            <script src="/gv_reseller/static/js/optional_services.jsx" type="text/babel"></script>
+            <script src="/gv_reseller/static/js/other_services.jsx" type="text/babel"></script>
+        </xpath>
+    </template>
+
     <template id="gvrs_assets" name="My Style" inherit_id="website.assets_frontend">
         <xpath expr="link[last()]" position="after">
             <link href="/gv_reseller/static/css/module_select.css" rel="stylesheet" type="text/css"/>
             <script src="/gv_reseller/static/js/react.js"></script>
             <script src="/gv_reseller/static/js/react-dom.js"></script>
+            <script src="/gv_reseller/static/js/classNames.js"></script>
             <script src="/gv_reseller/static/js/stickyfill.js"></script>    
             <script src="/gv_reseller/static/js/module_select.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-            <script src="/gv_reseller/static/js/custom.jsx" type="text/babel"></script>        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>   
         </xpath>
     </template>
         

@@ -2,7 +2,7 @@ from openerp.addons.web import http
 from openerp.addons.web.http import request
 from openerp import SUPERUSER_ID
 from datetime import datetime
-
+import time
 import json
 
 class booking(http.Controller):
@@ -55,32 +55,86 @@ class booking(http.Controller):
 		methods=['post'],
 		website=True)
 	def pricing_post(self, **kw):
-		# so = request.env['sale.order']
-		# sol = request.env['sale.order.line']
-		# pp = request.env['product.product']
+		so = request.env['sale.order']
+		sol = request.env['sale.order.line']
+		pp = request.env['product.product']
 
-		### perform validation if ppids has val ###
-		# pplist = pp.browse(kw['ppids'].split(','))
+		### get custom prod tpml id
+		custom_prod_tpml = request.env.ref('gv_reseller.product_custom_tmpl')
+		custom_ppid = pp.search([("product_tmpl_id", "=", custom_prod_tpml.id)])
 
-		# soc = request.website.sale_get_order(force_create=1)
-		# soc.write({'order_line': [(5,)] })
-		# soc = request.website.sale_get_order(force_create=1)
-		# soid = soc.id
-		# sollist = []
-		# for x in kw['ppids'].split(','):
-		# 	print pp.search([('id','=',x)])[0].product_tmpl_id
-		# 	solid = sol.sudo().create({
-		# 		'name': '-',
-		# 		'product_id': pp.search([('id','=',x)])[0].id,
-		# 		'order_id': soid
-		# 	})
-		# 	print solid
-		# 	sollist.append((4,solid.id))
-		# soc.write({'order_line': sollist })
+		product_service_tmpl = request.env.ref('gv_reseller.product_service_tmpl')
+		product_service_ppid = pp.search([("product_tmpl_id", "=", product_service_tmpl.id)])	
 
-		return http.request.render('gv_reseller.pricing2', {
+		product_user_tmpl = request.env.ref('gv_reseller.product_user_tmpl')
+		product_user_ppid = pp.search([("product_tmpl_id", "=", product_user_tmpl.id)])	
 
+		### CLEARS ANY ORDER LINE
+		soc = request.website.sale_get_order(force_create=1)
+		soc.write({'order_line': [(5,)] })
+
+		soc = request.website.sale_get_order(force_create=1)
+		soid = soc.id
+		sollist = []
+
+		m_price = 600.00
+		if (len(kw['mppids'].split(',')) < 2):
+			m_price = 1200.00
+
+		if kw['mppids'] != "":
+			for x in kw['mppids'].split(','):
+				solid = sol.sudo().create({
+					'name': '-',
+					'product_id': pp.search([('id','=',int(x))])[0].id,
+					'order_id': soid,
+					'price_unit': m_price
+				})
+				sollist.append((4,solid.id))
+
+		if kw['oppids'] != "":
+			for x in kw['oppids'].split(','):
+				print x
+				solid = sol.sudo().create({
+					'name': '-',
+					'product_id': pp.search([('id','=',x)])[0].id,
+					'order_id': soid
+				})
+				sollist.append((4,solid.id))
+
+		if kw['service'] != "":
+			for x in kw['service'].split('|'):
+				print x
+				dat = x.split(';')
+				tobj = {
+					'name': dat[0],
+					'product_id': product_service_ppid.id,
+					'order_id': soid,
+					'price_unit':dat[1]
+				}
+				sollist.append((0,0,tobj))
+
+		sollist.append((0,0, {
+				'name': 'Number of Users',
+				'product_id': product_user_ppid.id,
+				'order_id': soid,
+				'price_unit':product_user_ppid.lst_price,
+				'product_uom_qty': kw['user']
+			}))
+
+		### Custom product example
+		# sollist.append((0,0, {'name':'Custom Order Line', 'product_id':custom_ppid.id, 'order_id':soid, 'price_unit':123.45}))		
+		soc.write({'order_line': sollist, 'state': 'draft'})
+
+		### Create A New Project		
+		pjp = request.env['project.project']
+		pjp.create({
+			'name': kw['Company Name'] + ' - ' + time.strftime("%c"),
+			'status': 'pending',
+			'sale_order': soc.id
 		})
+		
+		request.website.sale_reset()
+		return '200'
 
 	#Handles the POST request for the route '/bookings'
 	# @http.route(

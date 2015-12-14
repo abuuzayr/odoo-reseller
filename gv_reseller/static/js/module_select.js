@@ -1,3 +1,5 @@
+var __rsGlobal = {};
+
 (function($){
 	var selected_module = {},
 		selected_module_elem = $('#summary_list_modules');
@@ -23,6 +25,8 @@
 
 		$('label.module-select').find('input').prop('checked', false);
 		registerModuleSelectEvents();
+		bindUserCountTag();
+		continueBtn();
 	}
 
 	/** INIT FUNCTIONS START */
@@ -36,80 +40,124 @@
 				lbl.find('input').prop('checked', isSelected);
 
 				if (!!isSelected) {
-					targetObj[lbl.attr('title')] = {
+					var obj = targetObj[lbl.attr('title')] = {
 						base: lbl.attr('listprice'),
 						ppid: lbl.attr('ppid')
 					};
+					__rsGlobal.summary.addModule(obj);
 				} else {
+					__rsGlobal.summary.removeModule(targetObj[lbl.attr('title')]);
 					delete targetObj[lbl.attr('title')];
 				}
-
-				updateSummary();
 			}
 		}
-		function updateSummary(){
-		selected_module_elem.empty();
-		total = 0;
-		module_ppid.length = 0;
-		extractData(selected_module, selected_module_elem);
-
-		function extractData(targetObj, targetElem){
-			var keys = Object.keys(targetObj);
-			for (var i = keys.length - 1; i >= 0; i--) {
-				var temp = module_list_elem_tpl.slice(0),
-					key = keys[i],
-					amount = Number(targetObj[key].base);
-
-				temp[2] = key;
-				temp[5] = '$' + amount.toFixed(2);
-				targetElem.append(temp.join(''));
-
-				total = total + amount;
-				module_ppid.push(targetObj[key].ppid);
-			}
+		function bindUserCountTag(){
+			$('#client_count').on('change', function(){
+				var val = $(this).val();
+				__rsGlobal.summary.setUsers(val);
+			});
 		}
-
-		if(selected_module_elem.children().length === 0)
-			selected_module_elem.html('No module selected');			
-
-		$('#total_amt').html('$' + total);
-	}
+		function continueBtn(){
+			$('#continue_btn').on('click', function(){
+				var data = validateForm();
+				if (!data) {
+					return;
+				}
+				var data2 = {
+					mppids: __rsGlobal.util.getMppids(),
+					oppids: __rsGlobal.util.getOppids(),
+					service: __rsGlobal.util.getService(),
+					user: __rsGlobal.util.getUser()
+				};
+				data  = jQuery.extend(data, data2);
+				console.log(data);
+				$.post('/pricing', data, function(rs){
+					//console.log('completed', rs);
+					window.location = '/projects';
+				});
+			});
+		}
 	/** INIT FUNCTIONS END */
 
-	/** UTIL FUNCTIONS START **/
-		function getCurrentPackage(moduleCount){
-			moduleCount = (moduleCount !== void(0)) ? moduleCount : 0;
-			if (moduleCount <= packageData.A) {
-				return 'A';
-			} else if (moduleCount <= packageData.B){
-				return 'B';
-			} else {
-				return 'C';
+	/* some validation stuff.. */
+	function validateForm(){
+		var fieldVals = {};
+		fieldVals['Company Name'] = $('#co_name').val();
+		fieldVals['Business Registration No'] = $('#co_biz_no').val();
+		fieldVals['Address 1'] = $('#co_addr1').val();
+		fieldVals['Address 2'] = $('#co_addr2').val();
+		fieldVals['Company Mobile'] = $('#co_mob_no').val();
+
+		fieldVals['Point of Contact Title'] = $('#poc_title').val();	
+		fieldVals['Point of Contact Name'] = $('#poc_name').val();	
+		fieldVals['Point of Contact Email'] = $('#poc_email').val();
+		fieldVals['Point of Contact Mobile'] = $('#poc_mob_no').val();
+		fieldVals['Point of Contact Remarks'] = $('#poc_remarks').val();
+
+		var requireFields = ['Company Name', 
+			'Business Registration No',
+			'Point of Contact Title',
+			'Point of Contact Name'].reverse();
+
+		var valid = true;
+
+		for (var i = requireFields.length - 1; i >= 0; i--) {
+			if ( !fieldVals[requireFields[i]] ){
+				alert(requireFields[i] + ' is required.');
+				valid = false;
+				break;
 			}
-		}
-		function getCurrentPackageRange(ptype){
-			var keys = Object.keys(packageData);
-			if (keys.indexOf(ptype) === keys.length-1) {
-				return packageData[keys[keys.indexOf(ptype) - 1]] + '+';
-			} else if (keys.indexOf(ptype) === 0){
-				return '1 - ' + packageData[ptype];
-			} else {
-				return '' + (packageData[keys[keys.indexOf(ptype) - 1]]+1) + ' - ' +  packageData[ptype];
-			}
-		}
+		};
 
-		function collatePIDs(){
-			return module_ppid.concat(service_ppid);
-		}
+		return valid ? fieldVals : false;
+	}
+	/***/
 
-		function getModuleCount(){
-			return Object.keys(selected_module).length;
+	__rsGlobal.util = {
+		updateTotal: function(){
+			var stotal = __rsGlobal.summary.getServicePrice(),
+				mtotal = __rsGlobal.summary.getModulePrice(),
+				utotal = __rsGlobal.summary.getUsersPrice(),
+				gtotal = stotal + total + mtotal + utotal;
+			$('#total_amt').html('$' + gtotal);
+		},
+		getMppids: function(){
+			var ppids = [];
+			var obj = __rsGlobal.summary.getState();
+			obj.modules.forEach(function(v){
+				ppids.push(v.ppid);
+			});
+			return ppids.join(',');
+		},
+		getOppids: function(){
+			var ppids = [];
+			var obj = __rsGlobal.summary.getState();
+			obj.optional.forEach(function(v){
+				ppids.push(v.ppid);
+			});
+			return ppids.join(',');
+		},
+		getService: function(){
+			var rs = [];
+			var obj = __rsGlobal.summary.getState();
+			obj.services.forEach(function(v){
+				var t = [];
+				if (typeof v.extra === 'object') {
+					t.push(v.title + ' - ' + v.extra[obj.wd].pages + ' Pages');					
+					t.push((v.price + v.extra[obj.wd].price));
+				} else {
+					t.push(v.title);
+					t.push(v.price);	
+				}
+				rs.push(t.join(';'));
+			});
+			return rs.join('|');
+		},
+		getUser: function(){
+			var obj = __rsGlobal.summary.getState();
+			return obj.users[0];
 		}
-	/** UTIL FUNCTIONS END **/
-
-	/** REACT CODE START */
-		
-	/** REACT CODE END */
+	};
 
 	/** EXTERNALS */
 	function __polyfillSticky(){
