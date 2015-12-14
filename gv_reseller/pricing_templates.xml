@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3">                    
-                    <div id="request_quote_btn" class="btn-green">Request for custom quote</div>
+                    <a href="/custom-project"><div id="request_quote_btn" class="btn-green">Request for custom quote</div></a>
                 </div>
                 <div class="col-sm-9" style="padding-bottom: 50px;">
                     <div id="module_div">

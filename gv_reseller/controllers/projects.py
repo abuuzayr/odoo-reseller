@@ -101,12 +101,11 @@ class projects(http.Controller):
                             
                             'name': contact.name or '',
                             'email_address': contact.email or '',
-                            'title': '', 
+                            'title': contact.honorifics or '', 
                             'contact_no': contact.mobile or '',
                             
                             'remarks': rs_project.customer_remarks,
                            }
-                print project
                 return http.request.render('gv_reseller.custom-project', {
                     'project': project,
                     'user' : request.env.user
@@ -128,7 +127,6 @@ class projects(http.Controller):
                         
                         'remarks': '',
                        }       
-        print project
         return http.request.render('gv_reseller.custom-project', {
                 'project': project,
                 'user' : request.env.user
@@ -140,18 +138,6 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def create_custom_project(self, **kwargs):
-#         {'company-address-1': u'add line 1', 
-#          'email-address': u'tester@email.com', 
-#          'name': u'tester name', 
-#          'title': u'mr', 
-#          'company-address-2': u'add line 2', 
-#          'contact-no': u'35789', 
-#          'company-name': u'comp name', 
-#          'business-registration-no': u'biz reg no', 
-#          'remarks': u'eara', 
-#          'postal-code': u'758917589', 
-#          'project_id': u'0', 
-#          'office-no': u'7829537'}
         if kwargs['project_id'] == '0' :
             contact_val = {
                 'name': kwargs['name'],
@@ -163,7 +149,6 @@ class projects(http.Controller):
                 'is_company': False,
                            }
             contact = request.env['res.partner'].sudo().create(contact_val)
-            print contact
             company_val = {
                    'name': kwargs['company-name'], 
                    'is_company': True,
@@ -178,8 +163,6 @@ class projects(http.Controller):
                     'user_id': request.env.user.id,
                     }
             company = request.env['res.partner'].sudo().create(company_val)
-            print company
-            print request.env.user
             sale_order_val = {
                     'user_id': request.env.user.id,
                     'pricelist_id': request.env.user.property_product_pricelist.id,
@@ -194,7 +177,7 @@ class projects(http.Controller):
                    'sale_order': sale_order.id,
                    }
             project = request.env['project.project'].sudo().create(project_val)
-            print project
+            return request.redirect('/custom-project'+'?project_id='+str(project.id))
             
 
     @http.route(
@@ -215,7 +198,6 @@ class projects(http.Controller):
         website=True)
     def reject_project(self, **kwargs):
         project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
-        print project
         if project:
             if project.status == 'pending' or (project.status == 'approved' and request.env.user.partner_id.is_company):
                 project.status = 'rejected'
@@ -228,8 +210,8 @@ class projects(http.Controller):
     def get_project_details(self, **kwargs):
         if 'project_id' in kwargs:
             project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
-            if project: 
-                print   '/custom-project'+'?project_id='+kwargs['project_id']
+            if project.status == 'custom': 
                 return request.redirect('/custom-project'+'?project_id='+kwargs['project_id'])
+            #else view project  details (not custom)
 
     

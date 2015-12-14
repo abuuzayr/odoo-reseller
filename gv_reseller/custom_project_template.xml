@@ -85,13 +85,12 @@
 					        <div class="row">
 					          <div class="col-sm-12 gv_reseller-custom-form-control">
 					            <label>Remarks</label><br/>
-					            <textarea name="remarks" t-att-value="project['remarks']"></textarea>
+					            <textarea name="remarks" ><t t-esc="project['remarks']" /></textarea>
 					            <span class="gv_reseller-project-info-display"><t t-esc="project['remarks']" /></span>
 					          </div>
 					        </div>
 					        <input type="submit" value="Submit" id="gv_reseller_custom_project_submit"></input>
 					      </form>
-					     <t t-esc="project"></t>
 					    </div> <!-- container -->
         		</div>
         	</t>
