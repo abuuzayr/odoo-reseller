@@ -53,7 +53,7 @@
 		        	</thead>
 		        	<tbody>
 		        		<t t-foreach="projects" t-as="project">
-		        			<tr>
+		        			<tr t-attf-id="{{project['id']}}">
 			        			<td data-label="ID"><t t-esc="project['id']" /></td>
 			        			<td data-label="Created"><t t-esc="project['created_date']" /></td>
 			        			<t t-if="user['is_admin']">
@@ -83,6 +83,9 @@
 		        		</t>
 	        		</tbody>
 	        	</table>
+	        	<form action="/project-details" id="form-project-details">
+	        		<input name="project_id" type="text" id="gv_reseller-input-id" class="hidden"></input>
+	        	</form>
 	        </div>
 
 	    <script type="text/javascript">

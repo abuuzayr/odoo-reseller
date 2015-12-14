@@ -1,0 +1,107 @@
+<openerp>
+	<data>
+		<template id="custom-project">
+			<title>GV Reseller</title>
+			<t t-call="website.layout">
+        		<div class="oe_structure">
+        		    <div class="container">
+					      <h2>CUSTOM REQUEST FORM</h2>
+					      
+					      <h4 class="gv_reseller-custom-project-h4"> CLIENT DETAILS </h4>
+					      All fields are required.
+					      <form action="/custom-project/create" method="get">
+					      	<input type="text" t-att-value="project['id']" name='project_id' class="hidden" id="project_id"/>
+					        <div class="row">
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Company Name</label><br/>
+					              <input type="text" name="company-name" t-att-value="project['company_name']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['company_name']" /></span>
+					            </div>
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Business Registration No.</label><br/>
+					              <input type="text" name="business-registration-no" t-att-value="project['business_registration_no']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['business_registration_no']" /></span>
+					            </div>
+					        </div>
+					        <div class="row">
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Company Address Line 1</label><br/>
+					              <input type="text" name="company-address-1" t-att-value="project['customer_address_line_1']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['customer_address_line_1']" /></span>
+					            </div>
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Office No</label><br/>
+					              <div  class="gv_reseller-phone-control-area-code">
+					                <div>
+					                  +65
+					                </div>
+					                <input type="text" name="office-no" t-att-value="project['office_no']" required="true'" />
+					              </div>
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['office_no']" /></span>
+					            </div>
+					        </div>
+					        <div class="row">
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Company Address Line 2</label><br/>
+					              <input type="text" name="company-address-2" t-att-value="project['customer_address_line_2']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['customer_address_line_2']" /></span>
+					            </div>
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Postal Code</label><br/>
+					              <input type="text" name="postal-code" t-att-value="project['postal_code']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['postal_code']" /></span>
+					            </div>
+					        </div>
+					        <h4 class="gv_reseller-custom-project-h4"> CONTACT DETAILS </h4>
+					        <div class="row">
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Title</label><br/>
+					              <input type="text" name="title" t-att-value="project['title']" required="true'" placeholder="Mr / Ms /Mrs / Mdm"/>
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['title']" /></span>
+					            </div>
+					            <div class="col-sm-6 gv_reseller-custom-form-control">
+					              <label>Name</label><br/>
+					              <input type="text" name="name" t-att-value="project['name']" required="true'" />
+					              <span class="gv_reseller-project-info-display"><t t-esc="project['name']" /></span>
+					            </div>
+					        </div>
+					        <div class="row">
+					          <div class="col-sm-6 gv_reseller-custom-form-control">
+					            <label>Email Address</label><br/>
+					            <input type="text" name="email-address" t-att-value="project['email_address']" required="true'" />
+					            <span class="gv_reseller-project-info-display"><t t-esc="project['email_address']" /></span>
+					          </div>
+					          <div class="col-sm-6 gv_reseller-custom-form-control">
+					            <label>Contact No</label><br/>
+					            <div  class="gv_reseller-phone-control-area-code">
+					              <div>
+					                +65
+					              </div>
+					              <input type="text" name="contact-no" t-att-value="project['contact_no']" required="true'" />
+					            </div>
+					            <span class="gv_reseller-project-info-display"><t t-esc="project['contact_no']" /></span>
+					          </div>
+					        </div>
+					        <div class="row">
+					          <div class="col-sm-12 gv_reseller-custom-form-control">
+					            <label>Remarks</label><br/>
+					            <textarea name="remarks" t-att-value="project['remarks']"></textarea>
+					            <span class="gv_reseller-project-info-display"><t t-esc="project['remarks']" /></span>
+					          </div>
+					        </div>
+					        <input type="submit" value="Submit" id="gv_reseller_custom_project_submit"></input>
+					      </form>
+					     <t t-esc="project"></t>
+					    </div> <!-- container -->
+        		</div>
+        	</t>
+		</template>
+	    
+	    <template id="project_custom_frontend_assets" name="Project Frontend Assets" inherit_id="custom-project">
+	        <xpath expr="." position="inside">
+				<link rel="stylesheet" href="/gv_reseller/static/css/custom_project.css" />
+				<script type="text/javascript" src="/gv_reseller//static/js/custom_project.js" />        
+	        </xpath>
+	    </template>
+	</data>
+</openerp>

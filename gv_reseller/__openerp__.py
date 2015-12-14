@@ -28,6 +28,7 @@
         'security/gv_reseller_security.xml',
         'pricing_templates.xml',
         'project_templates.xml',
+        'custom_project_template.xml',
         'views/product_template.xml',
         'views/project_project.xml',
         'views/res_user.xml',

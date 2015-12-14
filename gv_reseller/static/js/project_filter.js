@@ -23,8 +23,6 @@
 		
 	    $('.gv_reseller-approve-button').click(function(){
 	        var project_id = $(this)[0].id;
-	        console.log($(this))
-			console.log(project_id);
 	        jQuery.get('/projects/approve-project',{
 	                project_id: project_id
 	            }, function(rs){
@@ -34,13 +32,17 @@
 	    
 	    $('.gv_reseller-reject-button').click(function(){
 	        var project_id = $(this)[0].id;
-	        console.log($(this))
-			console.log(project_id);
 	        jQuery.get('/projects/reject-project',{
 	                project_id: project_id
 	            }, function(rs){
 	                location.reload();
 	            });
+	    });
+	    
+	    $('.gv_reseller-project-table tr:nth-child(n+1)').click(function(){
+	        var project_id = $(this)[0].id;
+	        $('#gv_reseller-input-id').val(project_id);
+	        $('#form-project-details')[0].submit();
 	    });
 
 	});

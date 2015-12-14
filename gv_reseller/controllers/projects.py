@@ -80,13 +80,130 @@ class projects(http.Controller):
         })
         
     @http.route(
+        ['/custom-project'],
+        auth='user',
+        methods=['get'],
+        website=True)
+    def custom_project(self, **kwargs):
+        if 'project_id' in kwargs:
+            rs_project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
+            if rs_project: 
+                contact = rs_project.partner_id.child_ids[0]
+                company = rs_project.partner_id
+                project = {
+                           'id': rs_project.id,
+                            'company_name': company.name or '',
+                            'business_registration_no': company.business_registration_number or '',
+                            'customer_address_line_1': company.street or '',
+                            'customer_address_line_2': company.street2 or '',
+                            'office_no': company.phone,
+                            'postal_code': company.zip,
+                            
+                            'name': contact.name or '',
+                            'email_address': contact.email or '',
+                            'title': '', 
+                            'contact_no': contact.mobile or '',
+                            
+                            'remarks': rs_project.customer_remarks,
+                           }
+                print project
+                return http.request.render('gv_reseller.custom-project', {
+                    'project': project,
+                    'user' : request.env.user
+                })
+        
+        project = {
+                       'id': '0',
+                        'company_name': '',
+                        'business_registration_no': '',
+                        'customer_address_line_1': '',
+                        'customer_address_line_2': '',
+                        'office_no': '',
+                        'postal_code': '',
+                        
+                        'name': '',
+                        'email_address': '',
+                        'title': '', 
+                        'contact_no': '',
+                        
+                        'remarks': '',
+                       }       
+        print project
+        return http.request.render('gv_reseller.custom-project', {
+                'project': project,
+                'user' : request.env.user
+            })
+
+    @http.route(
+        ['/custom-project/create'],
+        auth='user',
+        methods=['get'],
+        website=True)
+    def create_custom_project(self, **kwargs):
+#         {'company-address-1': u'add line 1', 
+#          'email-address': u'tester@email.com', 
+#          'name': u'tester name', 
+#          'title': u'mr', 
+#          'company-address-2': u'add line 2', 
+#          'contact-no': u'35789', 
+#          'company-name': u'comp name', 
+#          'business-registration-no': u'biz reg no', 
+#          'remarks': u'eara', 
+#          'postal-code': u'758917589', 
+#          'project_id': u'0', 
+#          'office-no': u'7829537'}
+        if kwargs['project_id'] == '0' :
+            contact_val = {
+                'name': kwargs['name'],
+                'mobile': kwargs['contact-no'],
+                'email' : kwargs['email-address'],
+                'honorifics': kwargs['title'], 
+                'user_id': request.env.user.id,
+                'use_parent_address': True,
+                'is_company': False,
+                           }
+            contact = request.env['res.partner'].sudo().create(contact_val)
+            print contact
+            company_val = {
+                   'name': kwargs['company-name'], 
+                   'is_company': True,
+                    'business_registration_number': kwargs['business-registration-no'], 
+                    'street': kwargs['company-address-1'],
+                    'street2': kwargs['company-address-2'],
+                    'zip': kwargs['postal-code'],
+                    'phone': kwargs['office-no'],
+                    'email' : kwargs['email-address'],
+                    'city': 'Singapore',
+                    'child_ids': [(6, 0, [contact.id])],
+                    'user_id': request.env.user.id,
+                    }
+            company = request.env['res.partner'].sudo().create(company_val)
+            print company
+            print request.env.user
+            sale_order_val = {
+                    'user_id': request.env.user.id,
+                    'pricelist_id': request.env.user.property_product_pricelist.id,
+                    'partner_id': request.env.user.partner_id.id,
+                              }
+            sale_order = request.env['sale.order'].sudo().create(sale_order_val)
+            project_val = {
+                   'name': kwargs['company-name'], 
+                   'status': 'custom',
+                   'customer_remarks': kwargs['remarks'],
+                   'partner_id': company.id,
+                   'sale_order': sale_order.id,
+                   }
+            project = request.env['project.project'].sudo().create(project_val)
+            print project
+            
+
+    @http.route(
         ['/projects/approve-project'],
         auth='user',
         methods=['get'],
         website=True)
     def approve_project(self, **kwargs):
         project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
-        print project
         if project and request.env.user.partner_id.is_company:
             if project.status == 'pending':
                 project.status = 'approved'
@@ -102,3 +219,17 @@ class projects(http.Controller):
         if project:
             if project.status == 'pending' or (project.status == 'approved' and request.env.user.partner_id.is_company):
                 project.status = 'rejected'
+
+    @http.route(
+        ['/project-details'],
+        auth='user',
+        methods=['get'],
+        website=True)
+    def get_project_details(self, **kwargs):
+        if 'project_id' in kwargs:
+            project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
+            if project: 
+                print   '/custom-project'+'?project_id='+kwargs['project_id']
+                return request.redirect('/custom-project'+'?project_id='+kwargs['project_id'])
+
+    
