@@ -28,25 +28,10 @@
 				</xpath>
 			</field>
 			
-
-
         </record>
         
         
         
-        <!-- res.partner form view -->
-		<record id="partner_template_form_view" model="ir.ui.view">
-			<field name="model">res.partner</field>
-			<field name="inherit_id" ref="base.view_partner_form" />
-			<field name="arch" type="xml">			
-				<xpath expr="//field[@name='category_id']" position="before">
-					<newline />
-                        <field name="business_registration_number"
-                            placeholder="Business Registration Number"
-                            attrs="{'invisible': [('is_company','=', False)]}"/>
 
-				</xpath>
-			</field>
-        </record>
     </data>
 </openerp>

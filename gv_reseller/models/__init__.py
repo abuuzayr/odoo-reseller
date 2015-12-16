@@ -1,2 +1,3 @@
 import product_template
 import project_project
+import res_partner

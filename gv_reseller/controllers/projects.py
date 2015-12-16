@@ -39,6 +39,7 @@ class projects(http.Controller):
         for rs_project in rs_projects:
             
             contact = rs_project.partner_id.child_ids[0]
+            
             if request.env.user.partner_id.is_company:
                 project = {
                            'id': rs_project.id,

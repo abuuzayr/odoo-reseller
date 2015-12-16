@@ -1,0 +1,148 @@
+<openerp>
+	<data>
+		<template id="profile">
+			<title>GV Reseller</title>
+			<t t-call="website.layout">
+        		<div class="oe_structure">
+        		    <div class="container">
+				      <h2>Account Profile</h2>
+				      <div class="gv_reseller-profile-tier">
+				          <div class="gv_reseller-box-center">
+				             <h2><t t-esc="user_price" /></h2> 
+				          </div>
+				      </div>
+				      
+				      <div class="row">
+				        <div class="col-sm-4">
+				            <div class="gv_reseller-box-header">
+				              CREDIT BALANCE
+				            </div>
+				            <div class="gv_reseller-box-body">
+								
+				            </div>
+				            <div class="gv_reseller-demo-account">
+				              
+				              
+				            </div>
+				        </div>
+				        
+				        <div class="col-sm-4">
+				            <div class="gv_reseller-box-header">
+				              TOTAL SALES
+				            </div>
+				            <div class="gv_reseller-box-body">
+				            	<div>
+				            		<canvas class="donutchart" height="250" width="250">
+										<div t-att-data-value="sales">Sales</div>
+										<div t-att-data-value="pending_payment">Pending Payment</div>
+									</canvas>
+									<div class="gv_reseller-pie-chart-total">
+										<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_sales" /></span>
+										<br/>
+										sales
+									</div>
+									<div class="gv_reseller-pie-chart-legend-left">
+										<div></div>
+										Total Sales
+									</div>
+									<div class="gv_reseller-pie-chart-legend-right">
+										<div></div>
+										Pending Payment
+									</div>
+				            	</div>
+				              	
+				            </div>
+				        </div>
+				        <div class="col-sm-4">
+				            <div class="gv_reseller-box-header">
+				              TOTAL PROJECTS
+				            </div>
+				            <div class="gv_reseller-box-body">
+				            	<div>
+				            		<canvas class="donutchart" height="250" width="250">
+										<div t-att-data-value="active_projects">Active Projects</div>
+										<div t-att-data-value="ongoing_projects">Ongoing Projects</div>
+									</canvas>
+									<div class="gv_reseller-pie-chart-total">
+										<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_projects" /></span>
+										<br/>
+										projects
+									</div>
+									<div class="gv_reseller-pie-chart-legend-left">
+										<div></div>
+										Active
+									</div>
+									<div class="gv_reseller-pie-chart-legend-right">
+										<div></div>
+										Ongoing
+									</div>
+				            	</div>
+				              	
+				            </div>
+				        </div>
+				      </div> <!-- row -->
+  
+					  <div class="row">
+						<div class="col-sm-3">
+				            <div class="gv_reseller-box-header">
+				              ACCOUNT DETAILS
+				            </div>
+				            <div class="gv_reseller-user-details">
+				            	<h5>USERNAME</h5>
+				              	<t t-esc="user.name" />
+				              	<h5>NAME</h5>
+				              	<t t-esc="user.login" />
+				            </div>
+				         </div>
+				         
+				         <div class="col-sm-3">
+				            <div class="gv_reseller-box-header">
+				              COMPANY DETAILS
+				            </div>
+				            <div class="gv_reseller-user-details">
+				            	<h5>COMPANY NAME</h5>
+				              	<t t-esc="company.name" />
+				              	<h5>BUSINESS REG. NO.</h5>
+				              	<t t-esc="company.business_registration_number" />
+				            </div>
+				         </div>
+				         
+				         <div class="col-sm-3">
+				            <div class="gv_reseller-box-header">
+				              CONTACT DETAILS
+				            </div>
+				            <div class="gv_reseller-user-details">
+				            	<h5>CONTACT NO.</h5>
+				              	<t t-esc="user.mobile" />
+				              	<h5>EMAIL ADDRESS</h5>
+				              	<t t-esc="user.email" />
+				            </div>
+				         </div>
+				         
+				         <div class="col-sm-3">
+				            <div class="gv_reseller-box-header">
+				              COMPANY ADDRESS
+				            </div>
+				            <div class="gv_reseller-user-details">
+				            	<h5>LINE 1</h5>
+				              	<t t-esc="company.street" />
+				              	<h5>LINE 2</h5>
+				              	<t t-esc="company.street2" />
+				            </div>
+				         </div>
+						</div>    					       
+				    </div> <!-- container -->
+        		</div>
+        	</t>
+		</template>
+	    
+	    <template id="profile_frontend_assets" name="Profile Frontend Assets" inherit_id="profile">
+	        <xpath expr="." position="inside">
+				<link rel="stylesheet" href="/gv_reseller/static/css/profile.css" />
+				<script type="text/javascript" src="/gv_reseller//static/js/jquery.chart.js" />    
+				<script type="text/javascript" src="/gv_reseller//static/js/profile.js" />     
+	        </xpath>
+	    </template>
+	
+	</data>
+</openerp>

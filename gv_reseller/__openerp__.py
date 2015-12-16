@@ -27,6 +27,7 @@
     'data': [
         'security/gv_reseller_security.xml',
         'pricing_templates.xml',
+        'profile_templates.xml',
         'project_templates.xml',
         'custom_project_template.xml',
         'views/product_template.xml',

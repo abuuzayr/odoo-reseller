@@ -1,6 +1,5 @@
 from openerp import models, fields, api, exceptions
 
-import re
 '''
 Created on 27 Nov 2015
 
@@ -25,10 +24,5 @@ class gv_project_template(models.Model):
 
 
 
-class gv_partner_template(models.Model):
-    _inherit = 'res.partner'
-    
-    business_registration_number = fields.Char(string='Business Registration')
-    honorifics = fields.Text(string="Honorifics", help="E.g. Mr/Mrs/Ms/Mdm")
 
         
