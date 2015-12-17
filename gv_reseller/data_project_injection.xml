@@ -10,7 +10,11 @@
     		<field name="phone">6823-8010</field>
     		<field name="mobile">9223-7669</field>
     		<field name="email">rsa@test.com</field>
-    		
+    		<field name="website">http://demo.gronex.com.sg</field>
+    		<field name="street">Blk 10 </field>
+    		<field name="street2">72 Simei Avenue North</field>
+    		<filed name="zip">589218</filed>
+    		<field name="business_registration_number">BNA-6826597F</field>
     	</record>
     	
     	<record id="id_rs1_partner" model="res.partner">
@@ -21,6 +25,7 @@
     		<field name="phone">6823-6895</field>
     		<field name="mobile">8013-2249</field>
     		<field name="email">rs1@test.com</field>
+    		<field name="use_parent_address">True</field>
     	</record>
     	
     	<record id="id_rs2_partner" model="res.partner">
@@ -31,6 +36,7 @@
     		<field name="phone">6823-8011</field>
     		<field name="mobile">9314-6921</field>
     		<field name="email">rs2@test.com</field>
+    		<field name="use_parent_address">True</field>
     	</record>
     	
     	<!-- RSA and RS Users -->
