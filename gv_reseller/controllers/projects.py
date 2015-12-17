@@ -45,7 +45,7 @@ class projects(http.Controller):
                            'id': rs_project.id,
                            'created_date': rs_project.date_start or '-', 
                            'sales_person': rs_project.sale_order.user_id.name or '-',
-                           'price': rs_project.sale_order.amount_total or '-',
+                           'price': rs_project.sale_order.amount_total or '0.00',
                            'sales_contact': rs_project.sale_order.user_id.phone or '-',
                            'sales_email': rs_project.sale_order.user_id.email or '-',
                             'customer_company': rs_project.partner_id.name or '-',

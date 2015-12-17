@@ -5,7 +5,19 @@
 			<t t-call="website.layout">
         		<div class="oe_structure">
         		    <div class="container">
-				      <h2>Account Profile</h2>
+        		    	<div class="container">
+        		    		<h2 class="pull-left">Account Profile</h2>
+        		    		<div class="pull-right gv_reseller-login-date">
+        		    			<div class="pull-left">
+        		    				Last Signed in:
+        		    			</div>
+        		    			<div class="pull-right">
+        		    				<span t-field="user.login_date" t-field-options='{"format": "d/MM/y"}'/>
+        		    			</div>
+        		    			 
+        		    		</div>
+        		    	</div>
+				      
 				      <div class="gv_reseller-profile-tier">
 				          <div class="gv_reseller-box-center">
 				             <h2><t t-esc="user.property_product_pricelist.name" /></h2> 
