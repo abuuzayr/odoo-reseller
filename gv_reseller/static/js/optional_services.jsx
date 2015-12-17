@@ -50,17 +50,27 @@
 
 	var OsDiv = React.createClass({
 		render: function(){
+			var ctx = this;
 			return (
 				<div className="other_service col-xs-6 col-sm-3">
 					<header>{this.props.title}</header>
 					<p>{this.props.dat.description}</p>
-					<span className="opt_serv_price">${parseFloat(this.props.price).toFixed(2)}</span>
+					{getPriceTag()}
 					<OsUl 
 					    active={this.props.active}
 						dat={this.props.dat}
 						updateState={this.props.updateState}/>
+					<br style={{'clear':'both'}}/>
 				</div>
 			)
+
+			function getPriceTag(){
+				if (!isRSA) {
+					return;
+				} else {
+					return (<span className="opt_serv_price">${parseFloat(ctx.props.price).toFixed(2)}</span>);
+				}				
+			}
 		}
 	});
 
@@ -70,21 +80,16 @@
 			stateChange[key] = v;
 
 			var servicesObj = opsvTmpl[key].variants[v];
-			console.log(this.state[key],stateChange[key]);
-
 			__myglobal.summary.removeOptional(opsvTmpl[key].variants[this.state[key]]);
 			__myglobal.summary.addOptional(servicesObj);
-
 			this.setState(stateChange);
 		},
 		componentWillMount: function(){
 			var ctx = this;
 			Object.keys(this.state).forEach(function(v){
 				__myglobal[v] = {};
-				__myglobal[v].setState = function(s){
-					var obj = {};
-					obj[v] = s;
-					ctx.setState(obj);
+				__myglobal[v].setState = function(s){					
+					ctx.updateState(v,s);
 				};
 				__myglobal[v].getState = function(){
 					return ctx.state[v];
