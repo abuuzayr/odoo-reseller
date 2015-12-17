@@ -163,7 +163,7 @@ var __rsGlobal = {
 			var currentPrice = createElem('div.col-sm-4', [createElem('label', 'Current Price'), isRSA ? '$'+project.total.toFixed(2) : '-']);
 			var projectDetailsDiv = createElem('div.row.project_details',[createElem('h3.col-sm-12','Project Details'),projectId,startDate,status,createDate,expiryDate,currentPrice]);
 			$('#form_div').prepend(projectDetailsDiv);
-			
+
 			//addition of buttons
 			if (isRSA) {
 				if (project.status === 'pending') {
@@ -215,7 +215,10 @@ var __rsGlobal = {
 					targetObj = selected_module,
 					isSelected = !lbl.find('input').prop('checked');
 
-				lbl.find('input').prop('checked', isSelected);
+				lbl.find('input[type=checkbox]').prop('checked', isSelected);
+				lbl.find('input[type=hidden]').each(function(v,el){
+					$('label.module-select[ppid='+$(el).val()+']').trigger('click.module_select');
+				});
 
 				if (!!isSelected) {
 					var obj = targetObj[lbl.attr('title')] = {
