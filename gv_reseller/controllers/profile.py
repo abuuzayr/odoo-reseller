@@ -22,9 +22,10 @@ class profile(http.Controller):
             children = request.env['res.users'].sudo().search([('partner_id.parent_id', '=', user.partner_id.id)])
             for child in children:
                 user_ids.append(child.id)
+                
         else: 
-            company = user.parent_id
-        
+            company = request.env['res.users'].sudo().search([('partner_id', '=', user.parent_id.id)]) 
+            
         
         #get user price
         product_user = request.env['product.template'].with_context(pricelist=request.env.user.partner_id.property_product_pricelist.id).search([('type','=','user')])
@@ -32,9 +33,8 @@ class profile(http.Controller):
             user_price = product_user.price
         else:
             user_price = 50.00
-        
+            
         rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['approved','paid', 'active'])])
-     
         
         sales = pending_payment = 0.0
         for rs_project in rs_projects:
@@ -57,8 +57,7 @@ class profile(http.Controller):
                 ongoing_projects += 1
       
         total_projects = active_projects + ongoing_projects
-        
-         
+        print company.website         
         #
         return http.request.render('gv_reseller.profile', {
                 'user_price': user_price,
@@ -70,6 +69,8 @@ class profile(http.Controller):
                 'total_projects': total_projects,
                 'user': user,
                 'company': company,
+                'credits': "{:,}".format(company.credits),
+                'company_website': company.website or 'NOT AVAILABLE',
                 'is_admin': user.partner_id.is_company
             })
         # sales, pending_payment, total_sales, active_projects, ongoing_projects, expired_projects

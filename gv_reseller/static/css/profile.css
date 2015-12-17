@@ -1,3 +1,7 @@
+h5 {
+	font-weight: bold;
+}
+
 .row {
 	margin-top: 20px;
 }
@@ -42,11 +46,42 @@
   vertical-align: middle;
   padding: 10px 0px 10px 0px;
   position: relative;
+  min-height: 100px;
 }
 
-.gv_reseller-demo-account {
-  background-color: #9adc90;
-  
+.gv_reseller-demo-account-rs {
+	padding-top: 20%;
+	background-color: #9adc90;  
+	text-align: center;
+	padding-bottom: 25%;
+	
+}
+
+.gv_reseller-demo-account-rsa {
+	margin-top: 20px;
+	background-color: #9adc90;  
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.gv_reseller-demo-img {
+	height: 60px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.gv_reseller-demo-website-div {
+	width: 96%;
+	margin-left: 2%;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+	background-color: #FAFAFA;
+	margin-top: 25px;
+}
+
+.gv_reseller-demo-website-div a{
+	font-decoration: none;
+	color: black;
 }
 
 .gv_reseller-pie-chart-total {
@@ -96,4 +131,13 @@
 	width: 100%;
 	background-color: #FAFAFA;
 	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.gv_reseller-user-details img{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	bottom: 20px;
+	right: 20px;
 }

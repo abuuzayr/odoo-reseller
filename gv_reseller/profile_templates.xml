@@ -8,22 +8,39 @@
 				      <h2>Account Profile</h2>
 				      <div class="gv_reseller-profile-tier">
 				          <div class="gv_reseller-box-center">
-				             <h2><t t-esc="user_price" /></h2> 
+				             <h2><t t-esc="user.property_product_pricelist.name" /></h2> 
 				          </div>
 				      </div>
 				      
 				      <div class="row">
 				        <div class="col-sm-4">
-				            <div class="gv_reseller-box-header">
-				              CREDIT BALANCE
-				            </div>
-				            <div class="gv_reseller-box-body">
-								
-				            </div>
-				            <div class="gv_reseller-demo-account">
-				              
-				              
-				            </div>
+				        	<t t-if="is_admin">
+					            <div class="gv_reseller-box-header">
+					              CREDIT BALANCE
+					            </div>
+					            <div class="gv_reseller-box-body">
+									<p class="gv_reseller-pie-chart-total-amount">
+										<t t-esc="credits" /> <br />
+									</p>
+										balance
+					            </div>
+					            <div class="gv_reseller-demo-account-rsa">
+					              	<img src="/gv_reseller/static/img/Demo_icon.svg" class="gv_reseller-demo-img"/>
+					              	<p><b>DEMO ACCOUNT LINK</b></p>
+					              	<div class="gv_reseller-demo-website-div">
+				              			<a t-att-href="company_website"> <t t-esc="company_website"></t></a>
+					              	</div>
+					            </div>
+				            </t> 
+				            <t t-if="not is_admin">
+				            	 <div class="gv_reseller-demo-account-rs">
+					              	<img src="/gv_reseller/static/img/Demo_icon.svg" class="gv_reseller-demo-img"/>
+					              	<p><b>DEMO ACCOUNT LINK</b></p>
+					              	<div class="gv_reseller-demo-website-div">
+				              			<a t-att-href="company_website"> <t t-esc="company_website"></t></a>
+					              	</div>
+					            </div>
+				            </t>
 				        </div>
 				        
 				        <div class="col-sm-4">
@@ -89,9 +106,10 @@
 				            </div>
 				            <div class="gv_reseller-user-details">
 				            	<h5>USERNAME</h5>
-				              	<t t-esc="user.name" />
+				              	<p><t t-esc="user.name" /></p>
 				              	<h5>NAME</h5>
-				              	<t t-esc="user.login" />
+				              	<p><t t-esc="user.login" /></p>
+				              	<img src="/gv_reseller/static/img/user_icon.svg" />
 				            </div>
 				         </div>
 				         
@@ -101,9 +119,10 @@
 				            </div>
 				            <div class="gv_reseller-user-details">
 				            	<h5>COMPANY NAME</h5>
-				              	<t t-esc="company.name" />
+				              	<p><t t-esc="company.name" /></p>
 				              	<h5>BUSINESS REG. NO.</h5>
-				              	<t t-esc="company.business_registration_number" />
+				              	<p><t t-esc="company.business_registration_number" /></p>
+				              	<img src="/gv_reseller/static/img/companydetails_icon.svg" />
 				            </div>
 				         </div>
 				         
@@ -113,9 +132,10 @@
 				            </div>
 				            <div class="gv_reseller-user-details">
 				            	<h5>CONTACT NO.</h5>
-				              	<t t-esc="user.mobile" />
+				              	<p><t t-esc="user.mobile" /></p>
 				              	<h5>EMAIL ADDRESS</h5>
-				              	<t t-esc="user.email" />
+				              	<p><t t-esc="user.email" /></p>
+				              	<img src="/gv_reseller/static/img/contactinfo_icon.svg" />
 				            </div>
 				         </div>
 				         
@@ -125,9 +145,10 @@
 				            </div>
 				            <div class="gv_reseller-user-details">
 				            	<h5>LINE 1</h5>
-				              	<t t-esc="company.street" />
+				              	<p><t t-esc="company.street" /></p>
 				              	<h5>LINE 2</h5>
-				              	<t t-esc="company.street2" />
+				              	<p><t t-esc="company.street2" /></p>
+				              	<img src="/gv_reseller/static/img/address_icon.svg" />
 				            </div>
 				         </div>
 						</div>    					       
@@ -139,8 +160,8 @@
 	    <template id="profile_frontend_assets" name="Profile Frontend Assets" inherit_id="profile">
 	        <xpath expr="." position="inside">
 				<link rel="stylesheet" href="/gv_reseller/static/css/profile.css" />
-				<script type="text/javascript" src="/gv_reseller//static/js/jquery.chart.js" />    
-				<script type="text/javascript" src="/gv_reseller//static/js/profile.js" />     
+				<script type="text/javascript" src="/gv_reseller/static/js/jquery.chart.js" />    
+				<script type="text/javascript" src="/gv_reseller/static/js/profile.js" />     
 	        </xpath>
 	    </template>
 	
