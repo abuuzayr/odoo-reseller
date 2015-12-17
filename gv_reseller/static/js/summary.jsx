@@ -15,8 +15,7 @@
 				}
 			} else if (ctx.props.hasOwnProperty('data')) {
 				ctx.props.data.forEach(function(v){
-					if (v.hasOwnProperty('extra') && typeof v.extra === "object") {	
-						console.log(ctx.props.wd);
+					if (v.hasOwnProperty('extra') && typeof v.extra === "object") {
 						total = total + parseFloat(v.price) + v.extra[ctx.props.wd].price;
 					} else if (v.hasOwnProperty('price')){
 						total = total + parseFloat(v.price);
@@ -35,10 +34,20 @@
 
 			return (
 				<div className="row">
-					<div className="col-sm-6">{count} x {ctx.props.title}</div>
-					<div className="col-sm-6">${total}</div>
+					{render()}
 				</div>
 			);
+
+			function render(){
+				if (isRSA) {
+					return (<div>
+							<div className="col-sm-6">{count} x {ctx.props.title}</div>
+							<div className="col-sm-6">${total}</div></div>
+						);
+				} else {
+					return (<div className="col-sm-12">{count} x {ctx.props.title}</div>);
+				}
+			}
 		}
 	});
 
@@ -50,7 +59,6 @@
 			var ctx = this;
 			__myglobal.summary = {};
 			__myglobal.summary.setUsers = function(count){
-				console.log(count);
 				ctx.setState({users:[count]});
 			}
 			__myglobal.summary.addModule = function(mod){
@@ -120,12 +128,6 @@
 				} else {
 					return 600 * ctx.state.modules.length; 
 				}
-
-				// ctx.state.modules.forEach(function(v){
-				// 	if (v.hasOwnProperty('base')){
-				// 		total = total + parseFloat(v.base);
-				// 	}
-				// });
 			};
 			__myglobal.summary.getUsersPrice = function(){
 				return ctx.state.users[0] * 30;
@@ -168,4 +170,6 @@
 		React.createElement(SummCon),
 		document.getElementById('summary_list_modules')		
 	);
+
+	__myglobal.observer.notify();
 })(__rsGlobal);

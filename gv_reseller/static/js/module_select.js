@@ -1,4 +1,24 @@
-var __rsGlobal = {};
+var __rsGlobal = {
+	isEditable: true,
+	observer: {
+		callCount: 0,
+		obs_list: [],
+		add: function(hndl){
+			this.obs_list.push(hndl);
+		},
+		notify: function(){
+			if (this.callCount > 0) return;
+			for(var i = 0, max = this.obs_list.length; i < max; i++){
+				this.obs_list[i]();
+			}
+			this.callCount++;
+		}
+	},
+	closeOverLay: function() {			
+		console.log('called');
+		$('.pricing_overlay').fadeOut();
+	}
+};
 
 (function($){
 	var selected_module = {},
@@ -26,10 +46,162 @@ var __rsGlobal = {};
 		$('label.module-select').find('input').prop('checked', false);
 		registerModuleSelectEvents();
 		bindUserCountTag();
-		continueBtn();
+
+		__rsGlobal.observer.add(function(){
+			var project_id = getProjectId();
+			if (!!project_id) {
+				jQuery.get('/pricing/project-details?project_id='+project_id, 
+					function(rs){ 
+						rs = JSON.parse(rs);
+						$('#selection_div').before($('#form_div'));
+						$('#break_line').after($('#selection_div'));
+						populateFields(rs);
+					});
+			}
+			continueBtn();
+			setTimeout(function(){
+				__rsGlobal.closeOverLay();
+			},150);
+		});
 	}
 
 	/** INIT FUNCTIONS START */
+		function populateFields(data){
+			var company = data.company;
+			$('#co_name').val(company['Company Name']).attr('disabled', 'disabled');
+			$('#co_biz_no').val(company['Business Registration No']).attr('disabled', 'disabled');
+			$('#co_addr1').val(company['Address 1']).attr('disabled', 'disabled');
+			$('#co_addr2').val(company['Address 2']).attr('disabled', 'disabled');
+			$('#co_mob_no').val(company['phone']).attr('disabled', 'disabled');
+			$('#co_email').val(company['email']).attr('disabled', 'disabled');
+			$('#co_post_code').val(company['Postal Code']).attr('disabled', 'disabled');
+
+			var contact = data.contact;
+			$('#poc_title').val(contact['honorifics']).attr('disabled', 'disabled');	
+			$('#poc_name').val(contact['name']).attr('disabled', 'disabled');	
+			$('#poc_email').val(contact['email']).attr('disabled', 'disabled');
+			$('#poc_mob_no').val(contact['mobile']).attr('disabled', 'disabled');
+			$('#poc_remarks').val(contact['remarks']).attr('disabled', 'disabled');
+
+			var products = data.sale_order_line;
+				console.log(products);
+			var productIndex = {};
+			for (var i = products.length - 1; i >= 0; i--) {
+				productIndex[products[i].name] = i;
+				var cb_selector = 'label[title="'+products[i].name+'"] .cb_module';
+				$(cb_selector).prop('checked', true);
+				var lbl = $('label[title="'+products[i].name+'"]');
+				if (lbl.length > 0) {
+					var obj = selected_module[lbl.attr('title')] = {
+						base: lbl.attr('listprice'),
+						ppid: lbl.attr('ppid')
+					};
+					__rsGlobal.summary.addModule(obj);
+				} else if (!!opsvTmpl[products[i].name]) {
+					var searchArray = opsvTmpl[products[i].name].variants;
+					var index;
+					for (var j = searchArray.length - 1; j >= 0; j--) {
+						if (searchArray[j].ppid == products[i].ppid){
+							index = j; break;
+						}
+					};
+					__rsGlobal[products[i].name].setState(index);
+				} else if (!!otsvTmpl[products[i].name]) {
+					__rsGlobal[products[i].name].setState(true);
+				} else if (products[i].name.indexOf('Website Design') > -1) {
+					var num = parseInt(products[i].name.split(' ')[3]) > 10 ? 1 : 0 ;
+					__rsGlobal['Website Design'].setPages(num);
+				} else if (products[i].name === 'Email Hosting'){
+					__rsGlobal['Email Hosting'].setState(true);
+				} else if (products[i].name === 'Website Domain(.COM)'){
+					__rsGlobal['Website Domain1'].setState(true);
+				} else if (products[i].name === 'Website Domain(.COM.SG)'){
+					__rsGlobal['Website Domain2'].setState(true);
+				} else if (products[i].name === 'Website Domain(.SG)'){
+					__rsGlobal['Website Domain3'].setState(true);
+				}
+			}
+
+			//disable editting
+			var proxied = $._data($('label.module-select').get(0), "events").click[0].handler;
+			$('label.module-select').off('click.module_select').on('click.module_select', function(){
+				if(__rsGlobal.isEditable === true){
+					proxied.apply(this, arguments);
+				} else {
+					return;
+				}
+			}).find('.cb_module').attr('disabled','disabled');
+			$('#client_count').val(products[productIndex['Number of Users']].qty).attr('disabled', 'disabled');
+			__rsGlobal.summary.setUsers(products[productIndex['Number of Users']].qty);
+			$('.left2').css({'pointerEvents':'none'})
+			__rsGlobal.isEditable = false;
+
+			$('#page_title').html('Project Subscription');
+			$('#continue_btn, .recommended_div, #request_quote_btn').hide();
+
+			//create project details table
+			var project = data.project;
+
+			var sales_name = createElem('div.col-sm-4', [createElem('label','Name'),createElem('input#sales_name.form-control[disabled=disabled][value='+project.rs_name+']')]);
+			var sales_contact = createElem('div.col-sm-4', [createElem('label','Contact No.'),createElem('input#sales_contact.form-control[disabled=disabled][value='+project.rs_contact+']')]);
+			var sales_email = createElem('div.col-sm-4', [createElem('label','Email Address'),createElem('input#sales_email.form-control[disabled=disabled][value='+project.rs_email+']')]);
+			var salesPersonDiv = createElem('div.row', [sales_name,sales_contact,sales_email]);
+			$('#form_div').prepend(salesPersonDiv);
+			$('#form_div').prepend(createElem('h3','Sales Person Details'));
+
+			var projectId = createElem('div.col-sm-4', [createElem('label', 'Project ID'), project.id]);
+			var startDate = createElem('div.col-sm-4', [createElem('label', 'Start Date'), !!project.project_start_date ? project.project_start_date : '-']);
+			var status = createElem('div.col-sm-4', [createElem('label', 'Status'), project.status]);
+			var createDate = createElem('div.col-sm-4', [createElem('label', 'Created Date'), project.created_date]);
+			var expiryDate = createElem('div.col-sm-4', [createElem('label', 'Expiry Date'), !!project.project_end_date ? project.project_end_date : '-' ]);
+			var currentPrice = createElem('div.col-sm-4', [createElem('label', 'Current Price'), isRSA ? '$'+project.total.toFixed(2) : '-']);
+			var projectDetailsDiv = createElem('div.row.project_details',[createElem('h3.col-sm-12','Project Details'),projectId,startDate,status,createDate,expiryDate,currentPrice]);
+			$('#form_div').prepend(projectDetailsDiv);
+
+			//addition of buttons
+			if (isRSA) {
+				if (project.status === 'pending') {
+					$('.action_div').append('<div id="approve_btn" style="margin-top:10px;" class="btn-green">Approve</div>');
+					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-green">Reject</div>');
+				} else if (project.status == 'approved') {
+					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-green">Reject</div>');
+				}
+				var data = { project_id: project.id };
+				$('#approve_btn').on('click', function(){ 
+					$.get('/projects/approve-project', data).then(function(){
+						location.href = '/projects';
+					});
+				});
+				$('#reject_btn').on('click', function(){ 
+					$.get('/projects/reject-project', data).then(function(){
+						location.href = '/projects';
+					});
+				});				
+			}
+			if (project.status === 'pending') {
+				$('.action_div').append('<div id="edit_btn" style="margin-top:10px;" class="btn-green">Edit</div>');	
+				$('#edit_btn').on('click', function(){
+					__rsGlobal.isEditable = true;
+					$('label.module-select .cb_module').removeAttr('disabled');				
+					$('#client_count').removeAttr('disabled');
+					$(this).hide();
+					$('#continue_btn').html('Save').show();
+					$('.left2').css({'pointerEvents':'all'})
+					$("#custom_form input, #custom_form textarea").removeAttr('disabled');
+				});
+			}			
+			$('.action_div').append('<a href="/projects"><div id="back_btn" style="margin-top:10px;" class="btn-green">Back</div></a>');
+		}
+
+		function getProjectId(){			
+			return getParameterByName('project_id');
+			function getParameterByName(name) {
+			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			        results = regex.exec(location.search);
+			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+		}
 		function registerModuleSelectEvents(){
 			$('label.module-select').on('click.module_select', _moduleSelectHandler);
 			function _moduleSelectHandler(){
@@ -63,6 +235,8 @@ var __rsGlobal = {};
 				if (!data) {
 					return;
 				}
+				if (getProjectId())
+					data.project_id = getProjectId();
 				var data2 = {
 					mppids: __rsGlobal.util.getMppids(),
 					oppids: __rsGlobal.util.getOppids(),
@@ -70,9 +244,7 @@ var __rsGlobal = {};
 					user: __rsGlobal.util.getUser()
 				};
 				data  = jQuery.extend(data, data2);
-				console.log(data);
 				$.post('/pricing', data, function(rs){
-					//console.log('completed', rs);
 					window.location = '/projects';
 				});
 			});
@@ -160,6 +332,47 @@ var __rsGlobal = {};
 			return obj.users[0];
 		}
 	};
+
+	function createElem(tagName, inner){
+		var element, id, classNames=[], tag, attrs=[];
+
+		if (!!tagName.match(/\[(.*?)\]/g)) {
+			attrs = tagName.match(/\[(.*?)\]/g);
+			tagName = tagName.replace(/\[(.*?)\]/g, '');
+			console.log(attrs, tagName);
+		}
+		classNames = tagName.split('.');
+		id = classNames[0].split('#')[1];
+		tag = classNames.shift().split('#')[0];				
+		element = document.createElement(tag);
+
+		if (classNames.length > 0)
+			element.setAttribute('class', classNames.reduce(function(p, c){return p + ' ' + c; }));
+		if (id !== undefined)
+			element.setAttribute('id', id);
+		if (attrs.length > 0) {
+			attrs.forEach(function(attr){
+				attr = attr.substring(1, attr.length-1).split('=');
+				element.setAttribute(attr[0], attr[1]);
+			});
+		}
+
+		if (inner === undefined) return element;
+		appendInner(inner);
+		function appendInner(_inner){
+			if (_inner.constructor === Array) {						
+				for (var x in _inner){
+					appendInner(_inner[x]);
+				}
+			} else if(_inner instanceof Element) {
+				element.appendChild(_inner);
+			} else {
+				element.appendChild(document.createTextNode(_inner));
+			}
+		}
+
+		return element;
+	}
 
 	/** EXTERNALS */
 	function __polyfillSticky(){

@@ -1,61 +1,18 @@
-var otsvTmpl = {
-	'Email Hosting': {
-		title: 'Email Hosting',
-		description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
-		price: '120',
-		extra: '10GB'
-	},
-	'Website Domain1':{		
-		title: 'Website Domain(.COM)',
-		description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
-		price: '20',
-		extra: '.COM'
-	},
-	'Website Domain2':{		
-		title: 'Website Domain(.COM.SG)',
-		description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
-		price: '60',
-		extra: '.COM.SG'
-	},
-	'Website Domain3':{		
-		title: 'Website Domain(.SG)',
-		description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
-		price: '20',
-		extra: '.SG'
-	},
-	'Website Design':{	
-		title: 'Website Design',
-		description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
-		price: 1000,
-		extra: [{
-			pages: 10,
-			price: 0
-		},{
-			pages: 20,
-			price: 500
-		}]
-	}
-};
-
 (function(__myglobal){	
 	var ServiceTypes = Object.keys(otsvTmpl);
 	var classNames = window.classNames;
 
 	var OstSD = React.createClass({
 		updateSelected: function(sel){
-			this.setState({selected:sel});
 			this.refs.ul.blur();
 			this.props.updateDesignPrice(sel);
-		},
-		getInitialState: function(){
-			return {selected:0};
 		},
 		render: function(){
 			return (
 			<div>
 				<ul ref="ul" tabIndex="-1" className="opt_serv_dropdown">
 					<li>
-						Up to {otsvTmpl['Website Design'].extra[this.state.selected].pages} pages
+						Up to {otsvTmpl['Website Design'].extra[this.props.wd].pages} pages
 					</li>
 					<li onClick={this.updateSelected.bind(this, 0)}>Up to 10 pages</li>
 					<li onClick={this.updateSelected.bind(this, 1)}>Up to 20 pages</li>
@@ -74,29 +31,36 @@ var otsvTmpl = {
 
 	var OstDiv = React.createClass({
 		updateDesignPrice: function(sel){
-			this.setState({extraPrice: otsvTmpl['Website Design'].extra[sel].price});
 			this.props.updateState(sel);
 		},
-		getInitialState: function(){
-			return {extraPrice:0};
-		},
-		render: function(){			
-			return (				
+		render: function(){
+			var ctx = this;
+			var extraPrice = typeof this.props.dat.extra === "string" ? 0 : parseFloat(otsvTmpl['Website Design'].extra[this.props.wd].price)
+			return (
 				<div className="ots">
 					<div className="top" onClick={this.props.updateState}>
 						<input type="checkbox" checked={this.props.selected === true} onChange={this.updateState} />
 					</div>
 					<header>{this.props.title}</header>
 					<p>{this.props.dat.description}</p>
-					<span className="price">
-						<span>${(parseFloat(this.props.dat.price) + this.state.extraPrice)}</span>
-						<span>{typeof this.props.dat.price === "number" ? "" : " / YR"}</span>
-					</span>
+					{getPriceTag()}
 					<span className="ext">
-						{typeof this.props.dat.extra === "string" ? this.props.dat.extra : <OstSD updateDesignPrice={this.updateDesignPrice}/> }
+						{typeof this.props.dat.extra === "string" ? this.props.dat.extra : <OstSD wd={this.props.wd} updateDesignPrice={this.updateDesignPrice}/> }
 					</span>
 				</div>
 			)
+			function getPriceTag(){
+				if (isRSA) {
+					return (
+						<span className="price">
+							<span>${(parseFloat(ctx.props.dat.price) + extraPrice )}</span>
+							<span>{typeof ctx.props.dat.price === "number" ? "" : " / YR"}</span>
+						</span>
+					);
+				} else {
+					return;
+				}
+			}
 		}
 	});
 
@@ -106,6 +70,7 @@ var otsvTmpl = {
 			var serviceObj = otsvTmpl[v];
 
 			if (v === 'Website Design' && typeof wd === "number"){
+				console.log(wd);
 				obj.webdesign = wd;
 
 				if (this.state[v] === false) {
@@ -131,16 +96,14 @@ var otsvTmpl = {
 			ServiceTypes.forEach(function(v){
 				__myglobal[v] = {};
 				__myglobal[v].setState = function(s){
-					var obj; obj[v] = s;
-					ctx.setState(obj);
+					ctx.updateState(v,s);
 				};
 				__myglobal[v].getState = function(s){
 					return ctx.state[obj];
 				};
 			});
 			__myglobal['Website Design'].setPages = function(v){
-				var obj = {webdesign: v};
-				ctx.setState(obj);
+				ctx.updateState('Website Design', v);
 			};
 			__myglobal['Website Design'].getPages = function(v){
 				return ctx.state.webdesign;
@@ -162,6 +125,7 @@ var otsvTmpl = {
 							title={v}
 							dat={otsvTmpl[v]}
 							selected={ctx.state[v]}
+							wd={ctx.state.webdesign}
 							updateState={ctx.updateState.bind(ctx, v)}
 							>
 						</OstDiv>
