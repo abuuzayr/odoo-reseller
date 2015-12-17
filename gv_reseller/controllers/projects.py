@@ -1,9 +1,7 @@
 from openerp.addons.web import http
 from openerp.addons.web.http import request
-from openerp import SUPERUSER_ID
-from datetime import datetime
+from dateutil import parser
 
-import json
 
 class projects(http.Controller):
     
@@ -43,7 +41,7 @@ class projects(http.Controller):
             if request.env.user.partner_id.is_company:
                 project = {
                            'id': rs_project.id,
-                           'created_date': rs_project.date_start or '-', 
+                           'created_date': self.format_date(rs_project.date_start), 
                            'sales_person': rs_project.sale_order.user_id.name or '-',
                            'price': rs_project.sale_order.amount_total or '0.00',
                            'sales_contact': rs_project.sale_order.user_id.phone or '-',
@@ -52,8 +50,8 @@ class projects(http.Controller):
                             'customer_contact_name': contact.name or '-',
                             'customer_contact_no': contact.mobile or '-',
                             'customer_email': contact.email or '-',
-                            'start_date': rs_project.project_start_date or '-', 
-                            'expiry_date': rs_project.date or '-',
+                            'start_date': self.format_date(rs_project.project_start_date), 
+                            'expiry_date': self.format_date(rs_project.date),
                             'status': rs_project.status or '-',
                             'approve': rs_project.status == 'pending',
                             'reject': rs_project.status == 'pending' or rs_project.status == 'approved'
@@ -62,13 +60,13 @@ class projects(http.Controller):
             else:
                 project = {
                            'id': rs_project.id,
-                           'created_date': rs_project.date_start or '-',  
+                           'created_date': self.format_date(rs_project.date_start),  
                             'customer_company': rs_project.partner_id.name or '-',
                             'customer_contact_name': contact.name or '-',
                             'customer_contact_no': contact.mobile or '-',
                             'customer_email': contact.email or '-',
-                            'start_date': rs_project.project_start_date or '-', 
-                            'expiry_date': rs_project.date or '-',
+                            'start_date': self.format_date(rs_project.project_start_date), 
+                            'expiry_date': self.format_date(rs_project.date),
                             'status': rs_project.status or '-',
                             'approve': False,
                             'reject': rs_project.status == 'pending'
@@ -215,4 +213,9 @@ class projects(http.Controller):
                 return request.redirect('/custom-project'+'?project_id='+kwargs['project_id'])
             #else view project  details (not custom)
 
+    def format_date(self, date):
+        if date:
+            my_date = parser.parse(date)
+            return my_date.strftime("%d/%m/%Y")
+        return '-'
     
