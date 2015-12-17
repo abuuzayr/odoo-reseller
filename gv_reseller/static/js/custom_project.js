@@ -4,6 +4,10 @@
 	
 	$(document).ready(function() { 
 		toggle_edit($('#project_id')[0].value == 0);
+		
+		$('.gv_reseller_custom_project_submit').click(function(){
+			$('#gv_reseller_custom-project-submit-button').click();
+		})
 	})
     
     function toggle_edit(edit){

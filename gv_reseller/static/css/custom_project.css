@@ -47,3 +47,13 @@
   margin-top: 20px;
   margin-bottom: 0px;
 }
+
+.gv_reseller-button {
+	background-color: #018738;
+	text-align: center;
+	color: white;
+	padding: 10px 0px 10px 0px;
+	margin-top: 20px;
+	cursor: pointer; 
+  	cursor: hand; 
+}

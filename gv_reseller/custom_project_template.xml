@@ -48,7 +48,7 @@
 					            </div>
 					            <div class="col-sm-6 gv_reseller-custom-form-control">
 					              <label>Postal Code</label><br/>
-					              <input type="text" name="postal-code" t-att-value="project['postal_code']" required="true'" />
+					              <input type="number" name="postal-code" t-att-value="project['postal_code']" required="true'" />
 					              <span class="gv_reseller-project-info-display"><t t-esc="project['postal_code']" /></span>
 					            </div>
 					        </div>
@@ -68,7 +68,7 @@
 					        <div class="row">
 					          <div class="col-sm-6 gv_reseller-custom-form-control">
 					            <label>Email Address</label><br/>
-					            <input type="text" name="email-address" t-att-value="project['email_address']" required="true'" />
+					            <input type="email" name="email-address" t-att-value="project['email_address']" required="true'" />
 					            <span class="gv_reseller-project-info-display"><t t-esc="project['email_address']" /></span>
 					          </div>
 					          <div class="col-sm-6 gv_reseller-custom-form-control">
@@ -89,7 +89,16 @@
 					            <span class="gv_reseller-project-info-display"><t t-esc="project['remarks']" /></span>
 					          </div>
 					        </div>
-					        <input type="submit" value="Submit" id="gv_reseller_custom_project_submit"></input>
+					        
+					        <div class="row">
+					        	<div class="col-sm-4">
+					        		<div class="gv_reseller_custom_project_submit gv_reseller-button">Submit</div>
+					        	</div>
+					        	<div class="col-sm-4">
+					        		<a href="/pricing"><div class="gv_reseller-button">Back</div></a>
+					        	</div>
+					        </div>
+					        <input type="submit" id="gv_reseller_custom-project-submit-button" class="hidden"/>
 					      </form>
 					    </div> <!-- container -->
         		</div>
