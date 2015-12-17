@@ -216,9 +216,23 @@ var __rsGlobal = {
 					isSelected = !lbl.find('input').prop('checked');
 
 				lbl.find('input[type=checkbox]').prop('checked', isSelected);
-				lbl.find('input[type=hidden]').each(function(v,el){
-					$('label.module-select[ppid='+$(el).val()+']').trigger('click.module_select');
-				});
+				
+				if (isSelected === false) {
+					lbl.find('input[type=hidden].dpt').each(function(i,el){
+						var target = $('label.module-select[ppid='+$(el).val()+']'),
+							isChecked = target.find('input[type=checkbox]').prop('checked');
+
+						if (isChecked === true)
+							target.trigger('click.module_select');
+					});
+				} else {
+					lbl.find('input[type=hidden].dpc').each(function(i,el){
+						var target = $('label.module-select[ppid='+$(el).val()+']'),
+							isChecked = target.find('input[type=checkbox]').prop('checked');
+						if (isChecked === false)
+							target.trigger('click.module_select');
+					});
+				}
 
 				if (!!isSelected) {
 					var obj = targetObj[lbl.attr('title')] = {

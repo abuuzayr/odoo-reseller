@@ -93,6 +93,9 @@
                                             </t>
                                             <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
                                             <t t-foreach="pt.dependencies" t-as="d">
+                                                <input type="hidden" class="dpc" t-att-value="d.id"/>
+                                            </t>
+                                            <t t-foreach="pt.dependents" t-as="d">
                                                 <input type="hidden" class="dpt" t-att-value="d.id"/>
                                             </t>
                                     </label>
