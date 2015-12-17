@@ -279,6 +279,7 @@ class booking(http.Controller):
 			'state': 'draft',
 			'pricelist_id': request.env.user.property_product_pricelist.id,
 	        'partner_id': request.env.user.partner_id.id,
+            'user_id': request.env.user.id,
 		})
 
 		contact = request.env['res.partner'].sudo().create({
