@@ -128,7 +128,10 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Mobile No.</label>
-                                    <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                                    <div class="input-group">
+                                      <span class="input-group-addon" id="basic-addon1">+65</span>
+                                      <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                                    </div>                                    
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Email</label>
@@ -157,7 +160,10 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Mobile No.</label>
-                                    <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                                    <div class="input-group">
+                                      <span class="input-group-addon" id="basic-addon1">+65</span>
+                                      <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                                    </div>  
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Remarks</label>

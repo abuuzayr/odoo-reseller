@@ -143,7 +143,13 @@ var __rsGlobal = {
 			var project = data.project;
 
 			var sales_name = createElem('div.col-sm-4', [createElem('label','Name'),createElem('input#sales_name.form-control[disabled=disabled][value='+project.rs_name+']')]);
-			var sales_contact = createElem('div.col-sm-4', [createElem('label','Contact No.'),createElem('input#sales_contact.form-control[disabled=disabled][value='+project.rs_contact+']')]);
+			var sales_contact = createElem('div.col-sm-4', [
+				createElem('label','Contact No.'),
+				createElem('div.input-group',[
+						createElem('span.input-group-addon', '+65'), 
+						createElem('input#sales_contact.form-control[disabled=disabled][value='+project.rs_contact+']')
+					])
+				]);
 			var sales_email = createElem('div.col-sm-4', [createElem('label','Email Address'),createElem('input#sales_email.form-control[disabled=disabled][value='+project.rs_email+']')]);
 			var salesPersonDiv = createElem('div.row', [sales_name,sales_contact,sales_email]);
 			$('#form_div').prepend(salesPersonDiv);
@@ -157,7 +163,7 @@ var __rsGlobal = {
 			var currentPrice = createElem('div.col-sm-4', [createElem('label', 'Current Price'), isRSA ? '$'+project.total.toFixed(2) : '-']);
 			var projectDetailsDiv = createElem('div.row.project_details',[createElem('h3.col-sm-12','Project Details'),projectId,startDate,status,createDate,expiryDate,currentPrice]);
 			$('#form_div').prepend(projectDetailsDiv);
-
+			
 			//addition of buttons
 			if (isRSA) {
 				if (project.status === 'pending') {
