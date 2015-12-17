@@ -116,6 +116,8 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
     left: 0;
 }
 
+.form-control[disabled] { background: #f3f3f3; }
+
 @media screen and (max-width: 991px){
 	.module_title, .module_price { font-size: 0.8em; line-height: 11px;  }
 	label.module-select { margin: 5px 0; }

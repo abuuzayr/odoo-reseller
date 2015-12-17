@@ -72,10 +72,8 @@ class booking(http.Controller):
 		website=True)
 	def pricing_project(self, **kw):
 		if kw['project_id']:
-			project = request.env['project.project'].search([('id','=', kw['project_id'])])[0]
-			print dir(project)
-			print project.id
-			print project.sale_order.amount_total
+			project = request.env['project.project'].sudo().search([('id','=', kw['project_id'])])[0]
+
 			rs = {}
 			rs['project'] = {
 				'id': project.id,
