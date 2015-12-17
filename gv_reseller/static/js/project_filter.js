@@ -41,6 +41,7 @@
 	    
 	    $('.gv_reseller-project-table tr:nth-child(n+1)').click(function(){
 	        var project_id = $(this)[0].id;
+	        console.log('test');
 	        $('#gv_reseller-input-id').val(project_id);
 	        $('#form-project-details')[0].submit();
 	    });
@@ -49,7 +50,7 @@
 	
 	function set_project_table_status_index(){
 		for (var j = 0, col; col = $('.gv_reseller-project-table tr')[0].cells[j]; j++) {
-			if (col.innerHTML.toLowerCase().contains('status')){
+			if (col.innerHTML.toLowerCase().indexOf('status') != -1){
 				status_index = j;
 				return;
 			}
