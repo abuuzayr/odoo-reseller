@@ -148,7 +148,7 @@
         <record id="product_user_tmpl" model="product.template">
             <field name="name">User</field>
             <field name="website_published">false</field>
-            <field name="type">consu</field>
+            <field name="type">user</field>
             <field name="list_price">30.00</field>
         </record>
 
