@@ -6,54 +6,63 @@
             <field name="name">Point of Sale System</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
         </record>
         <record id="product_crm" model="product.template">
             <field name="name">CRM</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/CRM1.png"/>
         </record>
         <record id="product_am" model="product.template">
             <field name="name">Accounting Management</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/ACCOUNTING1.png"/>
         </record>
         <record id="product_pm" model="product.template">
             <field name="name">Project Management</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/PROJECT1.png"/>
         </record>
         <record id="product_mm" model="product.template">
             <field name="name">Marketing Management</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/MARKETING1.png"/>
         </record>        
         <record id="product_im" model="product.template">
             <field name="name">Inventory Management</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/INVENTORY1.png"/>
         </record>        
         <record id="product_hr" model="product.template">
             <field name="name">Human Resource</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/HR1.png"/>
         </record>        
         <record id="product_wm" model="product.template">
             <field name="name">Website Management</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/WEB1.png"/>
         </record>
         <record id="product_ecom" model="product.template">
             <field name="name">E-Commerce</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/E-COMM1.png"/>
         </record>
    
@@ -61,6 +70,7 @@
             <field name="name">Point of Sale System (MISC)</field>
             <field name="website_published">true</field>
             <field name="type">module</field>
+            <field name="list_price">600</field>
             <field name="image" type="base64" file="gv_reseller/static/img/POS1.png"/>
         </record>
         
