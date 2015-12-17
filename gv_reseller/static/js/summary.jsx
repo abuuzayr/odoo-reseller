@@ -6,7 +6,7 @@
 			var count = ctx.props.data.length;
 
 			if (!!ctx.props.data2) {count = count + ctx.props.data2.length; }
-			if (ctx.props.title === 'Users') { count = ctx.props.data[0]; total = count * 30 }
+			if (ctx.props.title === 'Users') { count = ctx.props.data[0]; total = count * per_user_price }
 			if (ctx.props.title === 'Modules') {
 				if (count < 2) {
 					total = 1200;
@@ -130,7 +130,7 @@
 				}
 			};
 			__myglobal.summary.getUsersPrice = function(){
-				return ctx.state.users[0] * 30;
+				return ctx.state.users[0] * per_user_price;
 			};
 			__myglobal.summary.getState = function(){
 				return ctx.state;

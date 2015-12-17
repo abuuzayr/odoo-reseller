@@ -10,7 +10,8 @@
                 overlayElem.setAttribute('class', 'pricing_overlay');
                 document.getElementById('wrapwrap').appendChild(overlayElem);
                 
-                var isRSA = Boolean("<t t-esc="isRSA"></t>");
+                isRSA = Boolean("<t t-esc="isRSA"></t>");
+                per_user_price = parseFloat(<t t-esc="per_user_price"></t>);
 
                 opsvTmpl = {};
                 <t t-foreach="optional_product_product" t-as="pt">

@@ -48,6 +48,9 @@ class booking(http.Controller):
 		else:
 			isRSA = False
 
+		product_user_tmpl = request.env.ref('gv_reseller.product_user_tmpl')
+		product_user_ppid = request.env['product.product'].with_context(pricelist=request.env.user.partner_id.property_product_pricelist.id).search([("product_tmpl_id", "=", product_user_tmpl.id)])
+
 		return http.request.render('gv_reseller.pricing', {
 			'consu_product_templates': consu_product_templates,
 			'consu_product_product': consu_product_product,
@@ -58,7 +61,8 @@ class booking(http.Controller):
 			'optional_product_templates': optional_product_templates,
 			'optional_product_product': optional_product_product,
 			'users': request.env.user,
-			'isRSA': isRSA
+			'isRSA': isRSA,
+			'per_user_price': product_user_ppid.price,
 		})
 
 	@http.route(
@@ -139,7 +143,7 @@ class booking(http.Controller):
 		product_service_ppid = pp.search([("product_tmpl_id", "=", product_service_tmpl.id)])	
 
 		product_user_tmpl = request.env.ref('gv_reseller.product_user_tmpl')
-		product_user_ppid = pp.search([("product_tmpl_id", "=", product_user_tmpl.id)])	
+		product_user_ppid = pp.with_context(pricelist=request.env.user.partner_id.property_product_pricelist.id).search([("product_tmpl_id", "=", product_user_tmpl.id)])	
 
 		if 'project_id' in kw:			
 			project = request.env['project.project'].sudo().search([('id', '=', kw['project_id'])])
@@ -266,7 +270,7 @@ class booking(http.Controller):
 				'name': 'Number of Users',
 				'product_id': product_user_ppid.id,
 				'order_id': soid,
-				'price_unit':product_user_ppid.lst_price,
+				'price_unit':product_user_ppid.price,
 				'product_uom_qty': kw['user']
 			}))
 
