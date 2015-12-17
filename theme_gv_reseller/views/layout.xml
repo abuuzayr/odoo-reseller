@@ -37,9 +37,6 @@
 	  <!-- Add an element after the top menu  -->
 	  <xpath expr="//div[@id='wrapwrap']/header/div" position="after">
 	    <div class="container">
-	      <div class="alert alert-info mt16" role="alert">
-	        <strong>Welcome</strong> to GV Reseller!
-	      </div>
 	    </div>
 	  </xpath>
 	</template>
