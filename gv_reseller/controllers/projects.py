@@ -211,7 +211,8 @@ class projects(http.Controller):
             project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
             if project.status == 'custom': 
                 return request.redirect('/custom-project'+'?project_id='+kwargs['project_id'])
-            #else view project  details (not custom)
+            else:
+                return request.redirect('/pricing'+'?project_id='+kwargs['project_id'])
 
     def format_date(self, date):
         if date:
