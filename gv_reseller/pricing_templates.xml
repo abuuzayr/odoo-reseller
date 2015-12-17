@@ -3,136 +3,191 @@
     <template id="pricing">
         <title>GV Reseller</title>
         <t t-call="website.layout">
+        <t t-set="isRSA" t-value="isRSA"/>
         <div class="oe_structure">
-            <script>
+            <script>                
+                var overlayElem = document.createElement('div');
+                overlayElem.setAttribute('class', 'pricing_overlay');
+                document.getElementById('wrapwrap').appendChild(overlayElem);
+                
+                var isRSA = Boolean("<t t-esc="isRSA"></t>");
+
                 opsvTmpl = {};
                 <t t-foreach="optional_product_product" t-as="pt">
                     opsvTmpl.<t t-esc="pt.name"></t> = {
-                        price: "<t t-esc="pt.price"></t>",
-                        description: "<t t-esc="pt.description"></t>",
+                        <t t-if="isRSA">price: "<t t-esc="pt.price"></t>",</t>
+                        description: "<t t-esc="pt.description_sale"></t>",
                         variants: []
                     };
                     <t t-foreach="optional_product_product[pt]" t-as="pp">
                     opsvTmpl.<t t-esc="pt.name"></t>.variants.push({
                         ppid: "<t t-esc="pp.id"></t>",
                         vName: "<t t-esc="pp.attribute_value_ids[0].name"></t>",
-                        lstPrice: "<t t-esc="pp.price"></t>"
+                        <t t-if="isRSA">lstPrice: "<t t-esc="pp.price"></t>"</t>
                     });
                     </t>
                 </t>
+
+                window.otsvTmpl = {
+                    'Email Hosting': {
+                        title: 'Email Hosting',
+                        description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
+                        price: '120',
+                        extra: '10GB'
+                    },
+                    'Website Domain1':{     
+                        title: 'Website Domain(.COM)',
+                        description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
+                        price: '20',
+                        extra: '.COM'
+                    },
+                    'Website Domain2':{     
+                        title: 'Website Domain(.COM.SG)',
+                        description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
+                        price: '60',
+                        extra: '.COM.SG'
+                    },
+                    'Website Domain3':{     
+                        title: 'Website Domain(.SG)',
+                        description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
+                        price: '20',
+                        extra: '.SG'
+                    },
+                    'Website Design':{  
+                        title: 'Website Design',
+                        description: 'Lorem Ipsum .. candy Waffers and Ear plugs too',
+                        price: 1000,
+                        extra: [{
+                            pages: 10,
+                            price: 0
+                        },{
+                            pages: 20,
+                            price: 500
+                        }]
+                    }
+                };
             </script>
             <div class="container-fluid">
-            <h1>Module Selection</h1>
+            <h1 id="page_title">Module Selection</h1>
             <div class="row">
-                <div class="col-sm-9">
-                    <div id="no_users_div">
-                        <h3>Number of Users</h3>
-                        <input class="form-control" type="number" id="client_count" min="1" value="1"></input>
-                    </div>
-                </div>
-                <div class="col-sm-3">                    
-                    <a href="/custom-project"><div id="request_quote_btn" class="btn-green">Request for custom quote</div></a>
-                </div>
-                <div class="col-sm-9" style="padding-bottom: 50px;">
-                    <div id="module_div">
-                    <h3 id="modules_h3">Modules</h3>
-                    <div class="row">
-                        <t t-foreach="consu_product_product" t-as="pt">
-                            <label 
-                                class="col-xs-6 col-sm-4 module-select" 
-                                t-attf-for="cb_{{pt.name}}" 
-                                t-att-title="pt.name" 
-                                t-att-listprice="pt.price"
-                                t-att-ppid="consu_product_product[pt][0].id">
-                                    <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
-                                    <span class="module_title"><t t-esc="pt.name"></t></span>
-                                    <span class="module_price">$<t t-esc="pt.price"></t></span>
-                                    <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
-                            </label>
-                        </t>
-                    </div>
-                    </div>
+                <div class="col-sm-9 left2">
+                    <div id="selection_div">
+                        <div id="no_users_div">
+                            <h3>Number of Users</h3>
+                            <input class="form-control" type="number" id="client_count" min="1" value="1"></input>
+                        </div>
+                        <div id="module_div">
+                            <h3 id="modules_h3">Modules</h3>
+                            <div class="row">
+                                <t t-foreach="consu_product_product" t-as="pt">
+                                    <label 
+                                        class="col-xs-6 col-sm-4 module-select" 
+                                        t-attf-for="cb_{{pt.name}}" 
+                                        t-att-title="pt.name"
+                                        t-att-ppid="consu_product_product[pt][0].id">
+                                            <img t-att-src="'data:image/png;base64,%s' % pt.image"/>
+                                            <span class="module_title"><t t-esc="pt.name"></t></span>
+                                            <t t-if="isRSA">
+                                                <span class="module_price">$<t t-esc="pt.price"></t></span>
+                                            </t>
+                                            <input class="cb_module" type="checkbox" t-attf-name="cb_{{pt.name}}" />
+                                    </label>
+                                </t>
+                            </div>
+                        </div>
 
-                    <div id="optional_service_div">
-                        <h3>Optional Services</h3>
-                        <div class="row" id="os_container"></div>
-                    </div>
+                        <div id="optional_service_div">
+                            <h3>Optional Services</h3>
+                            <div class="row" id="os_container"></div>
+                        </div>
 
-                    <div id="other_service_div">
-                        <h3>Other Services</h3>
-                        <div class="row" id="ots_container"> </div>
+                        <div id="other_service_div">
+                            <h3>Other Services</h3>
+                            <div class="row" id="ots_container"> </div>
+                        </div>
                     </div>
 
                     <br/>
-                    <hr/>
+                    <hr id="break_line"/>                    
+                    <div id="form_div">
+                        <div id="custom_form">
+                            <h3>Client Details</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Company Name</label>
+                                    <input class="form-control" id="co_name" name="co_name" type="text"/>
+                                </div>
+                                <div class="col-lg-6">                            
+                                    <label>Business Registration No.</label>
+                                    <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Postal code</label>
+                                    <input class="form-control" id="co_post_code" name="co_post_code" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Mobile No.</label>
+                                    <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Email</label>
+                                    <input class="form-control" id="co_email" name="co_email" type="text"/>
+                                </div>
+                                <div class="col-lg-6">                            
+                                    <label>Address</label>
+                                    <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
+                                    <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
+                                </div>
+                            </div>
 
-                    <h3>Client Details</h3>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label>Company Name</label>
-                            <input class="form-control" id="co_name" name="co_name" type="text"/>
-                        </div>
-                        <div class="col-lg-6">                            
-                            <label>Business Registration No.</label>
-                            <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
-                        </div>
-                        <div class="col-lg-6">                            
-                            <label>Address</label>
-                            <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
-                            <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Postal code</label>
-                            <input class="form-control" id="co_post_code" name="co_post_code" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Mobile No.</label>
-                            <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Email</label>
-                            <input class="form-control" id="co_email" name="co_email" type="text"/>
-                        </div>
-                    </div>
-
-                    <h3>Point of Contact</h3>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label>Title</label>
-                            <input class="form-control" id="poc_title" name="poc_title" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Name</label>
-                            <input class="form-control" id="poc_name" name="poc_name" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Email Address</label>
-                            <input class="form-control" id="poc_email" name="poc_email" type="text"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Mobile No.</label>
-                            <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
-                        </div>
-                        <div class="col-lg-12">
-                            <label>Remarks</label>
-                            <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                            <h3>Point of Contact</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Title</label>
+                                    <input class="form-control" id="poc_title" name="poc_title" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Name</label>
+                                    <input class="form-control" id="poc_name" name="poc_name" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Email Address</label>
+                                    <input class="form-control" id="poc_email" name="poc_email" type="text"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Mobile No.</label>
+                                    <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label>Remarks</label>
+                                    <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 sticky" style="padding-bottom: 50px;">
+                    <a id="request_quote_btn" href="/custom-project"><div class="btn-green">Request for custom quote</div></a>                    
                     <h3 class="sub">Subscription</h3>
-                    <h4 class="total_amt">Total Amount:</h4>
-                    <div id="total_amt">S$0.00</div>
+                    <t t-if="isRSA">
+                        <h4 class="total_amt">Total Amount:</h4>
+                        <div id="total_amt">S$0.00</div>
+                    </t>
                     <div id="summary_list_modules" class="summary_list">
                         No modules and services selected
                     </div>
-
+                    
+                    <div class="action_div">
                     <div id="continue_btn" class="btn-green top-space">Continue</div>
-                    <h3 class="sub">Recommended Services</h3>
-                    <div id="summary_list_service" class="summary_list">
-                        No modules and services selected
                     </div>
-                    <div id="select_all_btn" class="btn-green top-space">Select All</div>
+
+                    <div class="recommended_div">
+                        <h3 class="sub">Recommended Services</h3>
+                        <div id="summary_list_service" class="summary_list">
+                            No modules and services selected
+                        </div>
+                        <div id="select_all_btn" class="btn-green top-space">Select All</div>
+                    </div>
                 </div>
             </div>
             </div>

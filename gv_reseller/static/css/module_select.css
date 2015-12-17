@@ -9,8 +9,10 @@ html[data-view-xmlid="gv_reseller.pricing"] textarea.form-control { border-radiu
 	the green: #018738;
  */
 
+.left2 { padding-bottom: 50px; }
+
 #no_users_div h3 { display: inline-block; margin-right: 50px; margin-top: 0px;}
-#client_count { display: inline-block; width: auto; background: #f3f3f3; border:none; outline: none;}
+#client_count { text-align: center;display: inline-block; width: auto; background: #f3f3f3; border:none; outline: none;}
 
 /*** MODULE BOXES ***/
 label.module-select { padding:0 5px; cursor: pointer; position: relative; margin: 10px 0px; }
@@ -44,9 +46,13 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 
 /*** SERVICES ***/
 
-.other_service {background: #eee; padding: 20px; text-align: center;min-height: 160px;border:8px solid #fff;}
+.other_service:before, .other_service:after{
+	content: " ";
+	display: table;
+}
+.other_service {background: #eee; padding: 20px 20px 40px; text-align: center;min-height: 160px;border:8px solid #fff;}
 .other_service header {display: block;font-weight: bold;}
-.other_service p {display: none; }
+.other_service p { font-size: 0.8em;margin: 15px 0px; }
 .opt_serv_price {display: inline-block; color: #018738; font-weight: bold; font-size: 1.5em; margin: 10px;}
 .opt_serv_dropdown { box-shadow:-1px 1px 3px rgba(0,0,0,0.2);cursor:pointer;list-style: none; margin:0; padding:0; position: absolute; width: 80%; background: #f3f3f3; height: 25px; left: 10%;overflow: hidden; z-index: 2;  outline:0;}
 .opt_serv_dropdown.selected { max-height: calc(25px * 4); }
@@ -62,8 +68,8 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 .ots {position:relative; width:20%;float:left; background:#eee;border:5px solid #fff;box-sizing:border-box; text-align:center; }
 .ots .top { background:green; padding:10px 0; }
 .ots .top input {width: 20px; height: 20px;}
-.ots header {display: block;font-weight: bold; padding:15px 0 3px; }
-.ots p {font-size:0.9em; margin:0 auto; width: 80%;}
+.ots header {display: block;font-weight: bold; padding:15px 5px 3px; }
+.ots p {font-size:0.8em; margin:0 auto; width: 80%;}
 .ots .price { color:#018738;display:block;margin: 20px 0;  } 
 .ots .price span:first-child {font-weight: bold; font-size: 1.2em;}
 .ots .ext { display: block; font-weight:bold; margin: 10px 0 20px; }
@@ -80,7 +86,7 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
 .summary_list .col-sm-6:nth-child(2) { text-align: right; padding-right: 0px; color:#018738; }
 
 .top-space { margin-top: 2em; }
-.btn-green { cursor: pointer; font-weight: bold; color: #ffffff; background-color: #018738; /*display: inline-block;*/ padding: 7px 20px; font-size: 0.9em; text-transform: uppercase; text-align: center; }
+.btn-green { cursor: pointer; font-weight: bold; color: #ffffff; background-color: #018738; /*display: inline-block;*/ padding: 10px 20px; font-size: 1em; text-transform: uppercase; text-align: center; }
 
 .sticky {
   position: -webkit-sticky;
@@ -92,6 +98,23 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
   top: 55px;
 }
 .clear { clear:both; }
+.project_details { background: #eee; font-size: 1em; margin:0; text-transform: capitalize; }
+.project_details h3 { margin: 0; padding: 10px; }
+.project_details div { padding: 15px; }
+.project_details label { display: block; font-size: 1.05em; margin-bottom: 5px; margin-top: 10px; }
+
+#form_div input.form-control {padding:22px 10px;}
+#form_div label {margin-top:20px;}
+
+.pricing_overlay {
+	position: fixed;
+    background: #fff url(/gv_reseller/static/img/loading_spinner.gif) no-repeat center center;
+    z-index: 9;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
 
 @media screen and (max-width: 991px){
 	.module_title, .module_price { font-size: 0.8em; line-height: 11px;  }
