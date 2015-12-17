@@ -118,9 +118,9 @@
 				            </div>
 				            <div class="gv_reseller-user-details">
 				            	<h5>USERNAME</h5>
-				              	<p><t t-esc="user.name" /></p>
-				              	<h5>NAME</h5>
 				              	<p><t t-esc="user.login" /></p>
+				              	<h5>NAME</h5>
+				              	<p><t t-esc="user.name" /></p>
 				              	<img src="/gv_reseller/static/img/user_icon.svg" />
 				            </div>
 				         </div>
