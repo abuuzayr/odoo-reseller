@@ -75,7 +75,30 @@
     padding-left: 2px;
 }
 
+.gv_reseller-project-table tr{
+	height: 33px;
+}
 .gv_reseller-project-table tr:nth-child(n+1):hover {
 	cursor: pointer; 
 	cursor: hand; 
+}
+
+.gv_reseller-approve-button {
+	text-align: center;
+	width: 80px;
+	height: 30px;
+	padding-top: 3px;
+	background-color: #018738;
+	color: white;
+	display: inline-block;
+}
+.gv_reseller-reject-button {
+	text-align: center;
+	width: 80px;
+	height: 30px;
+	margin-right: 2px;
+	padding-top: 3px;
+	background-color: #cc0000;
+	color: white;
+	display: inline-block;
 }
