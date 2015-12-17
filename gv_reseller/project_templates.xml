@@ -53,7 +53,7 @@
 		        	</thead>
 		        	<tbody>
 		        		<t t-foreach="projects" t-as="project">
-		        			<tr t-attf-id="{{project['id']}}" onclick="location.href='/pricing?project_id='+this.id;">
+		        			<tr t-attf-id="{{project['id']}}" onclick="location='/pricing?project_id='+this.id;">
 			        			<td data-label="ID"><t t-esc="project['id']" /></td>
 			        			<td data-label="Created"><t t-esc="project['created_date']" /></td>
 			        			<t t-if="user['is_admin']">
