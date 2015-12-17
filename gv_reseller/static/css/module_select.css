@@ -103,7 +103,7 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
 .project_details div { padding: 15px; }
 .project_details label { display: block; font-size: 1.05em; margin-bottom: 5px; margin-top: 10px; }
 
-#form_div input.form-control {padding:22px 10px;}
+#form_div input.form-control {height: 50px;}
 #form_div label {margin-top:20px;}
 
 .pricing_overlay {
