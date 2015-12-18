@@ -41,7 +41,6 @@
 	    
 	    $('.gv_reseller-project-table tr:nth-child(n+1)').click(function(){
 	        var project_id = $(this)[0].id;
-	        console.log('test');
 	        $('#gv_reseller-input-id').val(project_id);
 	        $('#form-project-details')[0].submit();
 	    });
@@ -60,13 +59,12 @@
 	function filter(status_string, search_string){
 		status_string = status_string || ''; //converts undefined to empty string
 		search_string = search_string || ''; //converts undefined to empty string
+		
 		for (var i = 1, row; row = $('.gv_reseller-project-table')[0].rows[i]; i++) {
 			var match = compare_ignore_case(row.cells[status_index].innerHTML, status_string);
-			
 			if (match){
 				match = table_row_contains(row, search_string);
 			}
-			
 			if (match){
 				$(row).removeClass('hidden');
 			}
@@ -90,6 +88,6 @@
 			console.log('compare_ignore_case has a null value: ' + string + ' : ' + searchword);
 			return false;
 		}
-		return string.toString().toLowerCase().contains(searchword.toString().toLowerCase());
+		return string.toString().toLowerCase().indexOf(searchword.toString().toLowerCase())>-1;
 	}
 })(jQuery);

@@ -57,7 +57,7 @@ class profile(http.Controller):
                 ongoing_projects += 1
       
         total_projects = active_projects + ongoing_projects
-        print pending_payment       
+             
         #
         return http.request.render('gv_reseller.profile', {
                 'user_price': user_price,
