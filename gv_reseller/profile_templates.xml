@@ -62,8 +62,8 @@
 				            <div class="gv_reseller-box-body">
 				            	<div>
 				            		<canvas class="donutchart" height="250" width="250">
-										<div t-att-data-value="sales">Sales</div>
 										<div t-att-data-value="pending_payment">Pending Payment</div>
+										<div t-att-data-value="sales">Sales</div>
 									</canvas>
 									<div class="gv_reseller-pie-chart-total">
 										<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_sales" /></span>
@@ -89,8 +89,8 @@
 				            <div class="gv_reseller-box-body">
 				            	<div>
 				            		<canvas class="donutchart" height="250" width="250">
+				            			<div t-att-data-value="ongoing_projects">Ongoing Projects</div>
 										<div t-att-data-value="active_projects">Active Projects</div>
-										<div t-att-data-value="ongoing_projects">Ongoing Projects</div>
 									</canvas>
 									<div class="gv_reseller-pie-chart-total">
 										<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_projects" /></span>

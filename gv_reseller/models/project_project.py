@@ -1,5 +1,5 @@
 from openerp import models, fields, api, exceptions
-
+import datetime
 '''
 Created on 27 Nov 2015
 
@@ -22,6 +22,11 @@ class gv_project_template(models.Model):
            ('cancelled','cancelled'),
            ('custom', 'Custom')], string="Status")
 
+#     @api.onchange('status')
+#     def automate_project_dates(self):
+#         if self.status=='paid':
+#             if not self.project_start_date:
+#                 self.project_start_date = datetime.date.today()
 
 
 
