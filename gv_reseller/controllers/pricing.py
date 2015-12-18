@@ -73,7 +73,17 @@ class booking(http.Controller):
 	def pricing_project(self, **kw):
 		if kw['project_id']:
 			project = request.env['project.project'].sudo().search([('id','=', kw['project_id'])])[0]
-
+			if project:
+				project.update_sale_order_price(request.env.user.partner_id.property_product_pricelist.id)
+# 			if project.status=='pending':
+# 				pricelist_id = request.env.user.partner_id.property_product_pricelist.id
+# 				for ol in project.sale_order.order_line:
+# 					# "Other Services" did not have their prices pulled from the DB
+# 					product = request.env['product.product'].with_context(pricelist=pricelist_id).search([("id", "=", ol.product_id.id), ('type', 'not in', ['other', 'consu'])])
+# 					if product and product.type !='other': 
+# 						ol.price_unit = product.price
+			
+			
 			rs = {}
 			rs['project'] = {
 				'id': project.id,

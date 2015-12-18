@@ -35,7 +35,7 @@ class projects(http.Controller):
         project_arr = []
         
         for rs_project in rs_projects:
-            
+            rs_project.update_sale_order_price(request.env.user.partner_id.property_product_pricelist.id)
             contact = rs_project.partner_id.child_ids[0]
             
             if request.env.user.partner_id.is_company:
