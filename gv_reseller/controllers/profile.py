@@ -7,13 +7,13 @@ import json
 
 class profile(http.Controller):
     
-    #Handles the GET request for the route '/projects'
+    #Handles the GET request for the route '/profile'
     @http.route(
         ['/profile'],
         auth='user',
         methods=['get'],
         website=True)
-    def projects_get(self):
+    def profile_get(self):
         user = request.env.user
         user_ids = [request.uid]
                        
@@ -27,15 +27,15 @@ class profile(http.Controller):
             company = request.env['res.users'].sudo().search([('partner_id', '=', user.parent_id.id)]) 
             
         
-        #get user price
+        #get user price - no longer needed as UI display is updated
         product_user = request.env['product.template'].with_context(pricelist=request.env.user.partner_id.property_product_pricelist.id).search([('type','=','user')])
-        if product_user: 
-            user_price = product_user.price
-        else:
-            user_price = 50.00
+#         if product_user: 
+#             user_price = product_user.price
+#         else:
+#             user_price = 50.00
             
         rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['approved','paid', 'active'])])
-        
+        # calculates the sales figures for the pie chart
         sales = pending_payment = 0.0
         for rs_project in rs_projects:
             if rs_project.status=='approved':
@@ -47,7 +47,7 @@ class profile(http.Controller):
         total_sales = pending_payment + sales
         
         rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['pending','approved','paid', 'active'])])
-        
+        # calculates the project values for project pie chart
         active_projects = ongoing_projects = 0
         for rs_project in rs_projects:
             if rs_project.status=='active':
@@ -60,7 +60,7 @@ class profile(http.Controller):
              
         #
         return http.request.render('gv_reseller.profile', {
-                'user_price': user_price,
+#                 'user_price': user_price,
                 'sales': sales,
                 'pending_payment': pending_payment,
                 'total_sales': '{:20,.2f}'.format(total_sales),

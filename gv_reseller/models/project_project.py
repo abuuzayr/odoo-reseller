@@ -23,7 +23,10 @@ class gv_project_template(models.Model):
            ('custom', 'Custom')], string="Status")
 
     def update_sale_order_price(self, pricelist_id):
-        print '1'
+        """
+        During the time a project is pending for approval, the prices of the items might have changed. 
+        Hence, this function updates all the items' prices before displaying it for approval so that the RSA can see the correct prices.
+        """
         if self.status=='pending':
             for ol in self.sale_order.order_line:
                 # "Other Services" did not have their prices pulled from the DB

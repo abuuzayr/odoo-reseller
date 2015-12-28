@@ -10,6 +10,7 @@
 		})
 	})
     
+	//toggles between view mode and edit mode for the form.
     function toggle_edit(edit){
 		if (edit){
 			$('.gv_reseller-custom-form-control input').show();
