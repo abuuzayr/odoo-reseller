@@ -26,10 +26,6 @@ class projects(http.Controller):
 
         
         if user.child_ids:
-#             child_ids = []
-#             for child in user.child_ids:
-#                 child_ids.append(child.id)
-#             children = request.env['res.user'].sudo().search([('partner_id', 'in', child_ids)])
             children = request.env['res.users'].sudo().search([('partner_id.parent_id', '=', user.partner_id.id)])
             for child in children:
                 user_ids.append(child.id)
@@ -53,8 +49,6 @@ class projects(http.Controller):
                            'created_date': self.format_date(rs_project.date_start), 
                            'sales_person': rs_project.sale_order.user_id.name or '-',
                            'price': rs_project.sale_order.amount_total or '0.00',
-                           'sales_contact': rs_project.sale_order.user_id.phone or '-',
-                           'sales_email': rs_project.sale_order.user_id.email or '-',
                             'customer_company': rs_project.partner_id.name or '-',
                             'customer_contact_name': contact.name or '-',
                             'customer_contact_no': contact.mobile or '-',
@@ -62,8 +56,6 @@ class projects(http.Controller):
                             'start_date': self.format_date(rs_project.project_start_date), 
                             'expiry_date': self.format_date(rs_project.date),
                             'status': rs_project.status or '-',
-                            'approve': rs_project.status == 'pending',
-                            'reject': rs_project.status == 'pending' or rs_project.status == 'approved'
                            }
             
             else:
@@ -77,8 +69,6 @@ class projects(http.Controller):
                             'start_date': self.format_date(rs_project.project_start_date), 
                             'expiry_date': self.format_date(rs_project.date),
                             'status': rs_project.status or '-',
-                            'approve': False,
-                            'reject': rs_project.status == 'pending'
                            }
             project_arr.append(project)
              

@@ -10,7 +10,7 @@
 		$('.gv_reseller-status-filter tr td').each(function(){
 			$(this).click(function(){
 				$('.gv_reseller-line-up-arrow').removeClass('gv_reseller-line-up-arrow');
-				$(this).find('hr').addClass('gv_reseller-line-up-arrow');
+				$(this).addClass('gv_reseller-line-up-arrow');
 				$('#input-search-filter')[0].value = '';
 				filter_status = $(this)[0].getAttribute('value');
 				filter(filter_status);
@@ -25,31 +25,12 @@
 		// allows the table to be sorted by clicking the table header.
 		$('.gv_reseller-project-table').tablesorter();
 		
-		// binds approve buttons to send a get request to the server to approve of the project
-	    $('.gv_reseller-approve-button').click(function(){
-	        var project_id = $(this)[0].id;
-	        jQuery.get('/projects/approve-project',{
-	                project_id: project_id
-	            }, function(rs){
-	                location.reload();
-	            });
-	    });
-	 // binds reject buttons to send a get request to the server to reject the project
-	    $('.gv_reseller-reject-button').click(function(){
-	        var project_id = $(this)[0].id;
-	        jQuery.get('/projects/reject-project',{
-	                project_id: project_id
-	            }, function(rs){
-	                location.reload();
-	            });
-	    });
-	 // binds table row to send a redirect page to project details when the row is clicked
-	    $('.gv_reseller-project-table tr:nth-child(n+1)').click(function(){
+	 // binds view buttons to send a get request to the server to view the project
+	    $('.gv_reseller-view-button').click(function(){
 	        var project_id = $(this)[0].id;
 	        $('#gv_reseller-input-id').val(project_id);
 	        $('#form-project-details')[0].submit();
 	    });
-
 	});
 	
 	// sets the index number of the status column in gv_reseller-project-table. This value is used as a shortcut to retrieve every row's project status

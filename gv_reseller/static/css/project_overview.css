@@ -24,14 +24,19 @@
   cursor: pointer; 
   cursor: hand; 
   font-weight: bold;
+
 }
 
-.gv_reseller-line-up-arrow {
+.gv_reseller-line-up-arrow hr {
     width:100%;
     height: 1px;
     background: light-gray;
 }
-.gv_reseller-line-up-arrow:after {
+.gv_reseller-line-up-arrow {
+    color: #018738;
+}
+
+.gv_reseller-line-up-arrow hr:after {
     content:'';
     position: relative;
     border-style: solid;
@@ -43,7 +48,7 @@
     top: -18px;
     left: 45%;
 }
-.gv_reseller-line-up-arrow:before {
+.gv_reseller-line-up-arrow hr:before {
     content:'';
     position: relative;
     border-style: solid;
@@ -64,7 +69,7 @@
 	background-color: #018738;
 	color: white;
 	padding-top: 5px;
-	padding-left: 2px;
+	padding-left: 5px;
 	padding-bottom: 5px;
 	font-weight: normal;
 }
@@ -73,33 +78,27 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding-left: 2px;
+    padding-left: 5px;
+    background-color: #fafafa;
+}
+
+.gv_reseller-table-company-info-column {
+	background-color: #eaeaea!important;
 }
 
 .gv_reseller-project-table tr{
-	height: 33px;
-}
-.gv_reseller-project-table tr:nth-child(n+1):hover {
-	cursor: pointer; 
-	cursor: hand; 
+	height: 40px;
+	border-bottom: 1px solid white;
 }
 
-.gv_reseller-approve-button {
+.gv_reseller-view-button {
 	text-align: center;
-	width: 80px;
-	height: 30px;
+	width: 60px;
+	height: 28px;
 	padding-top: 3px;
-	background-color: #018738;
-	color: white;
-	display: inline-block;
-}
-.gv_reseller-reject-button {
-	text-align: center;
-	width: 80px;
-	height: 30px;
-	margin-right: 2px;
-	padding-top: 3px;
-	background-color: #cc0000;
-	color: white;
-	display: inline-block;
+	margin-bottom: 3px;
+	background-color: #fafafa;
+	border: 1px solid black;
+	cursor: pointer; 
+	cursor: hand; 
 }

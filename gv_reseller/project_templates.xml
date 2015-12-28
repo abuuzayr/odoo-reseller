@@ -16,7 +16,7 @@
 	        <div class="gv_reseller-container">
 		        <table class="gv_reseller-status-filter">
 			      <tr>
-			        <td value="">ALL<hr class="gv_reseller-line-up-arrow" /></td>
+			        <td value=""  class="gv_reseller-line-up-arrow">ALL<hr /></td>
 			        <td value="pending">PENDING<hr /></td>
 			        <td value="approved">APPROVED<hr /></td>
 			        <td value="paid">PAID<hr /></td>
@@ -38,13 +38,11 @@
 		        			<t t-if="user['is_admin']">
 		        				<th>Sales Person</th>
 			        			<th>Price</th>
-			        			<th>Sales Contact</th>
-			        			<th>Sales Email</th>
 		        			</t>
 		        			<th>Company</th>
-		        			<th>P.O.C.</th>
-		        			<th>Contact</th>
-		        			<th>Email</th>
+		        			<th>POC</th>
+		        			<th>Client Contact</th>
+		        			<th>Client Email</th>
 		        			<th>Start</th>
 		        			<th>Expiry</th>
 		        			<th>Status</th>
@@ -59,24 +57,16 @@
 			        			<t t-if="user['is_admin']">
 			        				<td data-label="Sales Person"><t t-esc="project['sales_person']" /></td>
 				        			<td data-label="Price"><t t-esc="project['price']" /></td>
-				        			<td data-label="Sales Contact"><t t-esc="project['sales_contact']" /></td>
-				        			<td data-label="Sales Email"><t t-esc="project['sales_email']" /></td>
 			        			</t>
-			        			<td data-label="Company"><t t-esc="project['customer_company']" /></td>
-			        			<td data-label="P.O.C."><t t-esc="project['customer_contact_name']" /></td>
-			        			<td data-label="Contact"><t t-esc="project['customer_contact_no']" /></td>
-			        			<td data-label="Email"><t t-esc="project['customer_email']" /></td>
+			        			<td data-label="Company" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_company']" /></td>
+			        			<td data-label="POC" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_name']" /></td>
+			        			<td data-label="Client Contact" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_no']" /></td>
+			        			<td data-label="Client Email" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_email']" /></td>
 			        			<td data-label="Start"><t t-esc="project['start_date']" /></td>
 			        			<td data-label="Expiry"><t t-esc="project['expiry_date']" /></td>
 			        			<td data-label="Status" t-attf-class="{{project['status']}}"><t t-esc="project['status']" /></td>
 			        			<td data-label="Actions">
-			        				<t t-if="project['approve']">
-			        					<div  class="gv_reseller-approve-button" t-attf-id="{{project['id']}}"> Approve</div>
-			        				</t>
-			        				<t t-if="project['reject']">
-			        					<div class="gv_reseller-reject-button" t-attf-id="{{project['id']}}">Reject</div>
-			        				</t>
-			        				
+		        					<div class="gv_reseller-view-button" t-attf-id="{{project['id']}}"> View</div>
 			        			</td>
 		        			
 		        			</tr>
