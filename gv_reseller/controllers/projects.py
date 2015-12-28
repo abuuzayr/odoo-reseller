@@ -43,6 +43,11 @@ class projects(http.Controller):
             rs_project.update_sale_order_price(request.env.user.partner_id.property_product_pricelist.id)
             contact = rs_project.partner_id.child_ids[0]
             
+            if rs_project.status:
+                status_str = rs_project.status.title()
+            else:
+                status_str = '-'
+            
             if request.env.user.partner_id.is_company:
                 project = {
                            'id': rs_project.id,
@@ -55,7 +60,7 @@ class projects(http.Controller):
                             'customer_email': contact.email or '-',
                             'start_date': self.format_date(rs_project.project_start_date), 
                             'expiry_date': self.format_date(rs_project.date),
-                            'status': rs_project.status or '-',
+                            'status': status_str,
                            }
             
             else:
@@ -68,7 +73,7 @@ class projects(http.Controller):
                             'customer_email': contact.email or '-',
                             'start_date': self.format_date(rs_project.project_start_date), 
                             'expiry_date': self.format_date(rs_project.date),
-                            'status': rs_project.status or '-',
+                            'status': status_str,
                            }
             project_arr.append(project)
              

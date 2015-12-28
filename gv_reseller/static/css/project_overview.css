@@ -102,3 +102,43 @@
 	cursor: pointer; 
 	cursor: hand; 
 }
+
+.pending {
+	font-weight: bold;
+	color: #f7931e;
+}
+
+.approved {
+	font-weight: bold;
+	color: #1a8943;
+}
+
+.rejected {
+	font-weight: bold;
+	color: #ed1c24;
+}
+
+.paid {
+	font-weight: bold;
+	color: #000;
+}
+
+.active {
+	font-weight: bold;
+	color: #000;
+}
+
+.expired {
+	font-weight: bold;
+	color: #000;
+}
+
+.custom {
+	font-weight: bold;
+	color: #000;
+}
+
+.cancelled {
+	font-weight: bold;
+	color: #000;
+}
