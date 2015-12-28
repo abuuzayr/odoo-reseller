@@ -12,10 +12,19 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def projects_get(self):
+        """
+        Retrieves all the projects under the RSA or RS and returns them in a JSON array. If user is RSA, this function will also retrieve all the projects
+        of the RS that are below the RSA. Also, if user is RSA, this the project information returned will also consist of the RS information.
+        
+        variables
+        user_ids: for retrieving the ids of the RS below the RSA including the RSA himself. If user is only an RS then this array will only have the RSA's id.
+        rs_projects: resultset of projects pulled based on the user_id array above.
+        """
         user = request.env.user
-        user_ids = []
+        user_ids = [] 
         user_ids.append(request.uid)
 
+        
         if user.child_ids:
 #             child_ids = []
 #             for child in user.child_ids:
@@ -84,6 +93,9 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def custom_project(self, **kwargs):
+        """
+        fetches and returns the custom project's information. If no project_id is provided in the request, then it will return an empty project. 
+        """
         if 'project_id' in kwargs:
             rs_project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
             if rs_project: 
@@ -137,6 +149,11 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def create_custom_project(self, **kwargs):
+        """
+        Creates a custom project via form submission. No validation on the server side as of yet, only on client side.
+        Unable to update custom project's details as of yet since it is not in the requirements for the first version.
+        
+        """
         if kwargs['project_id'] == '0' :
             contact_val = {
                 'name': kwargs['name'],
@@ -185,6 +202,9 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def approve_project(self, **kwargs):
+        """
+        Changes the project status from pending to approved
+        """
         project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
         if project and request.env.user.partner_id.is_company:
             if project.status == 'pending':
@@ -196,6 +216,9 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def reject_project(self, **kwargs):
+        """
+        Changes the project from pending/approved to rejected
+        """
         project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
         if project:
             if project.status == 'pending' or (project.status == 'approved' and request.env.user.partner_id.is_company):
@@ -207,6 +230,10 @@ class projects(http.Controller):
         methods=['get'],
         website=True)
     def get_project_details(self, **kwargs):
+        """
+        Checks if the project is a custom project or a normal one. If project is a custom project, it will redirect the user to custom-project page. Otherwise,
+        it will redirect the user to the normal project page.
+        """
         if 'project_id' in kwargs:
             project = request.env['project.project'].sudo().search([('id', '=', kwargs['project_id'])])
             if project.status == 'custom': 
@@ -215,6 +242,9 @@ class projects(http.Controller):
                 return request.redirect('/pricing'+'?project_id='+kwargs['project_id'])
 
     def format_date(self, date):
+        """
+        converts the date to a String in the desired format.
+        """
         if date:
             my_date = parser.parse(date)
             return my_date.strftime("%d/%m/%Y")
