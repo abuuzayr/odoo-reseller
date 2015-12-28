@@ -2,8 +2,8 @@
     $.fn.donut = function(options) {
         var settings = $.extend({
             colors: [
-                '#48bd74',
                 '#c3f4d2',
+                '#48bd74',
                 '#7fdbff',
                 '#39cccc',
                 '#3d9970',

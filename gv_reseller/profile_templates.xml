@@ -56,31 +56,59 @@
 				        </div>
 				        
 				        <div class="col-sm-4">
-				            <div class="gv_reseller-box-header">
-				              TOTAL SALES
-				            </div>
-				            <div class="gv_reseller-box-body">
-				            	<div>
-				            		<canvas class="donutchart" height="250" width="250">
-										<div t-att-data-value="pending_payment">Pending Payment</div>
-										<div t-att-data-value="sales">Sales</div>
-									</canvas>
-									<div class="gv_reseller-pie-chart-total">
-										<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_sales" /></span>
-										<br/>
-										sales
-									</div>
-									<div class="gv_reseller-pie-chart-legend-left">
-										<div></div>
-										Total Sales
-									</div>
-									<div class="gv_reseller-pie-chart-legend-right">
-										<div></div>
-										Pending Payment
-									</div>
-				            	</div>
-				              	
-				            </div>
+				        	<t t-if="is_admin">
+					            <div class="gv_reseller-box-header">
+					              TOTAL SALES
+					            </div>
+					            <div class="gv_reseller-box-body">
+					            	<div>
+					            		<canvas class="donutchart" height="250" width="250">
+											<div t-att-data-value="pending_payment">Pending Payment</div>
+											<div t-att-data-value="sales">Sales</div>
+										</canvas>
+										<div class="gv_reseller-pie-chart-total">
+											<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_sales" /></span>
+											<br/>
+											sales
+										</div>
+										<div class="gv_reseller-pie-chart-legend-left">
+											<div></div>
+											Total Sales
+										</div>
+										<div class="gv_reseller-pie-chart-legend-right">
+											<div></div>
+											Pending Payment
+										</div>
+					            	</div>
+					            </div>
+				            </t>
+				            
+				            <t t-if="not is_admin">
+					            <div class="gv_reseller-box-header">
+					              TOTAL PAYMENT
+					            </div>
+					            <div class="gv_reseller-box-body">
+					            	<div>
+					            		<canvas class="donutchart" height="250" width="250">
+					            			<div t-att-data-value="unpaid">Unpaid</div>
+											<div t-att-data-value="paid">Paid</div>
+										</canvas>
+										<div class="gv_reseller-pie-chart-total">
+											<span class="gv_reseller-pie-chart-total-amount"><t t-esc="total_payment" /></span>
+											<br/>
+											project
+										</div>
+										<div class="gv_reseller-pie-chart-legend-left">
+											<div></div>
+											Paid
+										</div>
+										<div class="gv_reseller-pie-chart-legend-right">
+											<div></div>
+											Unpaid
+										</div>
+					            	</div>
+					            </div>
+				            </t>
 				        </div>
 				        <div class="col-sm-4">
 				            <div class="gv_reseller-box-header">
@@ -156,9 +184,8 @@
 				              COMPANY ADDRESS
 				            </div>
 				            <div class="gv_reseller-user-details">
-				            	<h5>LINE 1</h5>
+				            	<h5> ADDRESS</h5>
 				              	<p><t t-esc="company.street" /></p>
-				              	<h5>LINE 2</h5>
 				              	<p><t t-esc="company.street2" /></p>
 				              	<img src="/gv_reseller/static/img/address_icon.svg" />
 				            </div>

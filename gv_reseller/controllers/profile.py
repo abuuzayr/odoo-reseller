@@ -27,24 +27,8 @@ class profile(http.Controller):
             company = request.env['res.users'].sudo().search([('partner_id', '=', user.parent_id.id)]) 
             
         
-        #get user price - no longer needed as UI display is updated
-        product_user = request.env['product.template'].with_context(pricelist=request.env.user.partner_id.property_product_pricelist.id).search([('type','=','user')])
-#         if product_user: 
-#             user_price = product_user.price
-#         else:
-#             user_price = 50.00
-            
-        rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['approved','paid', 'active'])])
-        # calculates the sales figures for the pie chart
-        sales = pending_payment = 0.0
-        for rs_project in rs_projects:
-            if rs_project.status=='approved':
-                pending_payment += rs_project.sale_order.amount_total
-                
-            else:
-                sales += rs_project.sale_order.amount_total
-        
-        total_sales = pending_payment + sales
+
+
         
         rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['pending','approved','paid', 'active'])])
         # calculates the project values for project pie chart
@@ -58,21 +42,54 @@ class profile(http.Controller):
       
         total_projects = active_projects + ongoing_projects
              
-        #
-        return http.request.render('gv_reseller.profile', {
-#                 'user_price': user_price,
-                'sales': sales,
-                'pending_payment': pending_payment,
-                'total_sales': '{:20,.2f}'.format(total_sales),
-                'active_projects': active_projects,
-                'ongoing_projects': ongoing_projects,
-                'total_projects': total_projects,
-                'user': user,
-                'company': company,
-                'credits': "{:,}".format(company.credits),
-                'company_website': company.website or 'NOT AVAILABLE',
-                'is_admin': user.partner_id.is_company
+        if user.is_company:         
+            rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids), ('status', 'in', ['approved','paid', 'active'])])
+            # calculates the sales figures for the pie chart
+            sales = pending_payment = 0.0
+            for rs_project in rs_projects:
+                if rs_project.status=='approved':
+                    pending_payment += rs_project.sale_order.amount_total
+                    
+                else:
+                    sales += rs_project.sale_order.amount_total
+            
+            total_sales = pending_payment + sales
+            return http.request.render('gv_reseller.profile', {
+                    'sales': sales,
+                    'pending_payment': pending_payment,
+                    'total_sales': '{:20,.2f}'.format(total_sales),
+                    'active_projects': active_projects,
+                    'ongoing_projects': ongoing_projects,
+                    'total_projects': total_projects,
+                    'user': user,
+                    'company': company,
+                    'credits': "{:,}".format(company.credits),
+                    'company_website': company.website or 'NOT AVAILABLE',
+                    'is_admin': user.partner_id.is_company
             })
-        # sales, pending_payment, total_sales, active_projects, ongoing_projects, expired_projects
+        
+        else: 
+            rs_projects = request.env['project.project'].sudo().search([('sale_order.user_id', 'in', user_ids)])
+            paid = 0
+            unpaid = 0
+            for rs_project in rs_projects:
+                if rs_project.status == 'pending' or rs_project.status == 'approved' or rs_project.status == 'custom':
+                    unpaid += 1
+                elif rs_project.status == 'paid' or rs_project.status == 'active' or rs_project.status == 'expired':
+                    paid += 1 
+            total_payment = paid + unpaid
+            return http.request.render('gv_reseller.profile', {
+                    'paid': paid,
+                    'unpaid': unpaid,
+                    'total_payment': total_payment,
+                    'active_projects': active_projects,
+                    'ongoing_projects': ongoing_projects,
+                    'total_projects': total_projects,
+                    'user': user,
+                    'company': company,
+                    'company_website': company.website or 'NOT AVAILABLE',
+                    'is_admin': user.partner_id.is_company
+            })
+                    
         
                 

@@ -136,6 +136,7 @@ h5 {
 	background-color: #FAFAFA;
 	padding: 10px;
 	margin-bottom: 20px;
+	min-height: 140px;
 }
 
 .gv_reseller-user-details img{
