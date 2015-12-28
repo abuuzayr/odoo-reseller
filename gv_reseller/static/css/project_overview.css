@@ -120,25 +120,25 @@
 
 .paid {
 	font-weight: bold;
-	color: #000;
+	color: #2116f7;
 }
 
 .active {
 	font-weight: bold;
-	color: #000;
+	color: #26cda4 ;
 }
 
 .expired {
 	font-weight: bold;
-	color: #000;
+	color: #333333;
 }
 
 .custom {
 	font-weight: bold;
-	color: #000;
+	color: #fb7292;
 }
 
 .cancelled {
 	font-weight: bold;
-	color: #000;
+	color: #b400ff;
 }
