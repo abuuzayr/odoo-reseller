@@ -161,18 +161,30 @@ var __rsGlobal = {
 				var data = { project_id: project.id };
 				$('#approve_btn').on('click', function(){
 					$('#gv_reseller-approve-modal').modal('show');
-					console.log('test');
 				});
 				$('#confirm-approve_btn').on('click', function(){
 					$.get('/projects/approve-project', data).then(function(){
 						location.href = '/projects';
 					});
 				});
+				
 				$('#reject_btn').on('click', function(){ 
+					$('#gv_reseller-reject-modal').modal('show');
+					$('#gv_reseller-submit-reject').hide();
+					$('#gv_reseller-confirm-reject').show();
+				});	
+				$('#confirm-reject_btn').on('click', function(){
+					$('#gv_reseller-confirm-reject').hide();
+					$('#gv_reseller-submit-reject').show();
+				});
+				$('#submit-reject_btn').on('click', function(){
+					console.log('test');
+					data.reject_feedback = $('gv_reseller-reject-feedback').value;
+					console.log(data);
 					$.get('/projects/reject-project', data).then(function(){
 						location.href = '/projects';
 					});
-				});				
+				});
 			}
 			if (project.status === 'pending') {
 				$('.action_div').append('<div id="edit_btn" style="margin-top:10px;" class="btn-green">Edit</div>');	

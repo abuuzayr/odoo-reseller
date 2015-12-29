@@ -210,11 +210,10 @@
                 </div>
             </div>
             </div>
-            <!-- Modal -->
+            <!--Approve Modal -->
 			  <div class="modal fade" id="gv_reseller-approve-modal" role="dialog">
 			    <div class="modal-dialog">
 			    	
-			      <!-- Modal content-->
 			      <div class="modal-content">
 		      		<div class="gv_reseller-terms-and-conditions-header">
 		      			<h4>Are you sure you want to approve this request?</h4>
@@ -228,7 +227,7 @@
 		      		</div>
 	      			<div class="row">
 	      				<div class="col-sm-6">
-	      					<div class="gv_reseller-btn-approve pull-right" id="confirm-approve_btn">
+	      					<div class="gv_reseller-btn-confirm pull-right" id="confirm-approve_btn">
 	      						Approve
 	      					</div>
 	      				</div>
@@ -241,6 +240,50 @@
 			      </div>
 			    </div>
 			  </div> <!-- end of approve modal -->
+			  
+			  <!--Reject Modal -->
+			  <div class="modal fade" id="gv_reseller-reject-modal" role="dialog">
+			    <div class="modal-dialog">
+			    	
+			      <div class="modal-content">
+			      	<div id="gv_reseller-confirm-reject">
+			      		<div class="gv_reseller-reject-project-confirmation-dialog">
+			      			<h4>Are you sure you want to reject this request?</h4>
+			      			<p>Press Reject to proceed, or Cancel to stay on the current page.</p>
+			      		</div>
+		      			<div class="row">
+		      				<div class="col-sm-6">
+		      					<div class="gv_reseller-btn-confirm pull-right" id="confirm-reject_btn">
+		      						Reject
+		      					</div>
+		      				</div>
+		      				<div class="col-sm-6">
+		      					<div class="gv_reseller-btn-cancel pull-left" data-dismiss="modal">
+		      						Cancel
+		      					</div>
+		      				</div>
+			      		</div>
+		      		</div>
+		      		<div id="gv_reseller-submit-reject">
+		      			<div class="gv_reseller-reject-project-confirmation-dialog">
+			      			<h4>Rejected</h4>
+			      			<p>Request submission rejected.</p>
+			      		</div>
+				      	<div class="gv_reseller-reject-project-confirmation-dialog">
+			      			<p>Please provide feedback for requestor (Optional)</p>
+			      			<textarea id="gv_reseller-reject-feedback" rows="10" placeholder="Type feedback here..." />
+			      		</div>
+						<div id="gv_reseller-reject-project-submit-div">
+								<div id="submit-reject_btn" class="gv_reseller-btn-confirm">
+		      						Submit
+		      					</div>
+						</div>
+
+
+		      		</div>
+			      </div>
+			    </div>
+			  </div> <!-- end of reject modal -->
         </div>
         </t>
     </template>
