@@ -124,25 +124,25 @@ class booking(http.Controller):
 				'Postal Code': company.zip
 			}
 			
-			cancel = approve = reject = False
-			
-			if request.env.user.is_company: #if user is RSA
-				if project.status == 'pending':
-					cancel = approve = reject = True
-				elif project.status == 'approved':
-					cancel = reject = True
-					
-			else: 
-				if project.status == 'pending':	
-					cancel = reject = True
-					
-			rs['actions'] = {
-				'cancel': cancel,
-				'approve': approve,
-				'reject': reject,			
-			}
-			
-			print rs['actions']
+# 			cancel = approve = reject = False
+# 			
+# 			if request.env.user.is_company: #if user is RSA
+# 				if project.status == 'pending':
+# 					cancel = approve = reject = True
+# 				elif project.status == 'approved':
+# 					cancel = reject = True
+# 					
+# 			else: 
+# 				if project.status == 'pending':	
+# 					cancel = reject = True
+# 					
+# 			rs['actions'] = {
+# 				'cancel': cancel,
+# 				'approve': approve,
+# 				'reject': reject,			
+# 			}
+# 			
+# 			print rs['actions']
 			
 			return json.dumps(rs)
 		else:

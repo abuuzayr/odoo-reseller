@@ -204,11 +204,43 @@
                     </div>
                     
                     <div class="action_div">
-                    <div id="continue_btn" class="btn-green top-space">Continue</div>
+                    	<div id="continue_btn" class="btn-green top-space">Continue</div>                    	
                     </div>
+
                 </div>
             </div>
             </div>
+            <!-- Modal -->
+			  <div class="modal fade" id="gv_reseller-approve-modal" role="dialog">
+			    <div class="modal-dialog">
+			    	
+			      <!-- Modal content-->
+			      <div class="modal-content">
+		      		<div class="gv_reseller-terms-and-conditions-header">
+		      			<h4>Are you sure you want to approve this request?</h4>
+		      			<p>Press Approve to proceed, or Cancel to stay on the current page.</p>
+		      		</div>
+		      		<div class="gv_reseller-terms-and-conditions-body">
+		      			<div style="background-color: white; height: 50px; width: 100%; color: black">
+		      				Insert terms and conditions iframe here
+		      			</div>
+		      			<input type="checkbox" name="terms" id="terms" /><label for="terms" >I have read and accepted Terms and Conditions of Use.</label>
+		      		</div>
+	      			<div class="row">
+	      				<div class="col-sm-6">
+	      					<div class="gv_reseller-btn-approve pull-right" id="confirm-approve_btn">
+	      						Approve
+	      					</div>
+	      				</div>
+	      				<div class="col-sm-6">
+	      					<div class="gv_reseller-btn-cancel pull-left" data-dismiss="modal">
+	      						Cancel
+	      					</div>
+	      				</div>
+		      		</div>
+			      </div>
+			    </div>
+			  </div> <!-- end of approve modal -->
         </div>
         </t>
     </template>

@@ -116,6 +116,56 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
     left: 0;
 }
 
+.modal-content {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
+
+.modal-dialog {
+	background-color: transparent;	
+}
+.gv_reseller-terms-and-conditions-body {
+	background-color: #1a8943;	
+	color: white;
+	padding: 10;
+	margin-bottom: 20px;
+}
+
+.gv_reseller-terms-and-conditions-body input{
+	margin: 30 10 30 0
+}
+
+.gv_reseller-terms-and-conditions-header{
+	padding: 40 0 40 0;
+	text-align: center;
+	margin-bottom: 5px;
+	background-color: #1a8943;	
+	color: white;
+}
+
+.gv_reseller-btn-cancel {
+	margin-left: 20px;
+	text-align: center;
+	width: 120px;
+	padding: 10 0 10 0;
+	border: 1px solid white;
+	color: white;
+	cursor: pointer; 
+  	cursor: hand; 
+}
+
+.gv_reseller-btn-approve {
+	margin-right: 20px;
+	text-align: center;
+	width: 120px;
+	padding: 10 0 10 0;
+	border: 1px solid white;
+	color: white;
+	cursor: pointer; 
+  	cursor: hand; 
+}
+
 .form-control[disabled] { background: #f3f3f3; }
 
 #rs_pagination ul { list-style: none; font-size: 2em; margin: 0; padding: 0; }

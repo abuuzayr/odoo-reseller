@@ -159,7 +159,11 @@ var __rsGlobal = {
 					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-green">Reject</div>');
 				}
 				var data = { project_id: project.id };
-				$('#approve_btn').on('click', function(){ 
+				$('#approve_btn').on('click', function(){
+					$('#gv_reseller-approve-modal').modal('show');
+					console.log('test');
+				});
+				$('#confirm-approve_btn').on('click', function(){
 					$.get('/projects/approve-project', data).then(function(){
 						location.href = '/projects';
 					});
