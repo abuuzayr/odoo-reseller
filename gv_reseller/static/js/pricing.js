@@ -14,58 +14,44 @@ var __rsGlobal = {
 			this.callCount++;
 		}
 	},
-	closeOverLay: function() {			
-		console.log('called');
+	closeOverLay: function() {
 		$('.pricing_overlay').fadeOut();
-	}
+	},
+	page: getUrlVars().pages || 1
 };
 
 (function($){
-	var selected_module = {},
-		selected_module_elem = $('#summary_list_modules');
-
-	var module_ppid = [],
-		service_ppid = [];
-
-	var year = 1,
-		total = 0;
-	var module_list_elem_tpl = [
-		'<div class="row">',
-		'<div class="col-sm-6">','value','</div>',
-		'<div class="col-sm-6">','value','</div>',
-		'</div>'
-	]; //replace values of index: 2 and 5
-
-	/******************************************************************/
+	var selected_module = {}, total = 0;
 
 	init();
 	function init(){
-		__retrieveGoogleFonts();
-		__polyfillSticky();
-
+		// Unchecks all checkboxes pre-checked by the browser
 		$('label.module-select').find('input').prop('checked', false);
 		registerModuleSelectEvents();
 		bindUserCountTag();
+		togglePages();
 
+		//Registers an event to trigger when all JSX files are loaded
 		__rsGlobal.observer.add(function(){
 			var project_id = getProjectId();
 			if (!!project_id) {
-				jQuery.get('/pricing/project-details?project_id='+project_id, 
-					function(rs){ 
-						rs = JSON.parse(rs);
-						$('#selection_div').before($('#form_div'));
-						$('#break_line').after($('#selection_div'));
-						populateFields(rs);
-					});
+				jQuery.get('/pricing/project-details?project_id='+project_id, function(rs){
+					populateFields(JSON.parse(rs));
+				});
 			}
 			continueBtn();
-			setTimeout(function(){
-				__rsGlobal.closeOverLay();
-			},150);
+			setTimeout(function(){__rsGlobal.closeOverLay();},150);
 		});
+		__retrieveGoogleFonts();
+		__polyfillSticky();
 	}
 
 	/** INIT FUNCTIONS START */
+		function togglePages(){
+			jQuery('[id^="pane"]').hide();
+			jQuery('[id="page' + __rsGlobal.page )
+		}
+
 		function populateFields(data){
 			var company = data.company;
 			$('#co_name').val(company['Company Name']).attr('disabled', 'disabled');
@@ -137,7 +123,7 @@ var __rsGlobal = {
 			__rsGlobal.isEditable = false;
 
 			$('#page_title').html('Project Subscription');
-			$('#continue_btn, .recommended_div, #request_quote_btn').hide();
+			$('#continue_btn, #request_quote_btn').hide();
 
 			//create project details table
 			var project = data.project;
@@ -199,7 +185,7 @@ var __rsGlobal = {
 			$('.action_div').append('<a href="/projects"><div id="back_btn" style="margin-top:10px;" class="btn-green">Back</div></a>');
 		}
 
-		function getProjectId(){			
+		function getProjectId(){
 			return getParameterByName('project_id');
 			function getParameterByName(name) {
 			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -208,6 +194,7 @@ var __rsGlobal = {
 			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 			}
 		}
+
 		function registerModuleSelectEvents(){
 			$('label.module-select').on('click.module_select', _moduleSelectHandler);
 			function _moduleSelectHandler(){
@@ -246,12 +233,14 @@ var __rsGlobal = {
 				}
 			}
 		}
+
 		function bindUserCountTag(){
 			$('#client_count').on('change', function(){
 				var val = $(this).val();
 				__rsGlobal.summary.setUsers(val);
 			});
 		}
+
 		function continueBtn(){
 			$('#continue_btn').on('click', function(){
 				var data = validateForm();
@@ -272,9 +261,10 @@ var __rsGlobal = {
 				});
 			});
 		}
+
 	/** INIT FUNCTIONS END */
 
-	/* some validation stuff.. */
+	/* CLIENT DETAILS FORM VALIDATION */
 	function validateForm(){
 		var fieldVals = {};
 		fieldVals['Company Name'] = $('#co_name').val();
@@ -405,6 +395,7 @@ var __rsGlobal = {
 		    Stickyfill.add(stickyElements[i]);
 		}
 	}
+
 	function __retrieveGoogleFonts(){
 		WebFontConfig = {
 			google: { families: [ 'Lato:400,100,300,700,900:latin' ] }
@@ -420,3 +411,21 @@ var __rsGlobal = {
 		})();
 	}
 })(jQuery);
+
+/** Utility Functions */
+/**
+ * getUrlVars
+ * Get the query string from URL
+ * @return {Object} "Key" will be the name of the Param
+ */
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
