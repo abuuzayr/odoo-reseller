@@ -69,10 +69,18 @@
                 };
             </script>
             <div class="container-fluid">
-            <h1 id="page_title">Module Selection</h1>
+            <h1 id="page_title">Project Request</h1>
             <div class="row">
                 <div class="col-sm-9 left2">
-                    <div id="selection_div">
+                    <div id="rs_pagination">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                    <div id="pane1">
                         <div id="no_users_div">
                             <h3>Number of Users</h3>
                             <input class="form-control" type="number" id="client_count" min="1" value="1"></input>
@@ -102,83 +110,88 @@
                                 </t>
                             </div>
                         </div>
+                    </div>
 
+                    <div id="pane2">
                         <div id="optional_service_div">
                             <h3>Optional Services</h3>
                             <div class="row" id="os_container"></div>
                         </div>
-
+                    </div>
+                    
+                    <div id="pane3">
                         <div id="other_service_div">
                             <h3>Other Services</h3>
                             <div class="row" id="ots_container"> </div>
                         </div>
                     </div>
 
-                    <br/>
-                    <hr id="break_line"/>                    
-                    <div id="form_div">
-                        <div id="custom_form">
-                            <h3>Client Details</h3>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label>Company Name</label>
-                                    <input class="form-control" id="co_name" name="co_name" type="text"/>
+                    <div id="pane4">
+                        <div id="form_div">
+                            <div id="custom_form">
+                                <h3>Client Details</h3>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Company Name</label>
+                                        <input class="form-control" id="co_name" name="co_name" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">                            
+                                        <label>Business Registration No.</label>
+                                        <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Postal code</label>
+                                        <input class="form-control" id="co_post_code" name="co_post_code" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Mobile No.</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon" id="basic-addon1">+65</span>
+                                          <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
+                                        </div>                                    
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Email</label>
+                                        <input class="form-control" id="co_email" name="co_email" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">                            
+                                        <label>Address</label>
+                                        <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
+                                        <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">                            
-                                    <label>Business Registration No.</label>
-                                    <input class="form-control" id="co_biz_no" name="co_biz_no" type="text"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Postal code</label>
-                                    <input class="form-control" id="co_post_code" name="co_post_code" type="text"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Mobile No.</label>
-                                    <div class="input-group">
-                                      <span class="input-group-addon" id="basic-addon1">+65</span>
-                                      <input class="form-control" id="co_mob_no" name="co_mob_no" type="text"/>
-                                    </div>                                    
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Email</label>
-                                    <input class="form-control" id="co_email" name="co_email" type="text"/>
-                                </div>
-                                <div class="col-lg-6">                            
-                                    <label>Address</label>
-                                    <input class="form-control" id="co_addr1" name="co_addr1" type="text" style="margin-bottom:5px;"/>
-                                    <input class="form-control" id="co_addr2" name="co_addr2" type="text"/>
-                                </div>
-                            </div>
 
-                            <h3>Point of Contact</h3>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label>Title</label>
-                                    <input class="form-control" id="poc_title" name="poc_title" type="text"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Name</label>
-                                    <input class="form-control" id="poc_name" name="poc_name" type="text"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Email Address</label>
-                                    <input class="form-control" id="poc_email" name="poc_email" type="text"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Mobile No.</label>
-                                    <div class="input-group">
-                                      <span class="input-group-addon" id="basic-addon1">+65</span>
-                                      <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
-                                    </div>  
-                                </div>
-                                <div class="col-lg-12">
-                                    <label>Remarks</label>
-                                    <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                                <h3>Point of Contact</h3>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Title</label>
+                                        <input class="form-control" id="poc_title" name="poc_title" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Name</label>
+                                        <input class="form-control" id="poc_name" name="poc_name" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Email Address</label>
+                                        <input class="form-control" id="poc_email" name="poc_email" type="text"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Mobile No.</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon" id="basic-addon1">+65</span>
+                                          <input class="form-control" id="poc_mob_no" name="poc_mob_no" type="text"/>
+                                        </div>  
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label>Remarks</label>
+                                        <textarea class="form-control" id="poc_remarks" name="poc_remarks"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-3 sticky" style="padding-bottom: 50px;">
                     <a id="request_quote_btn" href="/custom-project"><div class="btn-green">Request for custom quote</div></a>                    
                     <h3 class="sub">Subscription</h3>
@@ -192,14 +205,6 @@
                     
                     <div class="action_div">
                     <div id="continue_btn" class="btn-green top-space">Continue</div>
-                    </div>
-
-                    <div class="recommended_div">
-                        <h3 class="sub">Recommended Services</h3>
-                        <div id="summary_list_service" class="summary_list">
-                            No modules and services selected
-                        </div>
-                        <div id="select_all_btn" class="btn-green top-space">Select All</div>
                     </div>
                 </div>
             </div>
@@ -235,12 +240,12 @@
 
     <template id="gvrs_assets" name="My Style" inherit_id="website.assets_frontend">
         <xpath expr="link[last()]" position="after">
-            <link href="/gv_reseller/static/css/module_select.css" rel="stylesheet" type="text/css"/>
+            <link href="/gv_reseller/static/css/pricing.css" rel="stylesheet" type="text/css"/>
             <script src="/gv_reseller/static/js/react.js"></script>
             <script src="/gv_reseller/static/js/react-dom.js"></script>
             <script src="/gv_reseller/static/js/classNames.js"></script>
             <script src="/gv_reseller/static/js/stickyfill.js"></script>    
-            <script src="/gv_reseller/static/js/module_select.js"></script>
+            <script src="/gv_reseller/static/js/pricing.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>   
         </xpath>
     </template>

@@ -5,7 +5,7 @@ html[data-view-xmlid="gv_reseller.pricing"] .col-md-8 { width: 66%; float:left; 
 html[data-view-xmlid="gv_reseller.pricing"] input.form-control { border-radius: 0px; }
 html[data-view-xmlid="gv_reseller.pricing"] textarea.form-control { border-radius: 0px; }
 
-/*** bookmarks
+/*** QUICK REFERENCES
 	the green: #018738;
  */
 
@@ -117,6 +117,10 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
 }
 
 .form-control[disabled] { background: #f3f3f3; }
+
+#rs_pagination ul { list-style: none; font-size: 2em; margin: 0; padding: 0; }
+#rs_pagination ul li { background-color: #EEE; display: inline-block; width: 24%; box-sizing:border-box; text-align: center; padding: 10px; }
+#rs_pagination ul li.active { background-color: #018738; }
 
 @media screen and (max-width: 991px){
 	.module_title, .module_price { font-size: 0.8em; line-height: 11px;  }
