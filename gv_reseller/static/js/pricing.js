@@ -162,10 +162,21 @@ var __rsGlobal = {
 				$('#approve_btn').on('click', function(){
 					$('#gv_reseller-approve-modal').modal('show');
 				});
+				$('#terms').on('click', function(){
+					if (this.checked){
+						$('#confirm-approve_btn').removeClass('gv_reseller-btn-disabled');
+					}
+					else {
+						$('#confirm-approve_btn').addClass('gv_reseller-btn-disabled');
+					}
+					console.log(this.checked);
+				});
 				$('#confirm-approve_btn').on('click', function(){
-					$.get('/projects/approve-project', data).then(function(){
-						location.href = '/projects';
-					});
+					if ($('#terms')[0].checked){
+						$.get('/projects/approve-project', data).then(function(){
+							location.href = '/projects';
+						});				
+					}
 				});
 				
 				$('#reject_btn').on('click', function(){ 

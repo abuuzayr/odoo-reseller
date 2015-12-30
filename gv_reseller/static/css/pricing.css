@@ -179,6 +179,11 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
   	cursor: hand; 
 }
 
+.gv_reseller-btn-disabled {
+	border: 1px solid red !important;
+	color: red !important;
+	cursor: not-allowed !important;
+}
 .gv_reseller-btn-confirm {
 	margin-right: 20px;
 	text-align: center;

@@ -227,7 +227,7 @@
 		      		</div>
 	      			<div class="row">
 	      				<div class="col-sm-6">
-	      					<div class="gv_reseller-btn-confirm pull-right" id="confirm-approve_btn">
+	      					<div class="gv_reseller-btn-confirm pull-right gv_reseller-btn-disabled" id="confirm-approve_btn" disabled="true">
 	      						Approve
 	      					</div>
 	      				</div>
