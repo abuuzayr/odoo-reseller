@@ -1,4 +1,6 @@
-/* Styles go here */
+
+
+
 .gv_reseller-container {
 	width:100%;
 	padding-left: 10px;
@@ -72,6 +74,7 @@
 	padding-left: 5px;
 	padding-bottom: 5px;
 	font-weight: normal;
+	display: none;
 }
 
 .gv_reseller-project-table td {
@@ -80,7 +83,33 @@
     white-space: nowrap;
     padding-left: 5px;
     background-color: #fafafa;
+    display: block;
 }
+.gv_reseller-project-table td:before {
+	content: attr(data-th) ": ";
+	font-weight: bold;
+	width: 6.5em;
+	display: inline-block;
+}
+@media (min-width: 600px) {
+  .gv_reseller-project-table td:before {
+    display: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .gv_reseller-project-table th, .gv_reseller-project-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .gv_reseller-project-table th:first-child, .gv_reseller-project-table td:first-child {
+    padding-left: 0;
+  }
+  .gv_reseller-project-table th:last-child, gv_reseller-project-table td:last-child {
+    padding-right: 0;
+  }
+}
+
 
 .gv_reseller-table-company-info-column {
 	background-color: #eaeaea!important;

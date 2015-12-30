@@ -31,47 +31,43 @@
 	        </div> 
 	        <div class="gv_reseller-container table-responsive">
 	        	<table class="gv_reseller-project-table ">
-		        	<thead>
-		        		<tr>
-		        			<th>ID</th>
-		        			<th>Created</th>
+	        		<tr>
+	        			<th>ID</th>
+	        			<th>Created</th>
+	        			<t t-if="user['is_admin']">
+	        				<th>Sales Person</th>
+		        			<th>Price</th>
+	        			</t>
+	        			<th>Company</th>
+	        			<th>POC</th>
+	        			<th>Client Contact</th>
+	        			<th>Client Email</th>
+	        			<th>Start</th>
+	        			<th>Expiry</th>
+	        			<th>Status</th>
+	        			<th>Actions</th>
+	        		</tr>
+	        		<t t-foreach="projects" t-as="project">
+	        			<tr t-attf-id="{{project['id']}}" >
+		        			<td data-th="ID"><t t-esc="project['id']" /></td>
+		        			<td data-th="Created"><t t-esc="project['created_date']" /></td>
 		        			<t t-if="user['is_admin']">
-		        				<th>Sales Person</th>
-			        			<th>Price</th>
+		        				<td data-th="Sales Person"><t t-esc="project['sales_person']" /></td>
+			        			<td data-th="Price"><t t-esc="project['price']" /></td>
 		        			</t>
-		        			<th>Company</th>
-		        			<th>POC</th>
-		        			<th>Client Contact</th>
-		        			<th>Client Email</th>
-		        			<th>Start</th>
-		        			<th>Expiry</th>
-		        			<th>Status</th>
-		        			<th>Actions</th>
-		        		</tr>
-		        	</thead>
-		        	<tbody>
-		        		<t t-foreach="projects" t-as="project">
-		        			<tr t-attf-id="{{project['id']}}" >
-			        			<td data-label="ID"><t t-esc="project['id']" /></td>
-			        			<td data-label="Created"><t t-esc="project['created_date']" /></td>
-			        			<t t-if="user['is_admin']">
-			        				<td data-label="Sales Person"><t t-esc="project['sales_person']" /></td>
-				        			<td data-label="Price"><t t-esc="project['price']" /></td>
-			        			</t>
-			        			<td data-label="Company" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_company']" /></td>
-			        			<td data-label="POC" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_name']" /></td>
-			        			<td data-label="Client Contact" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_no']" /></td>
-			        			<td data-label="Client Email" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_email']" /></td>
-			        			<td data-label="Start"><t t-esc="project['start_date']" /></td>
-			        			<td data-label="Expiry"><t t-esc="project['expiry_date']" /></td>
-			        			<td data-label="Status" t-attf-class="{{project['status']}}"><t t-esc="project['status']" /></td>
-			        			<td data-label="Actions">
-		        					<div class="gv_reseller-view-button" t-attf-id="{{project['id']}}"> View</div>
-			        			</td>
-		        			
-		        			</tr>
-		        		</t>
-	        		</tbody>
+		        			<td data-th="Company" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_company']" /></td>
+		        			<td data-th="POC" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_name']" /></td>
+		        			<td data-th="Client Contact" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_contact_no']" /></td>
+		        			<td data-th="Client Email" class="gv_reseller-table-company-info-column"><t t-esc="project['customer_email']" /></td>
+		        			<td data-th="Start"><t t-esc="project['start_date']" /></td>
+		        			<td data-th="Expiry"><t t-esc="project['expiry_date']" /></td>
+		        			<td data-th="Status" t-attf-class="{{project['status']}}"><t t-esc="project['status']" /></td>
+		        			<td data-th="Actions">
+	        					<div class="gv_reseller-view-button" t-attf-id="{{project['id']}}"> View</div>
+		        			</td>
+	        			
+	        			</tr>
+	        		</t>
 	        	</table>
 	        	<form action="/project-details" id="form-project-details">
 	        		<input name="project_id" type="text" id="gv_reseller-input-id" class="hidden"></input>
