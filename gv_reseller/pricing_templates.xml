@@ -274,7 +274,7 @@
 			      			<textarea id="gv_reseller-reject-feedback" rows="10" placeholder="Type feedback here..." />
 			      		</div>
 						<div id="gv_reseller-reject-project-submit-div">
-								<div id="submit-reject_btn" class="gv_reseller-btn-confirm">
+								<div id="submit-reject_btn">
 		      						Submit
 		      					</div>
 						</div>

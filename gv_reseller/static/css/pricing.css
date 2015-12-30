@@ -157,8 +157,16 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
 	color: black;
 }
 
-#gv_reseller-reject-project-submit-div {
+#submit-reject_btn {
 	text-align: center;
+	width: 120px;
+	padding: 10 0 10 0;
+	border: 1px solid white;
+	color: white;
+	cursor: pointer; 
+  	cursor: hand; 
+  	margin-left: auto;
+  	margin-right: auto;
 }
 .gv_reseller-btn-cancel {
 	margin-left: 20px;

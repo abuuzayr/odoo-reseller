@@ -178,7 +178,6 @@ var __rsGlobal = {
 					$('#gv_reseller-submit-reject').show();
 				});
 				$('#submit-reject_btn').on('click', function(){
-					console.log('test');
 					data.reject_feedback = $('#gv_reseller-reject-feedback').val();
 					$.get('/projects/reject-project', data).then(function(){
 						location.href = '/projects';
