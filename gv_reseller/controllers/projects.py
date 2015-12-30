@@ -218,13 +218,13 @@ class projects(http.Controller):
         if project:
             if project.status == 'pending' or (project.status == 'approved' and request.env.user.partner_id.is_company):
                 project.status = 'rejected'
-                print kwargs
                 if 'reject_feedback' in kwargs:
-                    print kwargs['reject_feedback']
+                    if not kwargs['reject_feedback']:
+                        kwargs['reject_feedback'] = ' - '
                     if project.customer_remarks: 
-                        project.customer_remarks = project.customer_remarks + '/n' + kwargs['reject_feedback']
+                        project.customer_remarks = project.customer_remarks + '\n\n' + 'Rejection feedback: \n' +  kwargs['reject_feedback']
                     else:
-                        project.customer_remarks = kwargs['gv_reseller-reject-feedback']
+                        project.customer_remarks = 'Rejection feedback: \n' + kwargs['reject_feedback']
 
     @http.route(
         ['/project-details'],
