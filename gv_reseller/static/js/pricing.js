@@ -29,16 +29,18 @@ var __rsGlobal = {
 		$('label.module-select').find('input').prop('checked', false);
 		registerModuleSelectEvents();
 		bindUserCountTag();
-		togglePages();
 
 
 		//Registers an event to trigger when all JSX files are loaded
 		__rsGlobal.observer.add(function(){
 			var project_id = getProjectId();
 			if (!!project_id) {
+				jQuery('#rs_pagination, .btm_nav, #optional_service_div').hide();
 				jQuery.get('/pricing/project-details?project_id='+project_id, function(rs){
 					populateFields(JSON.parse(rs));
 				});
+			} else {				
+				togglePages();
 			}
 			continueBtn();
 			setTimeout(function(){__rsGlobal.closeOverLay();},150);
@@ -198,9 +200,9 @@ var __rsGlobal = {
 			if (isRSA) {
 				if (project.status === 'pending') {
 					$('.action_div').append('<div id="approve_btn" style="margin-top:10px;" class="btn-green">Approve</div>');
-					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-green">Reject</div>');
+					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-red">Reject</div>');
 				} else if (project.status == 'approved') {
-					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-green">Reject</div>');
+					$('.action_div').append('<div id="reject_btn" style="margin-top:10px;" class="btn-red">Reject</div>');
 				}
 				var data = { project_id: project.id };
 				$('#approve_btn').on('click', function(){
@@ -240,7 +242,7 @@ var __rsGlobal = {
 				});
 			}
 			if (project.status === 'pending') {
-				$('.action_div').append('<div id="edit_btn" style="margin-top:10px;" class="btn-green">Edit</div>');	
+				$('.action_div').append('<div id="edit_btn" style="margin-top:10px;" class="btn-yellow">Edit</div>');	
 				$('#edit_btn').on('click', function(){
 					__rsGlobal.isEditable = true;
 					$('label.module-select .cb_module').removeAttr('disabled');				
@@ -251,7 +253,7 @@ var __rsGlobal = {
 					$("#custom_form input, #custom_form textarea").removeAttr('disabled');
 				});
 			}			
-			$('.action_div').append('<a href="/projects"><div id="back_btn" style="margin-top:10px;" class="btn-green">Back</div></a>');
+			$('.action_div').append('<a href="/projects"><div id="back_btn" style="margin-top:10px;" class="btn-grey">Back</div></a>');
 		}
 
 		function getProjectId(){
