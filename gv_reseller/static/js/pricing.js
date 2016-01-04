@@ -31,6 +31,7 @@ var __rsGlobal = {
 		bindUserCountTag();
 		togglePages();
 
+
 		//Registers an event to trigger when all JSX files are loaded
 		__rsGlobal.observer.add(function(){
 			var project_id = getProjectId();
@@ -48,8 +49,51 @@ var __rsGlobal = {
 
 	/** INIT FUNCTIONS START */
 		function togglePages(){
+			var backBtn = jQuery(jQuery('.btm_nav div')[0]).css({'visibility':'hidden'}),
+				nextBtn = jQuery(jQuery('.btm_nav div')[1]).css({'visibility':'initial'});
 			jQuery('[id^="pane"]').hide();
-			jQuery('[id="page' + __rsGlobal.page )
+			jQuery('[id="pane' + __rsGlobal.page).show();
+			jQuery(jQuery('#rs_pagination').find('ul li')[(__rsGlobal.page - 1)]).addClass('active')
+			jQuery('#rs_pagination').find('ul li').each(function(i){
+				jQuery(this).on('click', function(){
+					__rsGlobal.page = i + 1;
+					togglePaginationStyles();
+					toggleNavControls();				
+				});
+			});
+
+			backBtn.on('click', function(){
+				if (__rsGlobal.page !== 1) {	
+					__rsGlobal.page -= 1;				
+					togglePaginationStyles();
+					toggleNavControls();
+				}
+			});
+
+			nextBtn.on('click', function(){
+				if (__rsGlobal.page !== 4) {	
+					__rsGlobal.page += 1;				
+					togglePaginationStyles();
+					toggleNavControls();
+				}
+			});
+
+			function toggleNavControls(){
+				var index = __rsGlobal.page;
+				backBtn.css({'visibility':'initial'});
+				nextBtn.css({'visibility':'initial'});
+				if (index === 1) 
+					backBtn.css({'visibility':'hidden'});
+				if (index === 4) 
+					nextBtn.css({'visibility':'hidden'});
+			}
+
+			function togglePaginationStyles(){				
+				jQuery('#rs_pagination').find('ul li').removeClass('active');
+				jQuery(jQuery('#rs_pagination').find('ul li')[__rsGlobal.page - 1]).addClass('active');
+				jQuery('[id^="pane"]').hide();
+				jQuery('[id^="pane'+(__rsGlobal.page)+'"]').show();
+			}
 		}
 
 		function populateFields(data){
@@ -260,10 +304,27 @@ var __rsGlobal = {
 		}
 
 		function bindUserCountTag(){
-			$('#client_count').on('change', function(){
-				var val = $(this).val();
+ 			var minus_btn = $('.rs_number_slider span')[0], 			
+ 				plus_btn = $('.rs_number_slider span')[2];
+
+ 			$(minus_btn).on('click', function(){
+ 				if (parseInt($('#client_count').val()) === 1) return;
+ 				$('#client_count').val( parseInt($('#client_count').val()) - 1 );
+ 				clientCountOnChange();
+ 			});
+ 			$(plus_btn).on('click', function(){
+ 				$('#client_count').val( parseInt($('#client_count').val()) + 1 );
+ 				clientCountOnChange();
+ 			});
+
+ 			$('.rs_number_slider b').html('$' + per_user_price);
+			$('#client_count').on('change', clientCountOnChange);
+
+			function clientCountOnChange(){
+				var val = $('#client_count').val();
 				__rsGlobal.summary.setUsers(val);
-			});
+				$('.rs_number_slider val').html('' + val);
+			}
 		}
 
 		function continueBtn(){

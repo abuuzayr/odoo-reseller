@@ -26,7 +26,7 @@
 			}
 			if (ctx.props.hasOwnProperty('data2')) {
 				ctx.props.data2.forEach(function(v){
-					if (v.hasOwnProperty('lstPrice')) {
+					if (!!v && v.hasOwnProperty('lstPrice')) {
 						total = total + parseFloat(v.lstPrice);
 					}
 				});
@@ -91,10 +91,12 @@
 			};
 			__myglobal.summary.addOptional = function(opt){
 				var newState = {optional: ctx.state.optional};
+				if (!opt) return;
 				newState.optional.push(opt);
 				ctx.setState(newState);
 			};
 			__myglobal.summary.removeOptional = function(opt){
+				console.log(opt);
 				var newOptional = ctx.state.optional;
 				if (newOptional.indexOf(opt) > -1) {
 					newOptional.splice(newOptional.indexOf(opt), 1);
@@ -113,7 +115,7 @@
 				});
 				
 				ctx.state.optional.forEach(function(v){
-					if (v.hasOwnProperty('lstPrice')) {
+					if (!!v && v.hasOwnProperty('lstPrice')) {
 						total = total + parseFloat(v.lstPrice);
 					}
 				});

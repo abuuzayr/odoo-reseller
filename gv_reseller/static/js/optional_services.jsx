@@ -82,6 +82,7 @@
 			var servicesObj = opsvTmpl[key].variants[v];
 			__myglobal.summary.removeOptional(opsvTmpl[key].variants[this.state[key]]);
 			__myglobal.summary.addOptional(servicesObj);
+			__myglobal.UnsetRecomm();
 			this.setState(stateChange);
 		},
 		componentWillMount: function(){

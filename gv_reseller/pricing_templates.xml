@@ -74,15 +74,21 @@
                 <div class="col-sm-9 left2">
                     <div id="rs_pagination">
                         <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
                         </ul>
                     </div>
+
                     <div id="pane1">
                         <div id="no_users_div">
-                            <h3>Number of Users</h3>
+                            <h3>Select the no. of Users</h3>
+                            <div class="rs_number_slider">
+                                <span><i class="fa fa-minus"></i></span>
+                                <span><b></b> / <val>1</val> User</span>
+                                <span><i class="fa fa-plus"></i></span>
+                            </div>
                             <input class="form-control" type="number" id="client_count" min="1" value="1"></input>
                         </div>
                         <div id="module_div">
@@ -115,6 +121,7 @@
                     <div id="pane2">
                         <div id="optional_service_div">
                             <h3>Optional Services</h3>
+                            <div class="row" id="os_container_pre"></div>
                             <div class="row" id="os_container"></div>
                         </div>
                     </div>
@@ -189,6 +196,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row btm_nav" style="margin:10px -10px;">
+                        <div class="col-sm-3 btn-green" style="visibility:hidden;">Back</div>
+                        <div class="col-sm-3 col-sm-offset-6 btn-green">Next</div>
                     </div>
                 </div>
 
@@ -310,6 +322,7 @@
             <script src="/gv_reseller/static/js/summary.jsx" type="text/babel"></script>
             <script src="/gv_reseller/static/js/optional_services.jsx" type="text/babel"></script>
             <script src="/gv_reseller/static/js/other_services.jsx" type="text/babel"></script>
+            <script src="/gv_reseller/static/js/optional_services_selection.jsx" type="text/babel"></script>
         </xpath>
     </template>
 

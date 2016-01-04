@@ -50,7 +50,7 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 	content: " ";
 	display: table;
 }
-.other_service {background: #eee; padding: 20px 20px 40px; text-align: center;min-height: 160px;border:8px solid #fff;}
+.other_service {background: #e6e7e8; padding: 20px 20px 40px; text-align: center;min-height: 160px;border:8px solid #fff;}
 .other_service header {display: block;font-weight: bold;}
 .other_service p { font-size: 0.8em;margin: 15px 0px; }
 .opt_serv_price {display: inline-block; color: #018738; font-weight: bold; font-size: 1.5em; margin: 10px;}
@@ -65,7 +65,7 @@ label.module-select img { width: 100%; /*max-width: 240px*/; }
 /*** SERVICES [END]***/
 
 /** OTHER SERVICES */
-.ots {position:relative; width:20%;float:left; background:#eee;border:5px solid #fff;box-sizing:border-box; text-align:center; }
+.ots {position:relative; width:20%;float:left; background:#e6e7e8;border:5px solid #fff;box-sizing:border-box; text-align:center; }
 .ots .top { background:green; padding:10px 0; }
 .ots .top input {width: 20px; height: 20px;}
 .ots header {display: block;font-weight: bold; padding:15px 5px 3px; }
@@ -98,7 +98,7 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
   top: 55px;
 }
 .clear { clear:both; }
-.project_details { background: #eee; font-size: 1em; margin:0; text-transform: capitalize; }
+.project_details { background: #e6e7e8; font-size: 1em; margin:0; text-transform: capitalize; }
 .project_details h3 { margin: 0; padding: 10px; }
 .project_details div { padding: 15px; }
 .project_details label { display: block; font-size: 1.05em; margin-bottom: 5px; margin-top: 10px; }
@@ -197,9 +197,34 @@ h4.total_amt { color: #018738; font-size: 0.95em; margin-bottom: 0px; }
 
 .form-control[disabled] { background: #f3f3f3; }
 
-#rs_pagination ul { list-style: none; font-size: 2em; margin: 0; padding: 0; }
-#rs_pagination ul li { background-color: #EEE; display: inline-block; width: 24%; box-sizing:border-box; text-align: center; padding: 10px; }
-#rs_pagination ul li.active { background-color: #018738; }
+#no_users_div { background: #e6e7e8;  text-align: center; padding: 0 0 35px; margin: 20px 0; }
+#no_users_div h3 { text-transform: uppercase; width: 100%; margin:35px 0; }
+#client_count { display: none; }
+.rs_number_slider { display: block; width: 25%; min-width: 265px; margin: 0 auto; position: relative; }
+.rs_number_slider:after, .rs_number_slider:before { content: " "; display: table; clear:both; }
+.rs_number_slider span { float:left; padding: 17.5px; background: #fff; }
+.rs_number_slider span:nth-child(2) { width: 100%; color:#48bd74; font-size: 1.1em }
+.rs_number_slider span:first-child, .rs_number_slider span:last-child { cursor: pointer; background: #48bd74; color:#fff; font-size: 1.5em; }
+.rs_number_slider span:first-child { position: absolute; left:0px; }
+.rs_number_slider span:last-child { position: absolute; right:0px; }
+
+#rs_pagination { margin-bottom: 65px; }
+#rs_pagination:after, #rs_pagination:before {  content: ' '; display: table; clear:both;}
+#rs_pagination ul { list-style: none; margin: 0 auto; padding: 0; width: 100%; text-align: center; font-size: 1.5em;  }
+#rs_pagination ul li { position: relative; min-height:119px; width:24%; max-width:256px; color:#48bd74; float:left; box-sizing:border-box; text-align: center; padding: 10px; background-size:100% auto; background-repeat: no-repeat; cursor: pointer; }
+#rs_pagination ul li:nth-child(1) { background-image: url('/gv_reseller/static/img/Status-01.png'); }
+#rs_pagination ul li.active:nth-child(1) { background-image: url('/gv_reseller/static/img/Status-02.png'); }
+
+#rs_pagination ul li:nth-child(2) { background-image: url('/gv_reseller/static/img/Status-03.png'); }
+#rs_pagination ul li.active:nth-child(2) { background-image: url('/gv_reseller/static/img/Status-04.png'); }
+
+#rs_pagination ul li:nth-child(3) { background-image: url('/gv_reseller/static/img/Status-05.png'); }
+#rs_pagination ul li.active:nth-child(3) { background-image: url('/gv_reseller/static/img/Status-06.png'); }
+
+#rs_pagination ul li:nth-child(4) { background-image: url('/gv_reseller/static/img/Status-07.png'); }
+#rs_pagination ul li.active:nth-child(4) { background-image: url('/gv_reseller/static/img/Status-08.png'); }
+
+#os_container_pre { margin-bottom: 50px; }
 
 @media screen and (max-width: 991px){
 	.module_title, .module_price { font-size: 0.8em; line-height: 11px;  }

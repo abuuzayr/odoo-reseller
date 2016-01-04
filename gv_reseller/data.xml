@@ -79,7 +79,11 @@
             <field name="name">Hours</field>
             <field name="type">select</field>
         </record>
-
+        
+        <record id="att_val_optservice_10hr" model="product.attribute.value">
+            <field name="name">10</field>
+            <field name="attribute_id" eval="prod_att_optservice_hour"></field>
+        </record>
         <record id="att_val_optservice_13hr" model="product.attribute.value">
             <field name="name">13</field>
             <field name="attribute_id" eval="prod_att_optservice_hour"></field>
